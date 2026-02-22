@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -13,74 +13,18 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Aura Dental">
-<!-- <link rel="manifest" href="manifest.json"> -->
+<link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/svg+xml" sizes="192x192" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='192' height='192' fill='url(%23grad1)' rx='20'/%3E%3Cpath d='M96 40 C80 40 68 52 68 68 L68 124 C68 140 80 152 96 152 C112 152 124 140 124 124 L124 68 C124 52 112 40 96 40 Z' fill='white'/%3E%3Ctext x='96' y='175' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-size='16' font-weight='bold'%3EAURA%3C/text%3E%3C/svg%3E">
   <link rel="icon" type="image/svg+xml" sizes="512x512" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='grad2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' fill='url(%23grad2)' rx='50'/%3E%3Cpath d='M256 100 C220 100 190 130 190 190 L190 322 C190 382 220 412 256 412 C292 412 322 382 322 322 L322 190 C322 130 292 100 256 100 Z' fill='white'/%3E%3Ctext x='256' y='460' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-size='42' font-weight='bold'%3EAURA%3C/text%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='192' height='192' fill='url(%23grad1)' rx='20'/%3E%3Cpath d='M96 40 C80 40 68 52 68 68 L68 124 C68 140 80 152 96 152 C112 152 124 140 124 124 L124 68 C124 52 112 40 96 40 Z' fill='white'/%3E%3Ctext x='96' y='175' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-size='16' font-weight='bold'%3EAURA%3C/text%3E%3C/svg%3E">
   
-  <!-- PWA icons loaded via data URLs - no external files needed -->
   
-    console.log('✅ PWA icons loaded via data URLs');
-  </script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- External Libraries for Enhanced Features -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-
-// ====== STATE MOVED TO TOP ======
-const state = {
-  currentUser: null,
-  patients: [],
-  doctors: [
-    { id: 1, name: 'Dr. Sahil Chawla', email: 'sahil@auradental.com', password: 'doctor123', specialty: 'General Dentistry' },
-    { id: 2, name: 'Dr. Kiran Patel', email: 'kiran@auradental.com', password: 'doctor123', specialty: 'Orthodontics' },
-    { id: 3, name: 'Dr. Priyal Shah', email: 'priyal@auradental.com', password: 'doctor123', specialty: 'Endodontics' }
-  ],
-  treatments: [
-    { id: 1, name: 'Tooth Filling', cost: 1500 },
-    { id: 2, name: 'Root Canal', cost: 5000 },
-    { id: 3, name: 'Tooth Extraction', cost: 1000 },
-    { id: 4, name: 'Scaling', cost: 800 },
-    { id: 5, name: 'Gum Treatment', cost: 2000 },
-    { id: 6, name: 'Teeth Cleaning', cost: 1200 },
-    { id: 7, name: 'Consultation', cost: 500 },
-    { id: 8, name: 'Crown/Bridge', cost: 8000 },
-    { id: 9, name: 'Dental Implant', cost: 25000 },
-    { id: 10, name: 'Dentures', cost: 15000 },
-    { id: 11, name: 'TMJ Treatment', cost: 3000 }
-  ],
-  medicines: [
-    { id: 1, name: 'Amoxicillin 500mg', dosage: '1-1-1 for 5 days' },
-    { id: 2, name: 'Ibuprofen 400mg', dosage: '1-0-1 for 3 days' },
-    { id: 3, name: 'Metronidazole 400mg', dosage: '1-1-1 for 5 days' },
-    { id: 4, name: 'Chlorhexidine Mouthwash', dosage: 'Gargle twice daily' }
-  ],
-  treatmentPlans: [],
-  doctorQueue: [],
-  chairs: [],
-  bills: [],
-  appointments: [],
-  
-  // Consultation form state
-  consultationForm: {
-    patientId: null,
-    doctorId: null,
-    chairId: null,
-    selectedTeeth: [],
-    selectedMedicines: [],
-    selectedTreatments: [],
-    customTreatment: '',
-    customCost: '',
-    notes: '',
-    nextVisit: '',
-    chiefComplaint: '',  // Now filled by DOCTOR, not reception
-    diagnosis: '',
-    selectedTests: []
-  }
-};
-
 // ═══════════════════════════════════════════════════════════
 // CALENDAR FEATURE - Complete Implementation
 // ═══════════════════════════════════════════════════════════
@@ -853,6 +797,7 @@ function restoreFromBackup() {
   
   input.click();
 }
+}
 
 // Auto-backup reminder
 function checkAutoBackup() {
@@ -901,38 +846,6 @@ function lazyLoadImages() {
   });
 }
 
-// Optimize large list rendering
-function renderLargeList(items, renderItem, containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  
-  const fragment = document.createDocumentFragment();
-  const batchSize = 50;
-  let index = 0;
-  
-  function renderBatch() {
-    const end = Math.min(index + batchSize, items.length);
-    
-    for (let i = index; i < end; i++) {
-      const item = renderItem(items[i], i);
-      const div = document.createElement('div');
-      div.innerHTML = item;
-      fragment.appendChild(div.firstChild);
-    }
-    
-    index = end;
-    
-    if (index < items.length) {
-      requestAnimationFrame(renderBatch);
-    } else {
-      container.appendChild(fragment);
-    }
-  }
-  
-  container.innerHTML = '';
-  renderBatch();
-}
-
 
 
 // Cleanup old data
@@ -959,14 +872,9 @@ if (typeof state !== 'undefined' && state.currentUser && state.currentUser.role 
   setTimeout(cleanupOldData, 5000);
 }
 
-
-}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 <script>
-// ═══════════════════════════════════════════════════════════
-// CALENDAR FEATURE - Complete Implementation
-// ═══════════════════════════════════════════════════════════
 
 function renderCalendar() {
   // Check if state and currentUser exist
@@ -1764,64 +1672,6 @@ function lazyLoadImages() {
   images.forEach(function(img) {
     imageObserver.observe(img);
   });
-}
-
-// Optimize large list rendering
-function renderLargeList(items, renderItem, containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  
-  const fragment = document.createDocumentFragment();
-  const batchSize = 50;
-  let index = 0;
-  
-  function renderBatch() {
-    const end = Math.min(index + batchSize, items.length);
-    
-    for (let i = index; i < end; i++) {
-      const item = renderItem(items[i], i);
-      const div = document.createElement('div');
-      div.innerHTML = item;
-      fragment.appendChild(div.firstChild);
-    }
-    
-    index = end;
-    
-    if (index < items.length) {
-      requestAnimationFrame(renderBatch);
-    } else {
-      container.appendChild(fragment);
-    }
-  }
-  
-  container.innerHTML = '';
-  renderBatch();
-}
-
-// Cache DOM queries
-
-// Cleanup old data
-function cleanupOldData() {
-  const oneYearAgo = new Date();
-  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-  
-  // Clean old treatment plans (keep last year only)
-  if (state.treatmentPlans) {
-    const oldCount = state.treatmentPlans.length;
-    state.treatmentPlans = state.treatmentPlans.filter(function(tp) {
-      return new Date(tp.visitDate) > oneYearAgo;
-    });
-    const removed = oldCount - state.treatmentPlans.length;
-    if (removed > 0) {
-      DataStore.save('treatmentPlans', state.treatmentPlans);
-      console.log('Cleaned up ' + removed + ' old treatment records');
-    }
-  }
-}
-
-// Auto-cleanup on load (for admin only)
-if (typeof state !== 'undefined' && state.currentUser && state.currentUser.role === 'admin') {
-  setTimeout(cleanupOldData, 5000);
 }
 
 </script>
@@ -3918,61 +3768,7 @@ function lazyLoadImages() {
 }
 
 // Optimize large list rendering
-function renderLargeList(items, renderItem, containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  
-  const fragment = document.createDocumentFragment();
-  const batchSize = 50;
-  let index = 0;
-  
-  function renderBatch() {
-    const end = Math.min(index + batchSize, items.length);
-    
-    for (let i = index; i < end; i++) {
-      const item = renderItem(items[i], i);
-      const div = document.createElement('div');
-      div.innerHTML = item;
-      fragment.appendChild(div.firstChild);
-    }
-    
-    index = end;
-    
-    if (index < items.length) {
-      requestAnimationFrame(renderBatch);
-    } else {
-      container.appendChild(fragment);
-    }
-  }
-  
-  container.innerHTML = '';
-  renderBatch();
-}
 
-
-// Cleanup old data
-function cleanupOldData() {
-  const oneYearAgo = new Date();
-  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-  
-  // Clean old treatment plans (keep last year only)
-  if (state.treatmentPlans) {
-    const oldCount = state.treatmentPlans.length;
-    state.treatmentPlans = state.treatmentPlans.filter(function(tp) {
-      return new Date(tp.visitDate) > oneYearAgo;
-    });
-    const removed = oldCount - state.treatmentPlans.length;
-    if (removed > 0) {
-      DataStore.save('treatmentPlans', state.treatmentPlans);
-      console.log('Cleaned up ' + removed + ' old treatment records');
-    }
-  }
-}
-
-// Auto-cleanup on load (for admin only)
-if (state.currentUser && state.currentUser.role === 'admin') {
-  setTimeout(cleanupOldData, 5000);
-}
 
 </script>
 </head>
@@ -3989,6 +3785,56 @@ if (state.currentUser && state.currentUser.role === 'admin') {
 console.log('🔧 Aura Dental - Starting initialization...');
 
 // ================== STATE MANAGEMENT ==================
+const state = {
+  currentUser: null,
+  patients: [],
+  doctors: [
+    { id: 1, name: 'Dr. Sahil Chawla', email: 'sahil@auradental.com', password: 'doctor123', specialty: 'General Dentistry' },
+    { id: 2, name: 'Dr. Kiran Patel', email: 'kiran@auradental.com', password: 'doctor123', specialty: 'Orthodontics' },
+    { id: 3, name: 'Dr. Priyal Shah', email: 'priyal@auradental.com', password: 'doctor123', specialty: 'Endodontics' }
+  ],
+  treatments: [
+    { id: 1, name: 'Tooth Filling', cost: 1500 },
+    { id: 2, name: 'Root Canal', cost: 5000 },
+    { id: 3, name: 'Tooth Extraction', cost: 1000 },
+    { id: 4, name: 'Scaling', cost: 800 },
+    { id: 5, name: 'Gum Treatment', cost: 2000 },
+    { id: 6, name: 'Teeth Cleaning', cost: 1200 },
+    { id: 7, name: 'Consultation', cost: 500 },
+    { id: 8, name: 'Crown/Bridge', cost: 8000 },
+    { id: 9, name: 'Dental Implant', cost: 25000 },
+    { id: 10, name: 'Dentures', cost: 15000 },
+    { id: 11, name: 'TMJ Treatment', cost: 3000 }
+  ],
+  medicines: [
+    { id: 1, name: 'Amoxicillin 500mg', dosage: '1-1-1 for 5 days' },
+    { id: 2, name: 'Ibuprofen 400mg', dosage: '1-0-1 for 3 days' },
+    { id: 3, name: 'Metronidazole 400mg', dosage: '1-1-1 for 5 days' },
+    { id: 4, name: 'Chlorhexidine Mouthwash', dosage: 'Gargle twice daily' }
+  ],
+  treatmentPlans: [],
+  doctorQueue: [],
+  chairs: [],
+  bills: [],
+  appointments: [],
+  
+  // Consultation form state
+  consultationForm: {
+    patientId: null,
+    doctorId: null,
+    chairId: null,
+    selectedTeeth: [],
+    selectedMedicines: [],
+    selectedTreatments: [],
+    customTreatment: '',
+    customCost: '',
+    notes: '',
+    nextVisit: '',
+    chiefComplaint: '',  // Now filled by DOCTOR, not reception
+    diagnosis: '',
+    selectedTests: []
+  }
+};
 
 // ================== DATA STORE ==================
 const DataStore = {
@@ -4044,12 +3890,22 @@ function loadState() {
 // ================== ROUTER ==================
 const routes = {
   '#login': () => renderLogin(),
+  '#dashboard': () => renderDashboard(),
   '#walkin': () => renderWalkInBooking ? renderWalkInBooking() : renderWalkin(),
   '#patients': () => renderPatients(),
   '#doctors-section': () => renderDoctorsSection ? renderDoctorsSection() : console.error('renderDoctorsSection not found'),
   '#billing-section': () => renderBillingSection ? renderBillingSection() : console.error('renderBillingSection not found'),
   '#appointments': () => renderAppointments ? renderAppointments() : console.log('Appointments'),
   '#calendar': () => renderCalendar ? renderCalendar() : console.log('Calendar'),
+  '#prescription-section': () => renderPrescriptionSection(),
+  '#bookings': () => renderOnlineBooking(),
+  '#display': () => { try { renderDisplayScreen ? renderDisplayScreen() : renderDashboard(); } catch(e) { renderDashboard(); } },
+  '#reports': () => renderReports(),
+  '#expenses': () => renderExpenses(),
+  '#payroll': () => renderPayroll(),
+  '#medicines': () => renderMedicines(),
+  '#walkin': () => renderWalkInBooking ? renderWalkInBooking() : renderDashboard(),
+  '#doctors-section': () => renderDoctorsSection ? renderDoctorsSection() : renderDashboard(),
   '#settings': () => renderSettings ? renderSettings() : console.log('Settings')
 };
 
@@ -4082,6 +3938,306 @@ function logout() {
   DataStore.save('currentUser', null);
   window.location.hash = '#login';
   renderLogin();
+}
+
+function login() {
+  const email = (document.getElementById('login-email').value || '').trim().toLowerCase();
+  const password = document.getElementById('login-password').value || '';
+  const role = document.getElementById('login-role').value;
+
+  if (!email || !password) {
+    alert('Please enter email and password.');
+    return;
+  }
+
+  let user = null;
+
+  if (role === 'admin' && email === 'admin@auradental.com' && password === 'admin123') {
+    user = { name: 'Admin', email, role: 'admin' };
+  } else if (role === 'receptionist' && email === 'receptionist@auradental.com' && password === 'reception123') {
+    user = { name: 'Receptionist', email, role: 'receptionist' };
+  } else if (role === 'doctor') {
+    const doc = state.doctors.find(function(d) {
+      return d.email.toLowerCase() === email && d.password === password;
+    });
+    if (doc) user = { name: doc.name, email: doc.email, role: 'doctor', doctorId: doc.id };
+  }
+
+  if (user) {
+    state.currentUser = user;
+    DataStore.save('currentUser', user);
+    window.location.hash = '#walkin';
+    navigate();
+  } else {
+    alert('Invalid email, password, or role. Please try again.');
+  }
+}
+
+
+function renderAppointments(){window.location.hash='#calendar';}
+function renderBillingSection(){if(typeof renderTreatmentPlansReception==='function')renderTreatmentPlansReception();}
+
+// ================== WORKING PAGE FUNCTIONS ==================
+
+function renderDashboard() {
+  const app = document.getElementById('app');
+  if (!app) return;
+  const today = new Date().toISOString().split('T')[0];
+  const pts = state.patients || [];
+  const queue = state.doctorQueue || [];
+  const chairs = state.chairs || [];
+  const bills = state.bills || [];
+  const todayPts = pts.filter(p => p.registeredDate && p.registeredDate.startsWith(today)).length;
+  const todayBills = bills.filter(b => b.date && b.date.startsWith(today));
+  const todayRevenue = todayBills.reduce((s, b) => s + (parseFloat(b.totalAmount) || 0), 0);
+  const occupied = queue.filter(q => q.status === 'in-consultation' || q.status === 'waiting').length;
+
+  app.innerHTML = renderSidebar('#dashboard') + `
+    <div class="main-content" style="padding:24px;">
+      <h2 style="color:#1e293b;margin-bottom:24px;font-size:24px;font-weight:700;">📊 Dashboard</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:32px;">
+        <div style="background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:24px;border-radius:16px;">
+          <div style="font-size:36px;font-weight:700;">${todayPts}</div>
+          <div style="opacity:0.9;margin-top:4px;">Today's Patients</div>
+        </div>
+        <div style="background:linear-gradient(135deg,#f093fb,#f5576c);color:white;padding:24px;border-radius:16px;">
+          <div style="font-size:36px;font-weight:700;">${occupied}</div>
+          <div style="opacity:0.9;margin-top:4px;">In Queue / Consulting</div>
+        </div>
+        <div style="background:linear-gradient(135deg,#4facfe,#00f2fe);color:white;padding:24px;border-radius:16px;">
+          <div style="font-size:36px;font-weight:700;">₹${todayRevenue.toLocaleString()}</div>
+          <div style="opacity:0.9;margin-top:4px;">Today's Revenue</div>
+        </div>
+        <div style="background:linear-gradient(135deg,#43e97b,#38f9d7);color:white;padding:24px;border-radius:16px;">
+          <div style="font-size:36px;font-weight:700;">${pts.length}</div>
+          <div style="opacity:0.9;margin-top:4px;">Total Patients</div>
+        </div>
+      </div>
+      <div style="background:white;border-radius:16px;padding:24px;border:1px solid #e2e8f0;">
+        <h3 style="margin-bottom:16px;color:#1e293b;">🦷 Chair Status</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;">
+          ${(chairs.length ? chairs : [{id:1,name:'Chair 1'},{id:2,name:'Chair 2'},{id:3,name:'Chair 3'}]).map(ch => {
+            const q = queue.find(q => q.chairId === ch.id && (q.status==='in-consultation'||q.status==='waiting'));
+            const color = q ? '#ef4444' : '#10b981';
+            const label = q ? 'Occupied' : 'Available';
+            const patient = q ? (state.patients||[]).find(p=>p.id===q.patientId) : null;
+            return `<div style="padding:16px;border-radius:12px;border:2px solid ${color};text-align:center;">
+              <div style="font-size:24px;">🪑</div>
+              <div style="font-weight:600;color:#1e293b;">${ch.name}</div>
+              <div style="color:${color};font-weight:600;font-size:13px;">${label}</div>
+              ${patient ? `<div style="font-size:12px;color:#64748b;margin-top:4px;">${patient.name}</div>` : ''}
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderPatients() {
+  const app = document.getElementById('app');
+  if (!app) return;
+  const pts = state.patients || [];
+  app.innerHTML = renderSidebar('#patients') + `
+    <div class="main-content" style="padding:24px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+        <h2 style="color:#1e293b;font-size:24px;font-weight:700;">👥 Patients (${pts.length})</h2>
+        <input type="text" placeholder="🔍 Search patients..." onkeyup="filterPatientsList(this.value)"
+          style="padding:10px 16px;border:2px solid #e2e8f0;border-radius:10px;font-size:14px;width:250px;">
+      </div>
+      <div id="patients-list">
+        ${pts.length === 0 ? '<div style="text-align:center;padding:60px;color:#64748b;"><div style="font-size:48px;margin-bottom:16px;">👥</div><p>No patients registered yet.</p><p>Use OPD Registration to add patients.</p></div>' :
+          pts.map(p => `
+          <div style="background:white;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:600;color:#1e293b;font-size:16px;">${p.name}</div>
+              <div style="color:#64748b;font-size:13px;margin-top:4px;">📞 ${p.phone||'-'} | Age: ${p.age||'-'} | ${p.gender||'-'}</div>
+              ${p.registeredDate ? `<div style="color:#94a3b8;font-size:12px;margin-top:2px;">Registered: ${p.registeredDate}</div>` : ''}
+            </div>
+            <div style="color:#667eea;font-weight:600;font-size:13px;">ID: ${p.id||'-'}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function filterPatientsList(q) {
+  const pts = (state.patients||[]).filter(p => !q || p.name.toLowerCase().includes(q.toLowerCase()) || (p.phone||'').includes(q));
+  const el = document.getElementById('patients-list');
+  if (!el) return;
+  el.innerHTML = pts.length === 0 ? '<p style="color:#64748b;padding:20px;">No patients found.</p>' :
+    pts.map(p => `<div style="background:white;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:12px;">
+      <div style="font-weight:600;color:#1e293b;">${p.name}</div>
+      <div style="color:#64748b;font-size:13px;">📞 ${p.phone||'-'} | Age: ${p.age||'-'}</div>
+    </div>`).join('');
+}
+
+function renderPrescriptionSection() {
+  const app = document.getElementById('app');
+  if (!app) return;
+  const bills = (state.bills||[]).filter(b => !b.prescriptionPrinted);
+  app.innerHTML = renderSidebar('#prescription-section') + `
+    <div class="main-content" style="padding:24px;">
+      <h2 style="color:#1e293b;margin-bottom:24px;font-size:24px;font-weight:700;">🖨️ Print Bills & Rx</h2>
+      ${bills.length === 0 ? '<div style="text-align:center;padding:60px;color:#64748b;"><div style="font-size:48px;margin-bottom:16px;">🖨️</div><p>No pending bills to print.</p></div>' :
+        bills.map(b => {
+          const pt = (state.patients||[]).find(p=>p.id===b.patientId);
+          return `<div style="background:white;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:600;color:#1e293b;">${pt?pt.name:'Unknown'}</div>
+              <div style="color:#64748b;font-size:13px;">Amount: ₹${b.totalAmount||0} | Date: ${b.date||'-'}</div>
+            </div>
+            <button onclick="window.print()" style="padding:8px 16px;background:#667eea;color:white;border:none;border-radius:8px;cursor:pointer;">Print</button>
+          </div>`;
+        }).join('')}
+    </div>`;
+}
+
+function renderOnlineBooking() {
+  const app = document.getElementById('app');
+  if (!app) return;
+  const bookings = state.bookingRequests || [];
+  const pending = bookings.filter(b => b.status === 'pending');
+  app.innerHTML = renderSidebar('#bookings') + `
+    <div class="main-content" style="padding:24px;">
+      <h2 style="color:#1e293b;margin-bottom:24px;font-size:24px;font-weight:700;">📱 Online Bookings</h2>
+      ${pending.length === 0 ? '<div style="text-align:center;padding:60px;color:#64748b;"><div style="font-size:48px;margin-bottom:16px;">📱</div><p>No pending booking requests.</p></div>' :
+        pending.map(b => `<div style="background:white;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:12px;">
+          <div style="font-weight:600;color:#1e293b;">${b.name||'Unknown'}</div>
+          <div style="color:#64748b;font-size:13px;">📞 ${b.phone||'-'} | Date: ${b.date||'-'} | ${b.reason||'-'}</div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function renderExpenses() {
+  const app = document.getElementById('app');
+  if (!app) return;
+  const expenses = state.expenses || [];
+  const total = expenses.reduce((s,e)=>s+(parseFloat(e.amount)||0),0);
+  app.innerHTML = renderSidebar('#expenses') + `
+    <div class="main-content" style="padding:24px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+        <h2 style="color:#1e293b;font-size:24px;font-weight:700;">💸 Expenses</h2>
+        <div style="background:linear-gradient(135deg,#f093fb,#f5576c);color:white;padding:12px 24px;border-radius:12px;font-weight:700;">Total: ₹${total.toLocaleString()}</div>
+      </div>
+      <button onclick="addExpenseForm()" style="margin-bottom:20px;padding:10px 20px;background:#667eea;color:white;border:none;border-radius:10px;cursor:pointer;font-size:14px;">+ Add Expense</button>
+      <div id="expense-form" style="display:none;background:white;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:20px;">
+        <input id="exp-category" placeholder="Category (e.g. Supplies)" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:10px;box-sizing:border-box;">
+        <input id="exp-amount" type="number" placeholder="Amount (₹)" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:10px;box-sizing:border-box;">
+        <input id="exp-note" placeholder="Note" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:10px;box-sizing:border-box;">
+        <button onclick="saveExpense()" style="padding:10px 20px;background:#10b981;color:white;border:none;border-radius:8px;cursor:pointer;">Save</button>
+      </div>
+      ${expenses.length === 0 ? '<div style="text-align:center;padding:40px;color:#64748b;">No expenses recorded yet.</div>' :
+        expenses.map(e=>`<div style="background:white;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:10px;display:flex;justify-content:space-between;">
+          <div><div style="font-weight:600;">${e.category||'General'}</div><div style="color:#64748b;font-size:13px;">${e.note||''} | ${e.date||''}</div></div>
+          <div style="font-weight:700;color:#ef4444;">₹${parseFloat(e.amount||0).toLocaleString()}</div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function addExpenseForm() {
+  const f = document.getElementById('expense-form');
+  if (f) f.style.display = f.style.display === 'none' ? 'block' : 'none';
+}
+
+function saveExpense() {
+  const cat = document.getElementById('exp-category').value;
+  const amt = document.getElementById('exp-amount').value;
+  const note = document.getElementById('exp-note').value;
+  if (!cat || !amt) { alert('Please fill category and amount.'); return; }
+  if (!state.expenses) state.expenses = [];
+  state.expenses.push({ id: Date.now(), category: cat, amount: parseFloat(amt), note: note, date: new Date().toLocaleDateString() });
+  DataStore.save('expenses', state.expenses);
+  renderExpenses();
+}
+
+function renderReports() {
+  const app = document.getElementById('app');
+  if (!app) return;
+  const pts = state.patients || [];
+  const bills = state.bills || [];
+  const expenses = state.expenses || [];
+  const revenue = bills.reduce((s,b)=>s+(parseFloat(b.totalAmount)||0),0);
+  const expTotal = expenses.reduce((s,e)=>s+(parseFloat(e.amount)||0),0);
+  app.innerHTML = renderSidebar('#reports') + `
+    <div class="main-content" style="padding:24px;">
+      <h2 style="color:#1e293b;margin-bottom:24px;font-size:24px;font-weight:700;">📈 Reports</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+        <div style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px;text-align:center;">
+          <div style="font-size:36px;font-weight:700;color:#667eea;">${pts.length}</div>
+          <div style="color:#64748b;margin-top:4px;">Total Patients</div>
+        </div>
+        <div style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px;text-align:center;">
+          <div style="font-size:36px;font-weight:700;color:#10b981;">₹${revenue.toLocaleString()}</div>
+          <div style="color:#64748b;margin-top:4px;">Total Revenue</div>
+        </div>
+        <div style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px;text-align:center;">
+          <div style="font-size:36px;font-weight:700;color:#ef4444;">₹${expTotal.toLocaleString()}</div>
+          <div style="color:#64748b;margin-top:4px;">Total Expenses</div>
+        </div>
+        <div style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px;text-align:center;">
+          <div style="font-size:36px;font-weight:700;color:#f59e0b;">₹${(revenue-expTotal).toLocaleString()}</div>
+          <div style="color:#64748b;margin-top:4px;">Net Profit</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderPayroll() {
+  const app = document.getElementById('app');
+  if (!app) return;
+  const staff = state.staff || [];
+  app.innerHTML = renderSidebar('#payroll') + `
+    <div class="main-content" style="padding:24px;">
+      <h2 style="color:#1e293b;margin-bottom:24px;font-size:24px;font-weight:700;">💼 Payroll</h2>
+      ${staff.length === 0 ? '<div style="text-align:center;padding:60px;color:#64748b;"><div style="font-size:48px;margin-bottom:16px;">💼</div><p>No staff records. Add staff in Settings.</p></div>' :
+        staff.map(s=>`<div style="background:white;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;">
+          <div><div style="font-weight:600;">${s.name}</div><div style="color:#64748b;font-size:13px;">${s.role||'-'}</div></div>
+          <div style="font-weight:700;color:#10b981;">₹${(s.salary||0).toLocaleString()}/mo</div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function renderMedicines() {
+  const app = document.getElementById('app');
+  if (!app) return;
+  const meds = state.medicines || [];
+  app.innerHTML = renderSidebar('#medicines') + `
+    <div class="main-content" style="padding:24px;">
+      <h2 style="color:#1e293b;margin-bottom:24px;font-size:24px;font-weight:700;">💊 Medicines (${meds.length})</h2>
+      ${meds.length === 0 ? '<div style="text-align:center;padding:60px;color:#64748b;"><div style="font-size:48px;margin-bottom:16px;">💊</div><p>No medicines added yet.</p></div>' :
+        meds.map(m=>`<div style="background:white;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:10px;display:flex;justify-content:space-between;">
+          <div><div style="font-weight:600;">${m.name}</div><div style="color:#64748b;font-size:13px;">${m.type||''} | ${m.dosage||''}</div></div>
+          <div style="color:#667eea;font-size:13px;">Stock: ${m.stock||0}</div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function renderSettings() {
+  const app = document.getElementById('app');
+  if (!app) return;
+  const cfg = state.config || {};
+  app.innerHTML = renderSidebar('#settings') + `
+    <div class="main-content" style="padding:24px;">
+      <h2 style="color:#1e293b;margin-bottom:24px;font-size:24px;font-weight:700;">⚙️ Settings</h2>
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px;max-width:600px;">
+        <h3 style="margin-bottom:16px;color:#1e293b;">Clinic Information</h3>
+        <div style="margin-bottom:12px;"><label style="color:#64748b;font-size:13px;">Clinic Name</label>
+          <input id="cfg-name" value="${cfg.clinicName||'Aura Dental Care'}" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-top:4px;box-sizing:border-box;"></div>
+        <div style="margin-bottom:12px;"><label style="color:#64748b;font-size:13px;">Phone</label>
+          <input id="cfg-phone" value="${cfg.clinicPhone||''}" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-top:4px;box-sizing:border-box;"></div>
+        <div style="margin-bottom:12px;"><label style="color:#64748b;font-size:13px;">Address</label>
+          <input id="cfg-addr" value="${cfg.clinicAddress||''}" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px;margin-top:4px;box-sizing:border-box;"></div>
+        <button onclick="saveSettings()" style="padding:12px 24px;background:#667eea;color:white;border:none;border-radius:10px;cursor:pointer;font-weight:600;">Save Settings</button>
+      </div>
+    </div>`;
+}
+
+function saveSettings() {
+  if (!state.config) state.config = {};
+  state.config.clinicName = document.getElementById('cfg-name').value;
+  state.config.clinicPhone = document.getElementById('cfg-phone').value;
+  state.config.clinicAddress = document.getElementById('cfg-addr').value;
+  DataStore.save('config', state.config);
+  alert('Settings saved!');
 }
 
 // ================== INIT FUNCTION ==================
@@ -4473,6 +4629,7 @@ function navigate() {
   
   switch (hash) {
     case '#login': renderLogin(); break;
+    case '#calendar': renderCalendar(); break;
     case '#dashboard': renderDashboard(); break;
     case '#patients': renderPatients(); break;
     case '#appointments': renderAppointments(); break;
@@ -4694,68 +4851,6 @@ function fillLogin(email, password, role) {
   document.getElementById('login-role').value = role;
 }
 
-// ========== LOGIN FUNCTION ==========
-function login() {
-  const email = document.getElementById('login-email').value.trim();
-  const password = document.getElementById('login-password').value.trim();
-  const role = document.getElementById('login-role').value;
-  
-  if (!email || !password) {
-    alert('⚠️ Please enter email and password');
-    return;
-  }
-  
-  // Check admin
-  if (email === 'admin@auradental.com' && password === 'admin123' && role === 'admin') {
-    state.currentUser = { 
-      name: 'Admin', 
-      email: email, 
-      role: 'admin' 
-    };
-    DataStore.save('currentUser', state.currentUser);
-    console.log('✅ Admin logged in');
-    window.location.hash = '#walkin';
-    render();
-    return;
-  }
-  
-  // Check doctors
-  const doctor = state.doctors.find(d => d.email === email && d.password === password);
-  if (doctor && role === 'doctor') {
-    state.currentUser = {
-      id: doctor.id,
-      name: doctor.name,
-      email: doctor.email,
-      role: 'doctor',
-      specialty: doctor.specialty
-    };
-    DataStore.save('currentUser', state.currentUser);
-    console.log('✅ Doctor logged in:', doctor.name);
-    window.location.hash = '#doctors-section';
-    render();
-    return;
-  }
-  
-  // Check receptionist
-  if (email === 'receptionist@auradental.com' && password === 'reception123' && role === 'receptionist') {
-    state.currentUser = {
-      name: 'Receptionist',
-      email: email,
-      role: 'receptionist'
-    };
-    DataStore.save('currentUser', state.currentUser);
-    console.log('✅ Receptionist logged in');
-    window.location.hash = '#walkin';
-    render();
-    return;
-  }
-  
-  // Login failed
-  alert('❌ Invalid credentials! Please check email, password, and role.');
-}
-
-
-
 // ========== LOGIN ==========
 function renderLogin() {
   // Build dynamic user list
@@ -4806,21 +4901,22 @@ function renderLogin() {
         
         <h1 style="font-size:32px;font-weight:700;text-align:center;color:#1e293b;margin-bottom:30px;">Sign In</h1>
         
+        <form onsubmit="login();return false;" autocomplete="on">
         <div style="margin-bottom:20px;position:relative;">
           <span style="position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:20px;">📧</span>
-          <input type="email" id="login-email" placeholder="email@example.com" 
+          <input type="email" id="login-email" name="email" autocomplete="username" placeholder="email@example.com" 
                  style="width:100%;padding:16px 20px 16px 50px;border:2px solid #4ade80;border-radius:12px;font-size:16px;box-sizing:border-box;">
         </div>
         
         <div style="margin-bottom:20px;position:relative;">
           <span style="position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:20px;">🔒</span>
-          <input type="password" id="login-password" placeholder="Password" 
+          <input type="password" id="login-password" name="password" autocomplete="current-password" placeholder="Password" 
                  style="width:100%;padding:16px 20px 16px 50px;border:2px solid #4ade80;border-radius:12px;font-size:16px;box-sizing:border-box;">
         </div>
         
         <div style="margin-bottom:20px;position:relative;">
           <span style="position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:20px;">👤</span>
-          <select id="login-role" 
+          <select id="login-role" name="role"
                   style="width:100%;padding:16px 20px 16px 50px;border:2px solid #4ade80;border-radius:12px;font-size:16px;box-sizing:border-box;">
             <option value="admin">Admin</option>
             <option value="doctor">Doctor</option>
@@ -4828,10 +4924,11 @@ function renderLogin() {
           </select>
         </div>
         
-        <button onclick="login()" 
+        <button type="submit"
                 style="width:100%;padding:18px;background:linear-gradient(135deg,#667eea,#f093fb);color:white;border:none;border-radius:12px;font-size:18px;font-weight:700;cursor:pointer;margin-top:20px;">
           Sign In
         </button>
+        </form>
         
         <div style="margin-top:30px;text-align:center;">
           <div style="font-size:14px;color:#64748b;margin-bottom:15px;">
@@ -5328,6 +5425,142 @@ function generateUPIQRCode(elementId, amount) {
   });
 }
 
+function saveConsultationFormFromWalkIn() {
+  try {
+    const patientId = state.consultationForm.patientId;
+    const doctorId = state.consultationForm.doctorId;
+    const chairId = state.consultationForm.chairId;
+    const selectedTeeth = state.consultationForm.selectedTeeth;
+    const selectedMedicines = state.consultationForm.selectedMedicines;
+    const selectedTreatments = state.consultationForm.selectedTreatments;
+    const customTreatment = state.consultationForm.customTreatment;
+    const customCost = state.consultationForm.customCost;
+    const notes = state.consultationForm.notes;
+    const nextVisit = state.consultationForm.nextVisit;
+
+    if (!patientId || !doctorId) {
+      alert('Please select patient and doctor first!');
+      return;
+    }
+
+    const patient = state.patients.find(p => p.id === patientId);
+    const doctor = state.doctors.find(d => d.id === doctorId);
+    
+    if (!patient || !doctor) {
+      alert('Patient or doctor not found!');
+      return;
+    }
+
+    // Calculate total
+    let total = 0;
+    
+    // Add treatment costs
+    selectedTreatments.forEach(treatmentId => {
+      const treatment = state.treatments.find(t => t.id === treatmentId);
+      if (treatment) total += treatment.cost;
+    });
+    
+    // Add custom treatment cost
+    if (customCost) total += parseInt(customCost);
+    
+    // Add medicine costs
+    selectedMedicines.forEach(medicineId => {
+      const medicine = state.medicines.find(m => m.id === medicineId);
+      if (medicine) total += medicine.price;
+    });
+
+    // Create bill
+    const bill = {
+      id: generateId(state.bills || []),
+      patientId: patientId,
+      doctorId: doctorId,
+      chairId: chairId,
+      date: new Date().toLocaleDateString('en-IN'),
+      time: new Date().toLocaleTimeString('en-IN'),
+      teeth: selectedTeeth,
+      medicines: selectedMedicines.map(id => state.medicines.find(m => m.id === id)),
+      treatments: selectedTreatments.map(id => state.treatments.find(t => t.id === id)),
+      customTreatment: customTreatment,
+      customCost: customCost ? parseInt(customCost) : 0,
+      total: total,
+      notes: notes,
+      nextVisit: nextVisit
+    };
+    
+    state.bills.push(bill);
+  
+  // Auto-generate prescription if medicines selected
+  if (selectedMedicines.length > 0) {
+    const prescription = {
+      id: generateId(state.prescriptions || []),
+      billId: bill.id,
+      patientId: patientId,
+      doctorId: doctorId,
+      date: bill.date,
+      medicines: bill.medicines,
+      teeth: bill.teeth,
+      prescriptionNumber: 'PRX' + Date.now(),
+      generalInstructions: notes || 'Take medicines as prescribed. Follow up if any issues.'
+    };
+    
+    if (!state.prescriptions) state.prescriptions = [];
+    state.prescriptions.push(prescription);
+  }
+  
+  saveAllData();
+  
+  // Show success message
+  const patientInfo = state.patients.find(p => p.id == patientId); // Use == for type coercion
+  const doctorInfo = state.doctors.find(d => d.id == doctorId);
+  
+  if (!patientInfo) {
+    console.error('Patient not found! patientId:', patientId, 'All patients:', state.patients);
+    alert('ERROR: Patient not found. Please select patient again.');
+    return;
+  }
+  
+  if (!doctorInfo) {
+    console.error('Doctor not found! doctorId:', doctorId, 'All doctors:', state.doctors);
+    alert('ERROR: Doctor not found. Please select doctor again.');
+    return;
+  }
+  
+  let successMsg = '✅ BILL GENERATED SUCCESSFULLY!\n\n' +
+    'Bill Number: ' + bill.billNumber + '\n' +
+    'Patient: ' + patientInfo.name + '\n' +
+    'Doctor: ' + doctorInfo.name + '\n' +
+    'Total Amount: ' + formatIndianCurrency(total);
+  
+  if (selectedMedicines.length > 0) {
+    successMsg += '\n\n📋 Prescription also generated with medicines!';
+  }
+  
+  
+  alert(successMsg + '\n\nBill receipt will appear. Click Print buttons to print.');
+  
+  // Reset consultation form
+  state.consultationForm = {
+    patientId: null,
+    doctorId: null,
+    chairId: null,
+    selectedTeeth: [],
+    selectedMedicines: [],
+    selectedTreatments: [],
+    customTreatment: '',
+    customCost: '',
+    notes: '',
+    nextVisit: ''
+  };
+  
+  renderBillReceipt(bill);
+  setTimeout(() => window.print(), 500);
+  
+} catch (error) {
+  console.error('❌ ERROR in generateBillAndPrintUpdated:', error);
+  alert('❌ ERROR GENERATING BILL:\n\n' + error.message + '\n\nCheck console (F12) for details.');
+}
+} // end saveConsultationFormFromWalkIn
+
 // ========== WALK-IN APPOINTMENT CRUD ==========
 function editWalkInAppointment(appointmentId) {
   const appointment = state.appointments.find(a => a.id === appointmentId);
@@ -5753,6 +5986,11 @@ function showPublicBookingForm() {
       
       // Try to notify parent window
       if (window.opener && !window.opener.closed) {
+        try {
+          window.opener.location.reload();
+        } catch(e) {
+          
+        }
       }
       
       setTimeout(() => {
@@ -9736,20 +9974,22 @@ function showForgotPassword() {
           
           <div id="forgot-password-error"></div>
           
+          <form onsubmit="verifySecurityPin();return false;" autocomplete="on">
           <div class="form-group">
             <label>Your Email *</label>
-            <input type="email" id="reset-email" placeholder="Enter your email">
+            <input type="email" id="reset-email" name="email" autocomplete="username" placeholder="Enter your email">
           </div>
           
           <div class="form-group">
             <label>Security PIN (4 digits) *</label>
-            <input type="password" id="reset-security-pin" placeholder="Enter your security PIN" maxlength="4" pattern="[0-9]*" inputmode="numeric">
+            <input type="password" id="reset-security-pin" name="pin" autocomplete="current-password" placeholder="Enter your security PIN" maxlength="4" pattern="[0-9]*" inputmode="numeric">
             <small style="color: #64748b; font-size: 12px;">The 4-digit PIN you set when your account was created</small>
           </div>
           
-          <button class="btn-primary" onclick="verifySecurityPin()" style="width: 100%; padding: 15px; font-size: 16px;">
+          <button type="submit" class="btn-primary" style="width: 100%; padding: 15px; font-size: 16px;">
             Verify & Continue
           </button>
+          </form>
           
           <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
             <p style="font-size: 13px; color: #64748b; text-align: center;">
@@ -9769,19 +10009,21 @@ function showForgotPassword() {
           
           <div id="new-password-error"></div>
           
+          <form onsubmit="resetPasswordNow();return false;" autocomplete="new-password">
           <div class="form-group">
             <label>New Password *</label>
-            <input type="password" id="new-password" placeholder="Enter new password (min 6 characters)">
+            <input type="password" id="new-password" name="new-password" autocomplete="new-password" placeholder="Enter new password (min 6 characters)">
           </div>
           
           <div class="form-group">
             <label>Confirm New Password *</label>
-            <input type="password" id="confirm-password" placeholder="Re-enter new password">
+            <input type="password" id="confirm-password" name="confirm-password" autocomplete="new-password" placeholder="Re-enter new password">
           </div>
           
-          <button class="btn-primary" onclick="resetPasswordNow()" style="width: 100%; padding: 15px; font-size: 16px; background: #10b981;">
+          <button type="submit" class="btn-primary" style="width: 100%; padding: 15px; font-size: 16px; background: #10b981;">
             Reset Password
           </button>
+          </form>
         </div>
       </div>
     </div>
@@ -9935,19 +10177,21 @@ function showSetSecurityPinModal(userEmail, userType) {
         
         <div id="security-pin-error"></div>
         
+        <form onsubmit="saveSecurityPin('${userEmail}', '${userType}');return false;" autocomplete="new-password">
         <div class="form-group">
           <label>Create 4-Digit Security PIN *</label>
-          <input type="password" id="new-security-pin" placeholder="Enter 4 digits" maxlength="4" pattern="[0-9]*" inputmode="numeric" style="font-size: 24px; text-align: center; letter-spacing: 10px;">
+          <input type="password" id="new-security-pin" name="new-pin" autocomplete="new-password" placeholder="Enter 4 digits" maxlength="4" pattern="[0-9]*" inputmode="numeric" style="font-size: 24px; text-align: center; letter-spacing: 10px;">
         </div>
         
         <div class="form-group">
           <label>Confirm Security PIN *</label>
-          <input type="password" id="confirm-security-pin" placeholder="Re-enter 4 digits" maxlength="4" pattern="[0-9]*" inputmode="numeric" style="font-size: 24px; text-align: center; letter-spacing: 10px;">
+          <input type="password" id="confirm-security-pin" name="confirm-pin" autocomplete="new-password" placeholder="Re-enter 4 digits" maxlength="4" pattern="[0-9]*" inputmode="numeric" style="font-size: 24px; text-align: center; letter-spacing: 10px;">
         </div>
         
-        <button class="btn-primary" onclick="saveSecurityPin('${userEmail}', '${userType}')" style="width: 100%; padding: 15px; font-size: 16px;">
+        <button type="submit" class="btn-primary" style="width: 100%; padding: 15px; font-size: 16px;">
           Set Security PIN
         </button>
+        </form>
       </div>
     </div>
   `;
@@ -10305,6 +10549,15 @@ async function printPrescriptionRealtime(visitId, billId) {
   }
   
   // Also notify via API if connected
+  try {
+    await fetch('/api/prescription-printed', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ visitId: visitId })
+    });
+  } catch (error) {
+    // Offline mode - just print locally
+  }
   
   // Print
   if (billId) {
@@ -10665,6 +10918,36 @@ function openRegistrationForDate(dateStr) {
 }
 
 
+// ── Calendar Navigation Globals ──────────────────────────────
+// Must be global so onclick handlers generated by renderCalendar can reach them.
+function changeMonth(delta) {
+  if (typeof state === 'undefined' || !state.calendar) return;
+  state.calendar.currentMonth += delta;
+  if (state.calendar.currentMonth > 11) {
+    state.calendar.currentMonth = 0;
+    state.calendar.currentYear++;
+  } else if (state.calendar.currentMonth < 0) {
+    state.calendar.currentMonth = 11;
+    state.calendar.currentYear--;
+  }
+  renderCalendar();
+}
+
+function goToToday() {
+  if (typeof state === 'undefined' || !state.calendar) return;
+  var now = new Date();
+  state.calendar.currentMonth = now.getMonth();
+  state.calendar.currentYear = now.getFullYear();
+  renderCalendar();
+}
+
+function filterByDoctor(doctorId) {
+  if (typeof state === 'undefined' || !state.calendar) return;
+  state.calendar.selectedDoctor = doctorId === 'all' ? 'all' : parseInt(doctorId);
+  renderCalendar();
+}
+// ─────────────────────────────────────────────────────────────
+
 // Advanced Notification System
 function showNotification(message, type, duration) {
   type = type || 'info';
@@ -11207,7 +11490,7 @@ function markBackupDone() {
 }
 
 // Check on load
-if (state.currentUser) {
+if (typeof state !== 'undefined' && state.currentUser) {
   setTimeout(checkAutoBackup, 3000);
 }
 
@@ -11233,37 +11516,7 @@ function lazyLoadImages() {
   });
 }
 
-// Optimize large list rendering
-function renderLargeList(items, renderItem, containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  
-  const fragment = document.createDocumentFragment();
-  const batchSize = 50;
-  let index = 0;
-  
-  function renderBatch() {
-    const end = Math.min(index + batchSize, items.length);
-    
-    for (let i = index; i < end; i++) {
-      const item = renderItem(items[i], i);
-      const div = document.createElement('div');
-      div.innerHTML = item;
-      fragment.appendChild(div.firstChild);
-    }
-    
-    index = end;
-    
-    if (index < items.length) {
-      requestAnimationFrame(renderBatch);
-    } else {
-      container.appendChild(fragment);
-    }
-  }
-  
-  container.innerHTML = '';
-  renderBatch();
-}
+
 
 // Cache DOM queries
 const DOMCache = {
@@ -11278,31 +11531,6 @@ const DOMCache = {
     this.cache = {};
   }
 };
-
-
-// Cleanup old data
-function cleanupOldData() {
-  const oneYearAgo = new Date();
-  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-  
-  // Clean old treatment plans (keep last year only)
-  if (state.treatmentPlans) {
-    const oldCount = state.treatmentPlans.length;
-    state.treatmentPlans = state.treatmentPlans.filter(function(tp) {
-      return new Date(tp.visitDate) > oneYearAgo;
-    });
-    const removed = oldCount - state.treatmentPlans.length;
-    if (removed > 0) {
-      DataStore.save('treatmentPlans', state.treatmentPlans);
-      console.log('Cleaned up ' + removed + ' old treatment records');
-    }
-  }
-}
-
-// Auto-cleanup on load (for admin only)
-if (state.currentUser && state.currentUser.role === 'admin') {
-  setTimeout(cleanupOldData, 5000);
-}
 
 </script>
 
@@ -11321,910 +11549,9 @@ if (state.currentUser && state.currentUser.role === 'admin') {
   };
   document.head.appendChild(script);
 })();
-
-// ═══════════════════════════════════════════════════════════
-// CALENDAR FEATURE - Complete Implementation
-// ═══════════════════════════════════════════════════════════
-
-function renderCalendar() {
-  const role = state.currentUser.role;
-  
-  // Initialize calendar state if not exists
-  if (!state.calendar) {
-    const now = new Date();
-    state.calendar = {
-      currentMonth: now.getMonth(),
-      currentYear: now.getFullYear(),
-      selectedDoctor: 'all'
-    };
-  }
-  
-  const { currentMonth, currentYear, selectedDoctor } = state.calendar;
-  
-  // Get calendar data
-  const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-  const today = new Date();
-  const isCurrentMonth = today.getMonth() === currentMonth && today.getFullYear() === currentYear;
-  const todayDate = today.getDate();
-  
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-                      'July', 'August', 'September', 'October', 'November', 'December'];
-  
-  // Get appointments for this month
-  let appointments = state.appointments ? state.appointments.filter(function(apt) {
-    const aptDate = new Date(apt.date);
-    return aptDate.getMonth() === currentMonth && aptDate.getFullYear() === currentYear;
-  }) : [];
-  
-  // Filter by doctor if selected
-  if (selectedDoctor !== 'all') {
-    appointments = appointments.filter(function(apt) {
-      return apt.doctorId === parseInt(selectedDoctor);
-    });
-  }
-  
-  // Separate today's and upcoming appointments
-  const todaysApts = appointments.filter(function(apt) {
-    const aptDate = new Date(apt.date);
-    return aptDate.toDateString() === today.toDateString();
-  });
-  
-  const upcomingApts = appointments.filter(function(apt) {
-    const aptDate = new Date(apt.date);
-    return aptDate > today && aptDate.toDateString() !== today.toDateString();
-  }).sort(function(a, b) {
-    return new Date(a.date) - new Date(b.date);
-  });
-  
-  const html = '<div class="app-layout">' +
-    renderSidebar('#calendar') +
-    '<div class="main-wrapper">' +
-    '<div class="top-bar">' +
-    mobileMenuButton() +
-    '<h1 class="page-title">📅 Appointment Calendar</h1>' +
-    '<div class="user-profile">' +
-    '<div class="user-avatar">' + state.currentUser.name.charAt(0) + '</div>' +
-    '<div class="user-name">' + state.currentUser.name + '</div>' +
-    '</div></div>' +
-    '<div class="content-area">' +
-    
-    // Calendar Controls
-    '<div class="card">' +
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:15px;">' +
-    
-    // Month/Year Navigation
-    '<div style="display:flex;align-items:center;gap:10px;">' +
-    '<button onclick="changeMonth(-1)" style="padding:10px 15px;background:#667eea;color:white;border:none;border-radius:8px;cursor:pointer;font-size:16px;">◀</button>' +
-    '<h2 style="margin:0;font-size:24px;font-weight:700;min-width:200px;text-align:center;">' +
-    monthNames[currentMonth] + ' ' + currentYear +
-    '</h2>' +
-    '<button onclick="changeMonth(1)" style="padding:10px 15px;background:#667eea;color:white;border:none;border-radius:8px;cursor:pointer;font-size:16px;">▶</button>' +
-    '<button onclick="goToToday()" style="padding:10px 20px;background:#10b981;color:white;border:none;border-radius:8px;cursor:pointer;font-size:14px;margin-left:10px;">Today</button>' +
-    '</div>' +
-    
-    // Doctor Filter
-    '<div style="display:flex;align-items:center;gap:10px;">' +
-    '<label style="font-weight:600;">Filter by Doctor:</label>' +
-    '<select onchange="filterByDoctor(this.value)" style="padding:10px;border:2px solid #e2e8f0;border-radius:8px;font-size:14px;">' +
-    '<option value="all"' + (selectedDoctor === 'all' ? ' selected' : '') + '>All Doctors</option>' +
-    state.doctors.map(function(d) {
-      return '<option value="' + d.id + '"' + (selectedDoctor === d.id ? ' selected' : '') + '>' + d.name + '</option>';
-    }).join('') +
-    '</select>' +
-    '</div>' +
-    
-    '</div>' +
-    
-    // Calendar Grid
-    '<div style="background:#f8fafc;border-radius:12px;padding:20px;">' +
-    
-    // Day Headers
-    '<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:10px;">' +
-    ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(function(day, i) {
-      return '<div style="text-align:center;font-weight:700;font-size:14px;padding:10px;color:' + (i === 0 ? '#ef4444' : '#64748b') + ';">' + day + '</div>';
-    }).join('') +
-    '</div>' +
-    
-    // Calendar Days
-    '<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;">' +
-    (function() {
-      let days = '';
-      
-      // Empty cells before first day
-      for (let i = 0; i < firstDay; i++) {
-        days += '<div style="padding:40px 10px;"></div>';
-      }
-      
-      // Days of month
-      for (let day = 1; day <= daysInMonth; day++) {
-        const date = new Date(currentYear, currentMonth, day);
-        const dayOfWeek = date.getDay();
-        const isSunday = dayOfWeek === 0;
-        const isToday = isCurrentMonth && day === todayDate;
-        const isPast = date < today && !isToday;
-        const dateStr = currentYear + '-' + String(currentMonth + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
-        
-        // Count appointments for this date
-        const dayApts = appointments.filter(function(apt) {
-          return apt.date === dateStr;
-        });
-        
-        const bgColor = isToday ? '#ef4444' : (isSunday ? '#fee2e2' : (isPast ? '#f1f5f9' : 'white'));
-        const textColor = isToday ? 'white' : (isPast ? '#94a3b8' : (isSunday ? '#dc2626' : '#1e293b'));
-const cursor = isPast ? 'not-allowed' : 'pointer';
-const onClick = isPast ? '' : `onclick="openRegistrationForDate('${dateStr}')"`;
-
-        
-        days += '<div ' + onClick + ' style="' +
-          'background:' + bgColor + ';' +
-          'color:' + textColor + ';' +
-          'padding:10px;' +
-          'border-radius:8px;' +
-          'text-align:center;' +
-          'cursor:' + cursor + ';' +
-          'border:2px solid ' + (isToday ? '#dc2626' : (dayApts.length > 0 ? '#3b82f6' : '#e2e8f0')) + ';' +
-          'transition:all 0.2s;' +
-          'min-height:80px;' +
-          'display:flex;' +
-          'flex-direction:column;' +
-          'justify-content:space-between;' +
-          (isPast ? 'opacity:0.5;' : '') +
-          '"' +
-          (isPast ? '' : ' onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'scale(1)\'"') +
-          '>' +
-          '<div style="font-size:18px;font-weight:700;">' + day + '</div>' +
-          (dayApts.length > 0 ? '<div style="font-size:11px;background:' + (isToday ? 'rgba(255,255,255,0.3)' : '#3b82f6') + ';color:' + (isToday ? 'white' : 'white') + ';padding:3px 6px;border-radius:4px;margin-top:5px;">' + dayApts.length + ' apt' + (dayApts.length > 1 ? 's' : '') + '</div>' : '') +
-          '</div>';
-      }
-      
-      return days;
-    })() +
-    '</div>' +
-    '</div>' +
-    '</div>' +
-    
-    // Today's Appointments
-    '<div class="card" style="margin-top:20px;border-top:4px solid #10b981;">' +
-    '<h3 style="margin:0 0 15px 0;font-size:18px;font-weight:700;color:#065f46;">📌 Today\'s Appointments (' + todaysApts.length + ')</h3>' +
-    (todaysApts.length === 0 ?
-      '<div style="text-align:center;padding:30px;color:#94a3b8;">No appointments today</div>' :
-      '<div style="display:grid;gap:10px;">' +
-      todaysApts.map(function(apt) {
-        const patient = state.patients.find(function(p) { return p.id === apt.patientId; });
-        const doctor = state.doctors.find(function(d) { return d.id === apt.doctorId; });
-        return '<div style="padding:12px;background:#f0fdf4;border-left:4px solid #10b981;border-radius:8px;">' +
-          '<div style="font-weight:600;color:#065f46;">' + (patient ? patient.name : 'Unknown') + '</div>' +
-          '<div style="font-size:13px;color:#64748b;margin-top:4px;">' +
-          'Doctor: ' + (doctor ? doctor.name : 'N/A') + ' | Time: ' + (apt.time || 'Not set') +
-          '</div>' +
-          '</div>';
-      }).join('') +
-      '</div>') +
-    '</div>' +
-    
-    // Upcoming Appointments
-    '<div class="card" style="margin-top:20px;border-top:4px solid #3b82f6;">' +
-    '<h3 style="margin:0 0 15px 0;font-size:18px;font-weight:700;color:#1e40af;">📅 Upcoming Appointments (' + upcomingApts.length + ')</h3>' +
-    (upcomingApts.length === 0 ?
-      '<div style="text-align:center;padding:30px;color:#94a3b8;">No upcoming appointments this month</div>' :
-      '<div style="display:grid;gap:10px;">' +
-      upcomingApts.slice(0, 10).map(function(apt) {
-        const patient = state.patients.find(function(p) { return p.id === apt.patientId; });
-        const doctor = state.doctors.find(function(d) { return d.id === apt.doctorId; });
-        const aptDate = new Date(apt.date);
-        return '<div style="padding:12px;background:#eff6ff;border-left:4px solid #3b82f6;border-radius:8px;">' +
-          '<div style="font-weight:600;color:#1e40af;">' + (patient ? patient.name : 'Unknown') + '</div>' +
-          '<div style="font-size:13px;color:#64748b;margin-top:4px;">' +
-          formatIndianDate(apt.date) + ' | Doctor: ' + (doctor ? doctor.name : 'N/A') + ' | Time: ' + (apt.time || 'Not set') +
-          '</div>' +
-          '</div>';
-      }).join('') +
-      (upcomingApts.length > 10 ? '<div style="text-align:center;padding:10px;color:#64748b;font-size:14px;">... and ' + (upcomingApts.length - 10) + ' more</div>' : '') +
-      '</div>') +
-    '</div>' +
-    
-    '</div></div></div>';
-  
-  document.getElementById('app').innerHTML = html;
-}
-
-// Calendar helper functions
-function changeMonth(delta) {
-  state.calendar.currentMonth += delta;
-  if (state.calendar.currentMonth > 11) {
-    state.calendar.currentMonth = 0;
-    state.calendar.currentYear++;
-  } else if (state.calendar.currentMonth < 0) {
-    state.calendar.currentMonth = 11;
-    state.calendar.currentYear--;
-  }
-  renderCalendar();
-}
-
-function goToToday() {
-  const now = new Date();
-  state.calendar.currentMonth = now.getMonth();
-  state.calendar.currentYear = now.getFullYear();
-  renderCalendar();
-}
-
-function filterByDoctor(doctorId) {
-  state.calendar.selectedDoctor = doctorId === 'all' ? 'all' : parseInt(doctorId);
-  renderCalendar();
-}
-
-function openRegistrationForDate(dateStr) {
-  // Store selected date
-  state.selectedDate = dateStr;
-  
-  // Navigate to walk-in/registration page
-  window.location.hash = '#walkin';
-  
-  // Show notification
-  showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
-  
-  // Pre-fill date in appointment if possible
-  setTimeout(function() {
-    const dateInput = document.getElementById('appointment-date');
-    if (dateInput) {
-      dateInput.value = dateStr;
-    }
-  }, 100);
-}
-
-
-// Advanced Notification System
-function showNotification(message, type, duration) {
-  type = type || 'info';
-  duration = duration || 3000;
-  
-  const colors = {
-    success: '#10b981',
-    error: '#ef4444',
-    warning: '#f59e0b',
-    info: '#3b82f6'
-  };
-  
-  const icons = {
-    success: '✅',
-    error: '❌',
-    warning: '⚠️',
-    info: 'ℹ️'
-  };
-  
-  const notification = document.createElement('div');
-  notification.innerHTML = icons[type] + ' ' + message;
-  notification.style.cssText = 
-    'position:fixed;top:80px;right:20px;background:' + colors[type] + ';' +
-    'color:white;padding:16px 24px;border-radius:8px;font-weight:600;' +
-    'z-index:10000;box-shadow:0 4px 12px rgba(0,0,0,0.2);' +
-    'animation:slideInRight 0.3s ease;max-width:400px;';
-  
-  document.body.appendChild(notification);
-  
-  setTimeout(function() {
-    notification.style.animation = 'slideOutRight 0.3s ease';
-    setTimeout(function() {
-      if (notification.parentNode) {
-        document.body.removeChild(notification);
-      }
-    }, 300);
-  }, duration);
-}
-
-// Notification animations
-if (!document.getElementById('notification-styles')) {
-  const style = document.createElement('style');
-  style.id = 'notification-styles';
-  style.textContent = `
-    @keyframes slideInRight {
-      from { transform: translateX(400px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    @keyframes slideOutRight {
-      from { transform: translateX(0); opacity: 1; }
-      to { transform: translateX(400px); opacity: 0; }
-    }
-  `;
-  document.head.appendChild(style);
-}
-
-
-// Form Validation Helpers
-function validateEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email);
-}
-
-function validatePhone(phone) {
-  const re = /^[6-9]\d{9}$/;
-  return re.test(phone.replace(/\s+/g, ''));
-}
-
-function validateRequired(value, fieldName) {
-  if (!value || value.trim() === '') {
-    showNotification(fieldName + ' is required', 'error');
-    return false;
-  }
-  return true;
-}
-
-function formatPhone(input) {
-  let value = input.value.replace(/\D/g, '');
-  if (value.length > 10) value = value.slice(0, 10);
-  input.value = value;
-}
-
-function formatAge(input) {
-  let value = input.value.replace(/\D/g, '');
-  if (value.length > 3) value = value.slice(0, 3);
-  if (parseInt(value) > 150) value = '150';
-  input.value = value;
-}
-
-// Auto-capitalize name fields
-function capitalizeName(input) {
-  const words = input.value.split(' ');
-  const capitalized = words.map(word => {
-    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-  }).join(' ');
-  input.value = capitalized;
-}
-
-
-// Print & Export Utilities
-
-// Export to CSV
-function exportToCSV(data, filename) {
-  if (!data || data.length === 0) {
-    showNotification('No data to export', 'warning');
-    return;
-  }
-  
-  const headers = Object.keys(data[0]);
-  let csv = headers.join(',') + '\n';
-  
-  data.forEach(function(row) {
-    const values = headers.map(function(header) {
-      const val = row[header] || '';
-      return '"' + String(val).replace(/"/g, '""') + '"';
-    });
-    csv += values.join(',') + '\n';
-  });
-  
-  const blob = new Blob([csv], { type: 'text/csv' });
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename + '.csv';
-  a.click();
-  window.URL.revokeObjectURL(url);
-  
-  showNotification('Exported ' + data.length + ' records', 'success');
-}
-
-// Export patients to CSV
-function exportPatients() {
-  const data = state.patients.map(function(p) {
-    return {
-      ID: p.id,
-      Name: p.name,
-      Age: p.age,
-      Gender: p.gender,
-      Contact: p.contact,
-      Email: p.email,
-      'Created Date': formatIndianDate(p.createdAt)
-    };
-  });
-  exportToCSV(data, 'patients_' + new Date().toISOString().split('T')[0]);
-}
-
-// Export treatments to CSV
-function exportTreatments() {
-  const data = state.treatmentPlans.map(function(tp) {
-    const patient = state.patients.find(p => p.id === tp.patientId);
-    const doctor = state.doctors.find(d => d.id === tp.doctorId);
-    return {
-      ID: tp.id,
-      Patient: patient ? patient.name : 'Unknown',
-      Doctor: doctor ? doctor.name : 'Unknown',
-      Date: formatIndianDate(tp.visitDate),
-      'Chief Complaint': tp.chiefComplaint,
-      Status: tp.status,
-      'Total Cost': tp.totalCost,
-      'Amount Paid': tp.amountPaid
-    };
-  });
-  exportToCSV(data, 'treatments_' + new Date().toISOString().split('T')[0]);
-}
-
-// Enhanced print with better formatting
-function printWithLogo(title, content) {
-  const printWindow = window.open('', '', 'width=800,height=600');
-  printWindow.document.write('<html><head><title>' + title + '</title>');
-  printWindow.document.write('<style>');
-  printWindow.document.write('body { font-family: Arial, sans-serif; padding: 20px; }');
-  printWindow.document.write('.header { text-align: center; margin-bottom: 30px; border-bottom: 3px solid #667eea; padding-bottom: 20px; }');
-  printWindow.document.write('.clinic-name { font-size: 28px; font-weight: bold; color: #667eea; }');
-  printWindow.document.write('.content { margin-top: 20px; }');
-  printWindow.document.write('table { width: 100%; border-collapse: collapse; margin-top: 20px; }');
-  printWindow.document.write('th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }');
-  printWindow.document.write('th { background: #f8fafc; font-weight: bold; }');
-  printWindow.document.write('@media print { button { display: none; } }');
-  printWindow.document.write('</style></head><body>');
-  printWindow.document.write('<div class="header">');
-  printWindow.document.write('<div class="clinic-name">🦷 AURA DENTAL CARE</div>');
-  printWindow.document.write('<div>' + title + '</div>');
-  printWindow.document.write('</div>');
-  printWindow.document.write('<div class="content">');
-  printWindow.document.write(content);
-  printWindow.document.write('</div>');
-  printWindow.document.write('</body></html>');
-  printWindow.document.close();
-  printWindow.print();
-}
-
-
-// Advanced Search Functionality
-
-// Search patients by multiple criteria
-function searchPatients(query) {
-  if (!query || query.trim() === '') {
-    return state.patients;
-  }
-  
-  query = query.toLowerCase().trim();
-  
-  return state.patients.filter(function(p) {
-    return (
-      (p.name && p.name.toLowerCase().includes(query)) ||
-      (p.contact && p.contact.includes(query)) ||
-      (p.email && p.email.toLowerCase().includes(query)) ||
-      (p.id && p.id.toString() === query)
-    );
-  });
-}
-
-// Search treatments
-function searchTreatments(query) {
-  if (!query || query.trim() === '') {
-    return state.treatmentPlans;
-  }
-  
-  query = query.toLowerCase().trim();
-  
-  return state.treatmentPlans.filter(function(tp) {
-    const patient = state.patients.find(p => p.id === tp.patientId);
-    const patientName = patient ? patient.name.toLowerCase() : '';
-    
-    return (
-      (tp.chiefComplaint && tp.chiefComplaint.toLowerCase().includes(query)) ||
-      (tp.diagnosis && tp.diagnosis.toLowerCase().includes(query)) ||
-      patientName.includes(query) ||
-      (tp.id && tp.id.toString() === query)
-    );
-  });
-}
-
-// Global search across all entities
-function globalSearch(query) {
-  if (!query || query.trim() === '') {
-    return { patients: [], treatments: [], appointments: [] };
-  }
-  
-  return {
-    patients: searchPatients(query).slice(0, 5),
-    treatments: searchTreatments(query).slice(0, 5),
-    appointments: []
-  };
-}
-
-// Debounce function for search
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = function() {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-
-// Keyboard Shortcuts
-document.addEventListener('keydown', function(e) {
-  // Alt + shortcuts
-  if (e.altKey) {
-    switch(e.key) {
-      case 'h': // Alt+H: Home/Dashboard
-        e.preventDefault();
-        window.location.hash = state.currentUser.role === 'doctor' ? '#doctors-section' : '#walkin';
-        break;
-      case 'p': // Alt+P: Patients
-        e.preventDefault();
-        window.location.hash = '#patients';
-        break;
-      case 'c': // Alt+C: Calendar
-        e.preventDefault();
-        window.location.hash = '#calendar';
-        break;
-      case 's': // Alt+S: Settings
-        e.preventDefault();
-        window.location.hash = '#settings';
-        break;
-      case 'l': // Alt+L: Logout
-        e.preventDefault();
-        if (confirm('Are you sure you want to logout?')) {
-          logout();
-        }
-        break;
-    }
-  }
-  
-  // Escape key: Close modals
-  if (e.key === 'Escape') {
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(function(modal) {
-      modal.style.display = 'none';
-    });
-  }
-});
-
-// Show keyboard shortcuts help
-function showKeyboardShortcuts() {
-  const shortcuts = [
-    { keys: 'Alt + H', action: 'Go to Home/Dashboard' },
-    { keys: 'Alt + P', action: 'Go to Patients' },
-    { keys: 'Alt + C', action: 'Go to Calendar' },
-    { keys: 'Alt + S', action: 'Go to Settings' },
-    { keys: 'Alt + L', action: 'Logout' },
-    { keys: 'Esc', action: 'Close modals' }
-  ];
-  
-  let html = '<div style="padding:20px;">';
-  html += '<h2 style="margin-top:0;">⌨️ Keyboard Shortcuts</h2>';
-  html += '<table style="width:100%;"><tr><th>Keys</th><th>Action</th></tr>';
-  shortcuts.forEach(function(s) {
-    html += '<tr><td><code style="background:#f1f5f9;padding:4px 8px;border-radius:4px;">' + 
-            s.keys + '</code></td><td>' + s.action + '</td></tr>';
-  });
-  html += '</table></div>';
-  
-  showModal('Keyboard Shortcuts', html);
-}
-
-
-// Loading Indicators & UI Feedback
-
-// Show loading overlay
-function showLoading(message) {
-  message = message || 'Loading...';
-  
-  let loader = document.getElementById('global-loader');
-  if (!loader) {
-    loader = document.createElement('div');
-    loader.id = 'global-loader';
-    loader.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 99999;
-    `;
-    
-    loader.innerHTML = `
-      <div style="background: white; padding: 30px 50px; border-radius: 12px; text-align: center;">
-        <div class="spinner" style="margin: 0 auto 15px; width: 50px; height: 50px; border: 4px solid #e2e8f0; border-top-color: #667eea; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-        <div style="font-size: 16px; font-weight: 600; color: #1e293b;">${message}</div>
-      </div>
-    `;
-    
-    document.body.appendChild(loader);
-    
-    // Add spinner animation if not exists
-    if (!document.getElementById('spinner-animation')) {
-      const style = document.createElement('style');
-      style.id = 'spinner-animation';
-      style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
-      document.head.appendChild(style);
-    }
-  }
-  
-  loader.style.display = 'flex';
-}
-
-// Hide loading overlay
-function hideLoading() {
-  const loader = document.getElementById('global-loader');
-  if (loader) {
-    loader.style.display = 'none';
-  }
-}
-
-// Progress bar for operations
-function showProgress(percent, message) {
-  let progress = document.getElementById('global-progress');
-  if (!progress) {
-    progress = document.createElement('div');
-    progress.id = 'global-progress';
-    progress.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 99998;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      padding: 15px;
-    `;
-    
-    progress.innerHTML = `
-      <div id="progress-message" style="font-size: 14px; margin-bottom: 8px; color: #64748b;"></div>
-      <div style="width: 100%; background: #e2e8f0; border-radius: 10px; overflow: hidden;">
-        <div id="progress-bar" style="height: 8px; background: linear-gradient(90deg, #667eea, #764ba2); transition: width 0.3s ease;"></div>
-      </div>
-    `;
-    
-    document.body.appendChild(progress);
-  }
-  
-  document.getElementById('progress-message').textContent = message || 'Processing...';
-  document.getElementById('progress-bar').style.width = percent + '%';
-  progress.style.display = 'block';
-  
-  if (percent >= 100) {
-    setTimeout(function() {
-      progress.style.display = 'none';
-    }, 500);
-  }
-}
-
-
-// Data Backup & Restore System
-
-// Backup all data
-function backupAllData() {
-  showLoading('Creating backup...');
-  
-  try {
-    const backup = {
-      version: '2.0',
-      timestamp: new Date().toISOString(),
-      data: {
-        patients: state.patients,
-        doctors: state.doctors,
-        treatments: state.treatments,
-        medicines: state.medicines,
-        treatmentPlans: state.treatmentPlans,
-        doctorQueue: state.doctorQueue,
-        chairs: state.chairs,
-        appointments: state.appointments || [],
-        bills: state.bills || [],
-        treatmentMappings: state.treatmentMappings || {}
-      }
-    };
-    
-    const json = JSON.stringify(backup, null, 2);
-    const blob = new Blob([json], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'aura-dental-backup-' + new Date().toISOString().split('T')[0] + '.json';
-    a.click();
-    
-    URL.revokeObjectURL(url);
-    hideLoading();
-    showNotification('✅ Backup created successfully!', 'success');
-    
-  } catch (error) {
-    hideLoading();
-    showNotification('❌ Backup failed: ' + error.message, 'error');
-  }
-}
-
-// Restore from backup
-function restoreFromBackup() {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.json';
-  
-  input.onchange = function(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    
-    showLoading('Restoring backup...');
-    
-    const reader = new FileReader();
-    reader.onload = function(event) {
-      try {
-        const backup = JSON.parse(event.target.result);
-        
-        if (!backup.version || !backup.data) {
-          throw new Error('Invalid backup file');
-        }
-        
-        // Restore data
-        state.patients = backup.data.patients || [];
-        state.doctors = backup.data.doctors || [];
-        state.treatments = backup.data.treatments || [];
-        state.medicines = backup.data.medicines || [];
-        state.treatmentPlans = backup.data.treatmentPlans || [];
-        state.doctorQueue = backup.data.doctorQueue || [];
-        state.chairs = backup.data.chairs || [];
-        state.appointments = backup.data.appointments || [];
-        state.bills = backup.data.bills || [];
-        state.treatmentMappings = backup.data.treatmentMappings || {};
-        
-        // Save to localStorage
-        DataStore.save('patients', state.patients);
-        DataStore.save('doctors', state.doctors);
-        DataStore.save('treatments', state.treatments);
-        DataStore.save('medicines', state.medicines);
-        DataStore.save('treatmentPlans', state.treatmentPlans);
-        DataStore.save('doctorQueue', state.doctorQueue);
-        DataStore.save('chairs', state.chairs);
-        DataStore.save('appointments', state.appointments);
-        DataStore.save('bills', state.bills);
-        DataStore.save('treatmentMappings', state.treatmentMappings);
-        
-        hideLoading();
-        showNotification('✅ Backup restored successfully! Reloading...', 'success');
-        
-        setTimeout(function() {
-          location.reload();
-        }, 1500);
-        
-      } catch (error) {
-        hideLoading();
-        showNotification('❌ Restore failed: ' + error.message, 'error');
-      }
-    };
-    
-    reader.readAsText(file);
-  };
-  
-  input.click();
-}
-
-// Auto-backup reminder
-function checkAutoBackup() {
-  const lastBackup = localStorage.getItem('lastBackupDate');
-  const today = new Date().toDateString();
-  
-  if (lastBackup !== today) {
-    const daysSinceBackup = lastBackup ? 
-      Math.floor((new Date() - new Date(lastBackup)) / (1000 * 60 * 60 * 24)) : 999;
-    
-    if (daysSinceBackup >= 7) {
-      showNotification('⚠️ Backup reminder: Last backup was ' + daysSinceBackup + ' days ago', 'warning', 5000);
-    }
-  }
-}
-
-// Mark backup as done
-function markBackupDone() {
-  localStorage.setItem('lastBackupDate', new Date().toDateString());
-}
-
-// Check on load
-if (state.currentUser) {
-  setTimeout(checkAutoBackup, 3000);
-}
-
-
-// Performance Optimizations
-
-// Lazy load images
-function lazyLoadImages() {
-  const images = document.querySelectorAll('img[data-src]');
-  const imageObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        img.src = img.dataset.src;
-        img.removeAttribute('data-src');
-        imageObserver.unobserve(img);
-      }
-    });
-  });
-  
-  images.forEach(function(img) {
-    imageObserver.observe(img);
-  });
-}
-
-// Optimize large list rendering
-function renderLargeList(items, renderItem, containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  
-  const fragment = document.createDocumentFragment();
-  const batchSize = 50;
-  let index = 0;
-  
-  function renderBatch() {
-    const end = Math.min(index + batchSize, items.length);
-    
-    for (let i = index; i < end; i++) {
-      const item = renderItem(items[i], i);
-      const div = document.createElement('div');
-      div.innerHTML = item;
-      fragment.appendChild(div.firstChild);
-    }
-    
-    index = end;
-    
-    if (index < items.length) {
-      requestAnimationFrame(renderBatch);
-    } else {
-      container.appendChild(fragment);
-    }
-  }
-  
-  container.innerHTML = '';
-  renderBatch();
-}
-
-
-// Optimize localStorage usage
-const StorageOptimizer = {
-  compress: function(data) {
-    return JSON.stringify(data);
-  },
-  decompress: function(data) {
-    try {
-      return JSON.parse(data);
-    } catch (e) {
-      return null;
-    }
-  },
-  getSize: function() {
-    let total = 0;
-    for (let key in localStorage) {
-      if (localStorage.hasOwnProperty(key)) {
-        total += localStorage[key].length + key.length;
-      }
-    }
-    return (total / 1024).toFixed(2) + ' KB';
-  }
-};
-
-// Cleanup old data
-function cleanupOldData() {
-  const oneYearAgo = new Date();
-  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-  
-  // Clean old treatment plans (keep last year only)
-  if (state.treatmentPlans) {
-    const oldCount = state.treatmentPlans.length;
-    state.treatmentPlans = state.treatmentPlans.filter(function(tp) {
-      return new Date(tp.visitDate) > oneYearAgo;
-    });
-    const removed = oldCount - state.treatmentPlans.length;
-    if (removed > 0) {
-      DataStore.save('treatmentPlans', state.treatmentPlans);
-      console.log('Cleaned up ' + removed + ' old treatment records');
-    }
-  }
-}
-
-// Auto-cleanup on load (for admin only)
-if (state.currentUser && state.currentUser.role === 'admin') {
-  setTimeout(cleanupOldData, 5000);
-}
-
 </script>
 <script>
-if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.protocol === 'http:')) {
   window.addEventListener('load', function () {
     navigator.serviceWorker.register('/service-worker.js').catch(err => {
       console.log('Service Worker registration failed:', err);
@@ -12232,6 +11559,5 @@ if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
   });
 }
 </script>
-
 </body>
 </html>

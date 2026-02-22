@@ -1,12 +1,13 @@
 {
-  "name": "Aura Dental Clinic",
-  "short_name": "AuraDental",
-  "description": "Complete dental clinic management system with OPD, billing, consultation and patient management",
+  "name": "Aura Dental Care",
+  "short_name": "Aura Dental",
+  "description": "Complete Dental Clinic Management System",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#667eea",
   "orientation": "portrait-primary",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "categories": ["medical", "productivity", "business"],
   "icons": [
     {
       "src": "/icon-192.png",
@@ -21,25 +22,28 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["medical", "business", "productivity"],
+  "screenshots": [],
   "shortcuts": [
     {
-      "name": "OPD Registration",
-      "short_name": "OPD",
-      "description": "Register new patient",
+      "name": "New Patient",
+      "short_name": "New Patient",
+      "description": "Register a new patient",
       "url": "/#walkin",
-      "icons": [
-        { "src": "/icon-192.png", "sizes": "192x192" }
-      ]
+      "icons": []
     },
     {
-      "name": "Consultation",
-      "short_name": "Consult",
-      "description": "Start consultation",
-      "url": "/#doctors-section",
-      "icons": [
-        { "src": "/icon-192.png", "sizes": "192x192" }
-      ]
+      "name": "Calendar",
+      "short_name": "Calendar",
+      "description": "View appointment calendar",
+      "url": "/#calendar",
+      "icons": []
+    },
+    {
+      "name": "OPD Queue",
+      "short_name": "OPD",
+      "description": "View OPD queue",
+      "url": "/#opd",
+      "icons": []
     }
   ]
 }
