@@ -12177,3 +12177,30 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
 }
 </style>
 
+
+<style>
+/* ===== PERMANENT DESKTOP MODE (ALL DEVICES) ===== */
+
+.sidebar {
+  position: fixed !important;
+  left: 0 !important;
+  transform: none !important;
+  width: 250px !important;
+}
+
+.main-wrapper {
+  margin-left: 250px !important;
+}
+
+.mobile-overlay,
+.mobile-menu-btn {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: none !important;
+  }
+}
+</style>
+
