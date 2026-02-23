@@ -3960,7 +3960,7 @@ function login() {
     const doc = state.doctors.find(function(d) {
       return d.email.toLowerCase() === email && d.password === password;
     });
-    if (doc) user = { name: doc.name, email: doc.email, role: 'doctor', id: doc.id };
+    if (doc) user = { name: doc.name, email: doc.email, role: 'doctor', doctorId: doc.id };
   }
 
   if (user) {
