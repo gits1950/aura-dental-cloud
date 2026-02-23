@@ -155,7 +155,7 @@ function renderCalendar() {
         const bgColor = isToday ? '#ef4444' : (isSunday ? '#fee2e2' : (isPast ? '#f1f5f9' : 'white'));
         const textColor = isToday ? 'white' : (isPast ? '#94a3b8' : (isSunday ? '#dc2626' : '#1e293b'));
         const cursor = isPast ? 'not-allowed' : 'pointer';
-        const onClick = isPast ? '' : `onclick="openRegistrationForDate('${dateStr}')"`;
+        const onClick = isPast ? '' : `onclick="window.location.hash = '#walkin'"`;
         
         days += '<div ' + onClick + ' style="' +
           'background:' + bgColor + ';' +
@@ -257,7 +257,7 @@ function filterByDoctor(doctorId) {
   renderCalendar();
 }
 
-function openRegistrationForDate(dateStr) {
+function openRegistrationForDate(dateStr) { window.location.hash = '#walkin'; return;
   // Store selected date
   state.selectedDate = dateStr;
   
@@ -1009,7 +1009,7 @@ function renderCalendar() {
         const bgColor = isToday ? '#ef4444' : (isSunday ? '#fee2e2' : (isPast ? '#f1f5f9' : 'white'));
         const textColor = isToday ? 'white' : (isPast ? '#94a3b8' : (isSunday ? '#dc2626' : '#1e293b'));
         const cursor = isPast ? 'not-allowed' : 'pointer';
-        const onClick = isPast ? '' : `onclick="openRegistrationForDate('${dateStr}')"`;
+        const onClick = isPast ? '' : `onclick="window.location.hash = '#walkin'"`;
         
         days += '<div ' + onClick + ' style="' +
           'background:' + bgColor + ';' +
@@ -1086,7 +1086,7 @@ function renderCalendar() {
 
 
 
-function openRegistrationForDate(dateStr) {
+function openRegistrationForDate(dateStr) { window.location.hash = '#walkin'; return;
   // Store selected date
   state.selectedDate = dateStr;
   
@@ -3102,7 +3102,7 @@ function renderCalendar() {
         const bgColor = isToday ? '#ef4444' : (isSunday ? '#fee2e2' : (isPast ? '#f1f5f9' : 'white'));
         const textColor = isToday ? 'white' : (isPast ? '#94a3b8' : (isSunday ? '#dc2626' : '#1e293b'));
         const cursor = isPast ? 'not-allowed' : 'pointer';
-        const onClick = isPast ? '' : `onclick="openRegistrationForDate('${dateStr}')"`;
+        const onClick = isPast ? '' : `onclick="window.location.hash = '#walkin'"`;
         
         days += '<div ' + onClick + ' style="' +
           'background:' + bgColor + ';' +
@@ -3179,7 +3179,7 @@ function renderCalendar() {
 
 
 
-function openRegistrationForDate(dateStr) {
+function openRegistrationForDate(dateStr) { window.location.hash = '#walkin'; return;
   // Store selected date
   state.selectedDate = dateStr;
   
@@ -4174,7 +4174,7 @@ function dashCalChangeMonth(delta) {
 }
 function dashCalSetMonth(m) { if (!state.dashCal) return; state.dashCal.month = m; renderDashboard(); }
 function dashCalSetYear(y)  { if (!state.dashCal) return; state.dashCal.year  = y; renderDashboard(); }
-function dashCalBookDate(dateStr) {
+function dashCalBookDate(dateStr) { window.location.hash = '#walkin'; return;
   const modal = document.getElementById('dashCalModal');
   if (!modal) return;
   document.getElementById('dashCal_date').value = dateStr;
@@ -11110,7 +11110,7 @@ function renderCalendar() {
         const bgColor = isToday ? '#ef4444' : (isSunday ? '#fee2e2' : (isPast ? '#f1f5f9' : 'white'));
         const textColor = isToday ? 'white' : (isPast ? '#94a3b8' : (isSunday ? '#dc2626' : '#1e293b'));
         const cursor = isPast ? 'not-allowed' : 'pointer';
-       const onClick = isPast ? '' : `onclick="openRegistrationForDate('${dateStr}')"`;
+       const onClick = isPast ? '' : `onclick="window.location.hash = '#walkin'"`;
 
         
         days += '<div ' + onClick + ' style="' +
@@ -11188,7 +11188,7 @@ function renderCalendar() {
 
 
 
-function openRegistrationForDate(dateStr) {
+function openRegistrationForDate(dateStr) { window.location.hash = '#walkin'; return;
   // Store selected date
   state.selectedDate = dateStr;
   
