@@ -12163,7 +12163,7 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
   }
 
   .main-wrapper {
-    margin-left: 250px !important;
+    
   }
 
   .mobile-overlay {
@@ -12189,7 +12189,7 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
 }
 
 .main-wrapper {
-  margin-left: 250px !important;
+  
 }
 
 .mobile-overlay,
@@ -12202,5 +12202,31 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
     transform: none !important;
   }
 }
+</style>
+
+
+<style>
+/* ===== DESKTOP LAYOUT WITH MOBILE SCROLL ===== */
+
+body {
+  overflow-x: auto !important;
+}
+
+.app-layout {
+  min-width: 1200px !important;
+}
+
+.sidebar {
+  position: fixed !important;
+  left: 0 !important;
+  transform: none !important;
+  width: 250px !important;
+}
+
+.mobile-overlay,
+.mobile-menu-btn {
+  display: none !important;
+}
+
 </style>
 
