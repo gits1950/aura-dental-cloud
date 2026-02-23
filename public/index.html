@@ -262,7 +262,7 @@ function openRegistrationForDate(dateStr) {
   state.selectedDate = dateStr;
   
   // Navigate to walk-in/registration page
-  window.location.hash = '#walkin';
+  window.location.hash = '#dashboard';
   
   // Show notification
   showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
@@ -1091,7 +1091,7 @@ function openRegistrationForDate(dateStr) {
   state.selectedDate = dateStr;
   
   // Navigate to walk-in/registration page
-  window.location.hash = '#walkin';
+  window.location.hash = '#dashboard';
   
   // Show notification
   showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
@@ -3184,7 +3184,7 @@ function openRegistrationForDate(dateStr) {
   state.selectedDate = dateStr;
   
   // Navigate to walk-in/registration page
-  window.location.hash = '#walkin';
+  window.location.hash = '#dashboard';
   
   // Show notification
   showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
@@ -3918,7 +3918,7 @@ function render() {
     route();
   } else {
     console.warn('Route not found:', hash);
-    window.location.hash = '#walkin';
+    window.location.hash = '#dashboard';
   }
 }
 
@@ -3966,7 +3966,7 @@ function login() {
   if (user) {
     state.currentUser = user;
     DataStore.save('currentUser', user);
-    window.location.hash = '#walkin';
+    window.location.hash = '#dashboard';
     navigate();
   } else {
     alert('Invalid email, password, or role. Please try again.');
@@ -4139,7 +4139,7 @@ function renderDashboard() {
           <div id="dashCal_patResults" style="background:white;border:1px solid #e2e8f0;border-radius:8px;margin-top:4px;max-height:140px;overflow-y:auto;display:none;"></div>
           <input type="hidden" id="dashCal_patId">
           <div id="dashCal_patSelected" style="margin-top:6px;font-size:13px;color:#10b981;font-weight:600;"></div>
-          <div style="margin-top:6px;font-size:12px;color:#94a3b8;">New patient? <a href="#" onclick="dashCalCloseModal();window.location.hash='#walkin';" style="color:#667eea;font-weight:600;">Register first &rarr;</a></div>
+          <div style="margin-top:6px;font-size:12px;color:#94a3b8;">New patient? <a href="#" onclick="dashCalCloseModal();window.location.hash = '#dashboard';" style="color:#667eea;font-weight:600;">Register first &rarr;</a></div>
         </div>
         <div style="margin-bottom:14px;">
           <label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;">Doctor *</label>
@@ -11192,7 +11192,7 @@ function openRegistrationForDate(dateStr) {
   state.selectedDate = dateStr;
   
   // Navigate to walk-in/registration page
-  window.location.hash = '#walkin';
+  window.location.hash = '#dashboard';
   
   // Show notification
   showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
