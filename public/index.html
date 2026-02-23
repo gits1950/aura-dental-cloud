@@ -1734,7 +1734,7 @@ body {
   padding: 20px;
 }
 
-.login-container {
+.login-container { box-sizing: border-box;
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
   padding: 50px 40px;
@@ -6574,6 +6574,10 @@ function viewTestReport(billId, reportIndex) {
         .info { background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 
 /* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .login-wrapper, .login-page { overflow-x: hidden !important; padding: 16px !important; box-sizing: border-box; }
+  .login-container { width: 100% !important; max-width: 100% !important; padding: 30px 20px !important; box-sizing: border-box !important; }
+}
 .mobile-menu-btn {
   display: none;
   align-items: center;
