@@ -5941,6 +5941,7 @@ function bookWalkInPatientUpdated() {
     source: 'walkin'
   };
   state.appointments.push(appointment);
+    showBookingConfirmation(patient.name, appointment.date, appointment.time, doctor.name);
   
   const chair = state.chairs.find(c => c.id === chairId);
   chair.status = 'occupied';
@@ -12334,4 +12335,17 @@ html, body {
 
 }
 </style>
+
+
+<script>
+function showBookingConfirmation(patientName, date, time, doctorName) {
+  alert(
+    '? Appointment Confirmed\n\n' +
+    '?? Patient: ' + patientName + '\n' +
+    '?? Date: ' + date + '\n' +
+    '? Time: ' + time + '\n' +
+    '????? Doctor: ' + doctorName
+  );
+}
+</script>
 
