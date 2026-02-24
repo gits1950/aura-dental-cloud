@@ -1,4 +1,4 @@
-<!-- CLOUD TEST -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12163,3 +12163,31 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
 </script>
 </body>
 </html>
+
+
+/* ===== AURA DENTAL CLOUD CALENDAR ===== */
+
+if (!state.calendar) {
+  const now = new Date();
+  state.calendar = {
+    month: now.getMonth(),
+    year: now.getFullYear()
+  };
+}
+
+function openRegistrationForDate(dateStr) {
+  state.selectedDate = dateStr;
+  window.location.hash = '#walkin';
+  if (typeof render === 'function') render();
+
+  setTimeout(function () {
+    const dateInput =
+      document.getElementById('appointment-date') ||
+      document.querySelector('input[type="date"]');
+    if (dateInput) {
+      dateInput.value = dateStr;
+      dateInput.dispatchEvent(new Event('change'));
+    }
+  }, 200);
+}
+
