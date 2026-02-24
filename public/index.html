@@ -4177,17 +4177,25 @@ function dashCalChangeMonth(delta) {
 function dashCalSetMonth(m) { if (!state.dashCal) return; state.dashCal.month = m; renderDashboard(); }
 function dashCalSetYear(y)  { if (!state.dashCal) return; state.dashCal.year  = y; renderDashboard(); }
 function dashCalBookDate(dateStr) {
+  console.log('Dashboard calendar clicked ? redirecting to OPD');
+
+  // Save selected date globally
+  state.selectedDate = dateStr;
+
+  // Close modal if it exists
   const modal = document.getElementById('dashCalModal');
-  if (!modal) return;
-  document.getElementById('dashCal_date').value = dateStr;
-  document.getElementById('dashCal_patId').value = '';
-  document.getElementById('dashCal_patSelected').textContent = '';
-  document.getElementById('dashCal_patSearch').value = '';
-  document.getElementById('dashCal_time').value = '';
-  document.getElementById('dashCal_treatment').value = '';
-  document.getElementById('dashCal_notes').value = '';
-  modal.style.display = 'flex';
+  if (modal) modal.style.display = 'none';
+
+  // Navigate to OPD registration route
+  window.location.hash = '#register-opd';
+
+  // Force router execution if required
+  if (typeof render === 'function') {
+    render();
+  }
 }
+
+
 function dashCalOpenBookModal() { dashCalBookDate(new Date().toISOString().split('T')[0]); }
 function dashCalCloseModal() { const m = document.getElementById('dashCalModal'); if (m) m.style.display = 'none'; }
 function dashCalSearchPat(query) {
