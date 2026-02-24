@@ -1,3 +1,4 @@
+<!-- CLOUD TEST -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11234,6 +11235,19 @@ function filterByDoctor(doctorId) {
   if (typeof state === 'undefined' || !state.calendar) return;
   state.calendar.selectedDoctor = doctorId === 'all' ? 'all' : parseInt(doctorId);
   renderCalendar();
+}function openRegistrationForDate(dateStr) {
+  state.selectedDate = dateStr;
+  window.location.hash = '#walkin';
+  render();
+
+  setTimeout(function () {
+    const dateInput = document.getElementById('appointment-date');
+    if (dateInput) {
+      dateInput.value = dateStr;
+    }
+  }, 300);
+
+  showToast('📅 Date ' + dateStr + ' selected - Register patient below');
 }
 // ─────────────────────────────────────────────────────────────
 
