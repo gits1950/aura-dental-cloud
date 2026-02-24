@@ -6720,6 +6720,8 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 // ========== RECEPTION - WALK-IN BOOKING (REDESIGNED) ==========
 function renderWalkInBooking() {
   console.log('RENDER WALKIN CALLED');
+  const isOPDMode = window.location.hash === '#register-opd';
+  console.log('RENDER WALKIN CALLED');
 
   const isRegisterOPDMode = window.location.hash === '#register-opd';
 
