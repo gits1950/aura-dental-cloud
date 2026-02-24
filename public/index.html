@@ -8079,7 +8079,7 @@ function renderDoctorsSection() {
   // Get patients waiting for initial consultation
   const waitingPatients = state.doctorQueue.filter(function(q) {
     return q.status === 'waiting' && 
-           (q.doctorId === state.currentUser.id || state.currentUser.role === 'admin');
+           (true);
   });
   
   // Get patients in treatment (paid, chair assigned)
