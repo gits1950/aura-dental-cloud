@@ -263,7 +263,7 @@ function openRegistrationForDate(dateStr) {
   state.selectedDate = dateStr;
   
   // Navigate to walk-in/registration page
-  window.location.hash = '#walkin';
+  window.location.hash = '#register-opd';
   
   // Show notification
   showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
@@ -1092,7 +1092,7 @@ function openRegistrationForDate(dateStr) {
   state.selectedDate = dateStr;
   
   // Navigate to walk-in/registration page
-  window.location.hash = '#walkin';
+  window.location.hash = '#register-opd';
   
   // Show notification
   showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
@@ -3185,7 +3185,7 @@ function openRegistrationForDate(dateStr) {
   state.selectedDate = dateStr;
   
   // Navigate to walk-in/registration page
-  window.location.hash = '#walkin';
+  window.location.hash = '#register-opd';
   
   // Show notification
   showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
@@ -3919,7 +3919,7 @@ function render() {
     route();
   } else {
     console.warn('Route not found:', hash);
-    window.location.hash = '#walkin';
+    window.location.hash = '#register-opd';
   }
 }
 
@@ -3967,7 +3967,7 @@ function login() {
   if (user) {
     state.currentUser = user;
     DataStore.save('currentUser', user);
-    window.location.hash = '#walkin';
+    window.location.hash = '#register-opd';
     navigate();
   } else {
     alert('Invalid email, password, or role. Please try again.');
@@ -4840,6 +4840,7 @@ function navigate() {
     case '#prescription-section': renderPrescriptionSection(); break;  // Print Bills & Rx
     case '#bookings': renderOnlineBooking(); break;
     case '#walkin': renderWalkInBooking(); break;
+    case '#register-opd': renderOPDSection(); break;
     case '#display': renderDisplayScreen(); break;
     case '#reports': renderReports(); break;
     case '#expenses': renderExpenses(); break;
@@ -11193,7 +11194,7 @@ function openRegistrationForDate(dateStr) {
   state.selectedDate = dateStr;
   
   // Navigate to walk-in/registration page
-  window.location.hash = '#walkin';
+  window.location.hash = '#register-opd';
   
   // Show notification
   showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
@@ -11237,7 +11238,7 @@ function filterByDoctor(doctorId) {
   renderCalendar();
 }function openRegistrationForDate(dateStr) {
   state.selectedDate = dateStr;
-  window.location.hash = '#walkin';
+  window.location.hash = '#register-opd';
   render();
 
   setTimeout(function () {
@@ -12177,7 +12178,7 @@ if (!state.calendar) {
 
 function openRegistrationForDate(dateStr) {
   state.selectedDate = dateStr;
-  window.location.hash = '#walkin';
+  window.location.hash = '#register-opd';
   if (typeof render === 'function') render();
 
   setTimeout(function () {
