@@ -1,0 +1,2 @@
+lines = open('public/index.html', 'r', encoding='utf-8').readlines()
+result = []\ni = 0\nremoved = 0\nwhile i < len(lines):\n    if lines[i].strip() == '}, 100);' and i+1 < len(lines) and lines[i+1].strip() == '}':\n        # Check previous line is closing brace of our new function\n        removed += 1\n        i += 2  # skip both orphan lines\n    else:\n        result.append(lines[i])\n        i += 1\nopen('public/index.html', 'w', encoding='utf-8', newline='').writelines(result)\nprint('Removed', removed, 'orphan blocks')
