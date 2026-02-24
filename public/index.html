@@ -155,7 +155,7 @@ function renderCalendar() {
         const bgColor = isToday ? '#ef4444' : (isSunday ? '#fee2e2' : (isPast ? '#f1f5f9' : 'white'));
         const textColor = isToday ? 'white' : (isPast ? '#94a3b8' : (isSunday ? '#dc2626' : '#1e293b'));
         const cursor = isPast ? 'not-allowed' : 'pointer';
-        const onClick = isPast ? '' : `onclick="openRegistrationForDate('${dateStr}')"`;
+        const onClick = isPast ? '' : `onclick="openRegistrationForDate('')"`;
         
         days += '<div ' + onClick + ' style="' +
           'background:' + bgColor + ';' +
@@ -998,7 +998,7 @@ function renderCalendar() {
         const bgColor = isToday ? '#ef4444' : (isSunday ? '#fee2e2' : (isPast ? '#f1f5f9' : 'white'));
         const textColor = isToday ? 'white' : (isPast ? '#94a3b8' : (isSunday ? '#dc2626' : '#1e293b'));
         const cursor = isPast ? 'not-allowed' : 'pointer';
-        const onClick = isPast ? '' : `onclick="openRegistrationForDate('${dateStr}')"`;
+        const onClick = isPast ? '' : `onclick="openRegistrationForDate('')"`;
         
         days += '<div ' + onClick + ' style="' +
           'background:' + bgColor + ';' +
@@ -3081,7 +3081,7 @@ function renderCalendar() {
         const bgColor = isToday ? '#ef4444' : (isSunday ? '#fee2e2' : (isPast ? '#f1f5f9' : 'white'));
         const textColor = isToday ? 'white' : (isPast ? '#94a3b8' : (isSunday ? '#dc2626' : '#1e293b'));
         const cursor = isPast ? 'not-allowed' : 'pointer';
-        const onClick = isPast ? '' : `onclick="openRegistrationForDate('${dateStr}')"`;
+        const onClick = isPast ? '' : `onclick="openRegistrationForDate('')"`;
         
         days += '<div ' + onClick + ' style="' +
           'background:' + bgColor + ';' +
@@ -11007,6 +11007,9 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
 <script>
 
 </script>
+  </script>
+
+  </script>
   </script>
 </body>
 </html>
