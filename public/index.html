@@ -259,21 +259,11 @@ function filterByDoctor(doctorId) {
 }
 
 function openRegistrationForDate(dateStr) {
-  // Store selected date
   state.selectedDate = dateStr;
-  
-  // Navigate to walk-in/registration page
   window.location.hash = '#walkin';
-  
-  // Show notification
-  showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
-  
-  // Pre-fill date in appointment if possible
-  setTimeout(function() {
-    const dateInput = document.getElementById('appointment-date');
-    if (dateInput) {
-      dateInput.value = dateStr;
-    }
+  render();
+  showToast('Date ' + dateStr + ' - Register patient below');
+}
   }, 100);
 }
 
@@ -1088,21 +1078,11 @@ function renderCalendar() {
 
 
 function openRegistrationForDate(dateStr) {
-  // Store selected date
   state.selectedDate = dateStr;
-  
-  // Navigate to walk-in/registration page
   window.location.hash = '#walkin';
-  
-  // Show notification
-  showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
-  
-  // Pre-fill date in appointment if possible
-  setTimeout(function() {
-    const dateInput = document.getElementById('appointment-date');
-    if (dateInput) {
-      dateInput.value = dateStr;
-    }
+  render();
+  showToast('Date ' + dateStr + ' - Register patient below');
+}
   }, 100);
 }
 
@@ -3181,21 +3161,11 @@ function renderCalendar() {
 
 
 function openRegistrationForDate(dateStr) {
-  // Store selected date
   state.selectedDate = dateStr;
-  
-  // Navigate to walk-in/registration page
   window.location.hash = '#walkin';
-  
-  // Show notification
-  showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
-  
-  // Pre-fill date in appointment if possible
-  setTimeout(function() {
-    const dateInput = document.getElementById('appointment-date');
-    if (dateInput) {
-      dateInput.value = dateStr;
-    }
+  render();
+  showToast('Date ' + dateStr + ' - Register patient below');
+}
   }, 100);
 }
 
@@ -4187,24 +4157,24 @@ function dashCalBookDate(dateStr) {
 
 
 
-function dashCalOpenBookModal() { dashCalBookDate(new Date().toISOString().split('T')[0]); }
-function dashCalCloseModal() { const m = document.getElementById('dashCalModal'); if (m) m.style.display = 'none'; }
-function dashCalSearchPat(query) {
-  const results = document.getElementById('dashCal_patResults');
-  if (!query || query.length < 2) { results.style.display = 'none'; return; }
-  const matches = (state.patients||[]).filter(p =>
-    p.name.toLowerCase().includes(query.toLowerCase()) || (p.phone||'').includes(query) || (p.contact||'').includes(query)
-  ).slice(0,8);
-  if (!matches.length) { results.style.display = 'none'; return; }
-  results.innerHTML = matches.map(p =>
-    `<div onclick="dashCalSelectPat(${p.id},'${p.name.replace(/'/g,"\\'")}','${(p.phone||p.contact||'')}')"
-      style="padding:10px 14px;cursor:pointer;border-bottom:1px solid #f1f5f9;font-size:14px;"
-      onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
-      <span style="font-weight:600;">${p.name}</span>
-      <span style="color:#94a3b8;margin-left:8px;font-size:12px;">${p.phone||p.contact||''}</span>
-    </div>`).join('');
-  results.style.display = 'block';
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function dashCalSelectPat(id, name, phone) {
   document.getElementById('dashCal_patId').value = id;
   document.getElementById('dashCal_patSearch').value = name;
@@ -7707,8 +7677,17 @@ function autoSuggestTreatments(complaint) {
     }
     updateTreatmentsFromSelect();
     autoSuggestMedicines();
+  } else {
+    // fallback for checkbox mode
+    document.querySelectorAll('.consult-t-cb').forEach(function(cb) { cb.checked = false; });
+    if (state.currentConsultation) state.currentConsultation.selectedTreatments = [];
+    tids.forEach(function(tid) {
+      var cb = document.querySelector('.consult-t-cb[value="' + tid + '"]');
+      if (cb) { cb.checked = true; }
+    });
+    autoSuggestMedicines();
   }
-  showToast('Treatments & medicines suggested!');
+  showToast('Treatments & medicines suggested for: ' + complaint);
 }
 function autoSuggestMedicines() {
   var medMap = {
@@ -7717,6 +7696,7 @@ function autoSuggestMedicines() {
     "7": [2], "8": [1, 2, 4], "9": [1, 2, 3, 4],
     "10": [1, 2, 4], "11": [2, 4]
   };
+  var mSel = document.getElementById('consult-medicines-select');
   var tSel = document.getElementById('consult-treatments-select');
   var mids = new Set();
   if (tSel) {
@@ -7726,13 +7706,23 @@ function autoSuggestMedicines() {
         if (meds) meds.forEach(function(m) { mids.add(m); });
       }
     }
+  } else {
+    Array.from(document.querySelectorAll('.consult-t-cb:checked')).forEach(function(cb) {
+      var meds = medMap[cb.value];
+      if (meds) meds.forEach(function(m) { mids.add(m); });
+    });
   }
-  var mSel = document.getElementById('consult-medicines-select');
   if (mSel) {
     for (var i = 0; i < mSel.options.length; i++) {
       mSel.options[i].selected = mids.has(parseInt(mSel.options[i].value));
     }
     updateMedicinesFromSelect();
+  } else {
+    document.querySelectorAll('.consult-m-cb').forEach(function(cb) { cb.checked = false; });
+    mids.forEach(function(mid) {
+      var cb = document.querySelector('.consult-m-cb[value="' + mid + '"]');
+      if (cb) cb.checked = true;
+    });
   }
 }
 function updateTreatmentsFromSelect() {
@@ -11218,21 +11208,11 @@ function renderCalendar() {
 
 
 function openRegistrationForDate(dateStr) {
-  // Store selected date
   state.selectedDate = dateStr;
-  
-  // Navigate to walk-in/registration page
   window.location.hash = '#walkin';
-  
-  // Show notification
-  showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
-  
-  // Pre-fill date in appointment if possible
-  setTimeout(function() {
-    const dateInput = document.getElementById('appointment-date');
-    if (dateInput) {
-      dateInput.value = dateStr;
-    }
+  render();
+  showToast('Date ' + dateStr + ' - Register patient below');
+}
   }, 100);
 }
 

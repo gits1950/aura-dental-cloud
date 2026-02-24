@@ -1,0 +1,192 @@
+import re
+
+print("=== Aura Dental - Apply All Fixes ===")
+lines = open("public/index.html", "r", encoding="utf-8").readlines()
+total_fixes = 0
+
+# ─────────────────────────────────────────────
+# FIX 1: Doctor sees ALL waiting patients (not just their own)
+# ─────────────────────────────────────────────
+for i, line in enumerate(lines):
+    if "waitingPatients = state.doctorQueue.filter" in line:
+        # Next line should have the filter condition
+        if i+2 < len(lines) and "doctorId" in lines[i+2]:
+            lines[i+2] = "           (true);\n"
+            print(f"FIX 1 applied: Doctor queue filter at line {i+3}")
+            total_fixes += 1
+            break
+
+# ─────────────────────────────────────────────
+# FIX 2: Calendar date click → OPD Registration (not booking modal)
+# ─────────────────────────────────────────────
+for i, line in enumerate(lines):
+    if "function dashCalBookDate" in line:
+        lines[i]   = "function dashCalBookDate(dateStr) {\n"
+        lines[i+1] = "  state.selectedDate = dateStr;\n"
+        lines[i+2] = "  window.location.hash = '#walkin';\n"
+        lines[i+3] = "  render();\n"
+        lines[i+4] = "  showToast('Date ' + dateStr + ' - Register patient below');\n"
+        lines[i+5] = "}\n"
+        j = i + 6
+        while j < len(lines) and lines[j].strip() != "}":
+            lines[j] = "\n"
+            j += 1
+        if j < len(lines):
+            lines[j] = "\n"
+        print(f"FIX 2 applied: dashCalBookDate at line {i+1}")
+        total_fixes += 1
+        break
+
+# ─────────────────────────────────────────────
+# FIX 3: openRegistrationForDate → navigate to OPD
+# ─────────────────────────────────────────────
+new_reg_func = [
+    "function openRegistrationForDate(dateStr) {\n",
+    "  state.selectedDate = dateStr;\n",
+    "  window.location.hash = '#walkin';\n",
+    "  render();\n",
+    "  showToast('Date ' + dateStr + ' - Register patient below');\n",
+    "}\n",
+]
+count = 0
+i = 0
+result = []
+while i < len(lines):
+    if "function openRegistrationForDate" in lines[i]:
+        result.extend(new_reg_func)
+        i += 1
+        while i < len(lines) and lines[i].strip() != "}":
+            i += 1
+        i += 1  # skip closing }
+        count += 1
+    else:
+        result.append(lines[i])
+        i += 1
+lines = result
+if count:
+    print(f"FIX 3 applied: openRegistrationForDate x{count} instances")
+    total_fixes += 1
+
+# ─────────────────────────────────────────────
+# FIX 4: Auto-suggest treatments + medicines using inline hardcoded map
+# ─────────────────────────────────────────────
+new_suggest = """function autoSuggestTreatments(complaint) {
+  if (!complaint) return;
+  var map = {
+    "Toothache / Severe Pain": [2, 7, 1],
+    "Bleeding Gums": [4, 5, 7],
+    "Cavity / Tooth Decay": [1, 2, 7],
+    "Missing Tooth": [9, 10, 7],
+    "Loose Tooth": [5, 3, 7],
+    "Swelling in Gums": [5, 4, 7],
+    "Sensitivity (Hot/Cold)": [1, 2, 7],
+    "Broken/Chipped Tooth": [1, 8, 7],
+    "Stained/Yellow Teeth": [6, 4, 7],
+    "Wisdom Tooth Pain": [3, 7],
+    "Bad Breath (Halitosis)": [4, 6, 7],
+    "Braces / Orthodontic Query": [7],
+    "Scaling / Cleaning": [4, 6],
+    "Routine Checkup": [7, 4]
+  };
+  var tids = map[complaint] || [];
+  var sel = document.getElementById('consult-treatments-select');
+  if (sel) {
+    for (var i = 0; i < sel.options.length; i++) {
+      sel.options[i].selected = tids.indexOf(parseInt(sel.options[i].value)) !== -1;
+    }
+    updateTreatmentsFromSelect();
+    autoSuggestMedicines();
+  } else {
+    // fallback for checkbox mode
+    document.querySelectorAll('.consult-t-cb').forEach(function(cb) { cb.checked = false; });
+    if (state.currentConsultation) state.currentConsultation.selectedTreatments = [];
+    tids.forEach(function(tid) {
+      var cb = document.querySelector('.consult-t-cb[value="' + tid + '"]');
+      if (cb) { cb.checked = true; }
+    });
+    autoSuggestMedicines();
+  }
+  showToast('Treatments & medicines suggested for: ' + complaint);
+}
+function autoSuggestMedicines() {
+  var medMap = {
+    "1": [2, 4], "2": [1, 2, 3, 4], "3": [1, 2, 3, 4],
+    "4": [4, 2], "5": [1, 3, 4, 2], "6": [4],
+    "7": [2], "8": [1, 2, 4], "9": [1, 2, 3, 4],
+    "10": [1, 2, 4], "11": [2, 4]
+  };
+  var mSel = document.getElementById('consult-medicines-select');
+  var tSel = document.getElementById('consult-treatments-select');
+  var mids = new Set();
+  if (tSel) {
+    for (var i = 0; i < tSel.options.length; i++) {
+      if (tSel.options[i].selected) {
+        var meds = medMap[tSel.options[i].value];
+        if (meds) meds.forEach(function(m) { mids.add(m); });
+      }
+    }
+  } else {
+    Array.from(document.querySelectorAll('.consult-t-cb:checked')).forEach(function(cb) {
+      var meds = medMap[cb.value];
+      if (meds) meds.forEach(function(m) { mids.add(m); });
+    });
+  }
+  if (mSel) {
+    for (var i = 0; i < mSel.options.length; i++) {
+      mSel.options[i].selected = mids.has(parseInt(mSel.options[i].value));
+    }
+    updateMedicinesFromSelect();
+  } else {
+    document.querySelectorAll('.consult-m-cb').forEach(function(cb) { cb.checked = false; });
+    mids.forEach(function(mid) {
+      var cb = document.querySelector('.consult-m-cb[value="' + mid + '"]');
+      if (cb) cb.checked = true;
+    });
+  }
+}
+function updateTreatmentsFromSelect() {
+  var sel = document.getElementById('consult-treatments-select');
+  if (!sel || !state.currentConsultation) return;
+  state.currentConsultation.selectedTreatments = [];
+  for (var i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].selected) {
+      var t = state.treatments.find(function(t) { return t.id === parseInt(sel.options[i].value); });
+      if (t) state.currentConsultation.selectedTreatments.push(t);
+    }
+  }
+  updateConsultationTotal();
+  autoSuggestMedicines();
+}
+function updateMedicinesFromSelect() {
+  var sel = document.getElementById('consult-medicines-select');
+  if (!sel || !state.currentConsultation) return;
+  state.currentConsultation.selectedMedicines = [];
+  for (var i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].selected) {
+      var m = state.medicines.find(function(m) { return m.id === parseInt(sel.options[i].value); });
+      if (m) state.currentConsultation.selectedMedicines.push(m);
+    }
+  }
+}
+"""
+
+start = end = None
+for i, line in enumerate(lines):
+    if "function autoSuggestTreatments" in line and start is None:
+        start = i
+    if start is not None and "function updateConsultationTotal" in line:
+        end = i
+        break
+
+if start is not None and end is not None:
+    lines[start:end] = [new_suggest]
+    print(f"FIX 4 applied: autoSuggest functions at line {start+1}")
+    total_fixes += 1
+else:
+    print(f"FIX 4 SKIPPED: autoSuggestTreatments not found (start={start}, end={end})")
+
+# ─────────────────────────────────────────────
+# WRITE FILE
+# ─────────────────────────────────────────────
+open("public/index.html", "w", encoding="utf-8", newline="").writelines(lines)
+print(f"\n=== Done! {total_fixes}/4 fixes applied ===")
