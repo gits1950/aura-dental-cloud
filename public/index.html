@@ -259,10 +259,22 @@ function filterByDoctor(doctorId) {
 }
 
 function openRegistrationForDate(dateStr) {
+  // Store selected date
   state.selectedDate = dateStr;
+  
+  // Navigate to walk-in/registration page
   window.location.hash = '#walkin';
-  render();
-  showToast('Date ' + dateStr + ' - Register patient below');
+  
+  // Show notification
+  showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
+  
+  // Pre-fill date in appointment if possible
+  setTimeout(function() {
+    const dateInput = document.getElementById('appointment-date');
+    if (dateInput) {
+      dateInput.value = dateStr;
+    }
+  }, 100);
 }
 
 
@@ -786,6 +798,7 @@ function restoreFromBackup() {
   
   input.click();
 }
+}
 
 // Auto-backup reminder
 function checkAutoBackup() {
@@ -1075,10 +1088,22 @@ function renderCalendar() {
 
 
 function openRegistrationForDate(dateStr) {
+  // Store selected date
   state.selectedDate = dateStr;
+  
+  // Navigate to walk-in/registration page
   window.location.hash = '#walkin';
-  render();
-  showToast('Date ' + dateStr + ' - Register patient below');
+  
+  // Show notification
+  showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
+  
+  // Pre-fill date in appointment if possible
+  setTimeout(function() {
+    const dateInput = document.getElementById('appointment-date');
+    if (dateInput) {
+      dateInput.value = dateStr;
+    }
+  }, 100);
 }
 
 
@@ -3156,10 +3181,22 @@ function renderCalendar() {
 
 
 function openRegistrationForDate(dateStr) {
+  // Store selected date
   state.selectedDate = dateStr;
+  
+  // Navigate to walk-in/registration page
   window.location.hash = '#walkin';
-  render();
-  showToast('Date ' + dateStr + ' - Register patient below');
+  
+  // Show notification
+  showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
+  
+  // Pre-fill date in appointment if possible
+  setTimeout(function() {
+    const dateInput = document.getElementById('appointment-date');
+    if (dateInput) {
+      dateInput.value = dateStr;
+    }
+  }, 100);
 }
 
 
@@ -3781,37 +3818,6 @@ const state = {
   chairs: [],
   bills: [],
   appointments: [],
-  treatmentMappings: {
-    complaintToTreatments: {
-      "Toothache / Severe Pain": [2, 7, 1],
-      "Bleeding Gums": [4, 5, 7],
-      "Cavity / Tooth Decay": [1, 2, 7],
-      "Missing Tooth": [9, 10, 7],
-      "Loose Tooth": [5, 3, 7],
-      "Swelling in Gums": [5, 4, 7],
-      "Sensitivity (Hot/Cold)": [1, 2, 7],
-      "Broken/Chipped Tooth": [1, 8, 7],
-      "Stained/Yellow Teeth": [6, 4, 7],
-      "Wisdom Tooth Pain": [3, 7],
-      "Bad Breath (Halitosis)": [4, 6, 7],
-      "Braces / Orthodontic Query": [7],
-      "Scaling / Cleaning": [4, 6],
-      "Routine Checkup": [7, 4]
-    },
-    treatmentToMedicines: {
-      "1": [2, 4],
-      "2": [1, 2, 3, 4],
-      "3": [1, 2, 3, 4],
-      "4": [4, 2],
-      "5": [1, 3, 4, 2],
-      "6": [4],
-      "7": [2],
-      "8": [1, 2, 4],
-      "9": [1, 2, 3, 4],
-      "10": [1, 2, 4],
-      "11": [2, 4]
-    }
-  },
   
   // Consultation form state
   consultationForm: {
@@ -4170,17 +4176,17 @@ function dashCalChangeMonth(delta) {
 function dashCalSetMonth(m) { if (!state.dashCal) return; state.dashCal.month = m; renderDashboard(); }
 function dashCalSetYear(y)  { if (!state.dashCal) return; state.dashCal.year  = y; renderDashboard(); }
 function dashCalBookDate(dateStr) {
-  state.selectedDate = dateStr;
-  window.location.hash = '#walkin';
-  render();
-  showToast('Date ' + dateStr + ' selected - Register patient below');
+  const modal = document.getElementById('dashCalModal');
+  if (!modal) return;
+  document.getElementById('dashCal_date').value = dateStr;
+  document.getElementById('dashCal_patId').value = '';
+  document.getElementById('dashCal_patSelected').textContent = '';
+  document.getElementById('dashCal_patSearch').value = '';
+  document.getElementById('dashCal_time').value = '';
+  document.getElementById('dashCal_treatment').value = '';
+  document.getElementById('dashCal_notes').value = '';
+  modal.style.display = 'flex';
 }
-
-
-
-
-
-
 function dashCalOpenBookModal() { dashCalBookDate(new Date().toISOString().split('T')[0]); }
 function dashCalCloseModal() { const m = document.getElementById('dashCalModal'); if (m) m.style.display = 'none'; }
 function dashCalSearchPat(query) {
@@ -7693,23 +7699,16 @@ function autoSuggestTreatments(complaint) {
     "Scaling / Cleaning": [4, 6],
     "Routine Checkup": [7, 4]
   };
-  var tids = map[complaint];
-  if (!tids) return;
-  document.querySelectorAll('.consult-t-cb').forEach(function(cb) { cb.checked = false; });
-  if (state.currentConsultation) state.currentConsultation.selectedTreatments = [];
-  tids.forEach(function(tid) {
-    var cb = document.querySelector('.consult-t-cb[value="' + tid + '"]');
-    if (cb) {
-      cb.checked = true;
-      if (state.currentConsultation) {
-        var t = state.treatments.find(function(t) { return t.id === tid; });
-        if (t) state.currentConsultation.selectedTreatments.push(t);
-      }
+  var tids = map[complaint] || [];
+  var sel = document.getElementById('consult-treatments-select');
+  if (sel) {
+    for (var i = 0; i < sel.options.length; i++) {
+      sel.options[i].selected = tids.indexOf(parseInt(sel.options[i].value)) !== -1;
     }
-  });
-  updateConsultationTotal();
-  autoSuggestMedicines();
-  showToast('Treatments & medicines suggested for: ' + complaint);
+    updateTreatmentsFromSelect();
+    autoSuggestMedicines();
+  }
+  showToast('Treatments & medicines suggested!');
 }
 function autoSuggestMedicines() {
   var medMap = {
@@ -7718,24 +7717,47 @@ function autoSuggestMedicines() {
     "7": [2], "8": [1, 2, 4], "9": [1, 2, 3, 4],
     "10": [1, 2, 4], "11": [2, 4]
   };
-  var treatmentIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(function(cb) { return cb.value; });
-  var medicineIds = new Set();
-  treatmentIds.forEach(function(tid) {
-    var meds = medMap[tid];
-    if (meds) meds.forEach(function(mid) { medicineIds.add(mid); });
-  });
-  document.querySelectorAll('.consult-m-cb').forEach(function(cb) { cb.checked = false; });
-  if (state.currentConsultation) state.currentConsultation.selectedMedicines = [];
-  medicineIds.forEach(function(mid) {
-    var cb = document.querySelector('.consult-m-cb[value="' + mid + '"]');
-    if (cb) {
-      cb.checked = true;
-      if (state.currentConsultation) {
-        var m = state.medicines.find(function(m) { return m.id === mid; });
-        if (m) state.currentConsultation.selectedMedicines.push(m);
+  var tSel = document.getElementById('consult-treatments-select');
+  var mids = new Set();
+  if (tSel) {
+    for (var i = 0; i < tSel.options.length; i++) {
+      if (tSel.options[i].selected) {
+        var meds = medMap[tSel.options[i].value];
+        if (meds) meds.forEach(function(m) { mids.add(m); });
       }
     }
-  });
+  }
+  var mSel = document.getElementById('consult-medicines-select');
+  if (mSel) {
+    for (var i = 0; i < mSel.options.length; i++) {
+      mSel.options[i].selected = mids.has(parseInt(mSel.options[i].value));
+    }
+    updateMedicinesFromSelect();
+  }
+}
+function updateTreatmentsFromSelect() {
+  var sel = document.getElementById('consult-treatments-select');
+  if (!sel || !state.currentConsultation) return;
+  state.currentConsultation.selectedTreatments = [];
+  for (var i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].selected) {
+      var t = state.treatments.find(function(t) { return t.id === parseInt(sel.options[i].value); });
+      if (t) state.currentConsultation.selectedTreatments.push(t);
+    }
+  }
+  updateConsultationTotal();
+  autoSuggestMedicines();
+}
+function updateMedicinesFromSelect() {
+  var sel = document.getElementById('consult-medicines-select');
+  if (!sel || !state.currentConsultation) return;
+  state.currentConsultation.selectedMedicines = [];
+  for (var i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].selected) {
+      var m = state.medicines.find(function(m) { return m.id === parseInt(sel.options[i].value); });
+      if (m) state.currentConsultation.selectedMedicines.push(m);
+    }
+  }
 }
 function updateConsultationTotal() {
   const selected = Array.from(document.querySelectorAll('.consult-t-cb:checked'));
@@ -7902,30 +7924,26 @@ function renderActiveConsultationForm() {
     toothChartHTML +
     
     // ⑤ TREATMENTS
+    // ④ TREATMENTS - DROPDOWN
     '<div class="card" style="border-top:4px solid #10b981;">' +
-    '<h3 style="color:#065f46;margin-bottom:8px;font-size:20px;">⑤ Treatments / Procedures Recommended</h3>' +
-    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;">' +
+    '<h3 style="color:#065f46;margin-bottom:8px;font-size:20px;">④ Treatments / Procedures</h3>' +
+    '<p style="color:#64748b;font-size:13px;margin-bottom:10px;">Auto-suggested based on complaint. Hold Ctrl to select multiple.</p>' +
+    '<select id="consult-treatments-select" multiple onchange="updateTreatmentsFromSelect()" style="width:100%;height:220px;border:2px solid #10b981;border-radius:8px;padding:8px;font-size:15px;">' +
     state.treatments.map(function(t) {
       const sel = consultation.selectedTreatments.some(function(st) { return st.id === t.id; });
-      return '<label style="display:flex;align-items:start;padding:12px;cursor:pointer;gap:10px;border-radius:8px;border:2px solid ' + (sel?'#10b981':'#e2e8f0') + ';background:' + (sel?'#d1fae5':'#f8fafc') + ';">' +
-        '<input type="checkbox" class="consult-t-cb" onchange="autoSuggestMedicines()" value="' + t.id + '"' + (sel?' checked':'') + ' style="width:18px;height:18px;margin-top:2px;">' +
-        '<div><div style="font-weight:600;color:#1e293b;">' + t.name + '</div>' +
-        '<div style="font-size:13px;color:#10b981;font-weight:700;">₹' + t.cost.toLocaleString('en-IN') + '</div></div></label>';
-    }).join('') + '</div></div>' +
-    
-    // ⑥ MEDICINES
+      return '<option value="' + t.id + '"' + (sel?' selected':'') + '>\u20b9' + t.cost.toLocaleString('en-IN') + ' — ' + t.name + '</option>';
+    }).join('') +
+    '</select></div>' +
+    // ⑤ MEDICINES - DROPDOWN
     '<div class="card" style="border-top:4px solid #8b5cf6;">' +
-    '<h3 style="color:#5b21b6;margin-bottom:8px;font-size:20px;">⑥ Medicines Prescribed</h3>' +
-    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;">' +
+    '<h3 style="color:#5b21b6;margin-bottom:8px;font-size:20px;">⑤ Medicines Prescribed</h3>' +
+    '<p style="color:#64748b;font-size:13px;margin-bottom:10px;">Auto-suggested based on treatments. Hold Ctrl to select multiple.</p>' +
+    '<select id="consult-medicines-select" multiple onchange="updateMedicinesFromSelect()" style="width:100%;height:180px;border:2px solid #8b5cf6;border-radius:8px;padding:8px;font-size:15px;">' +
     state.medicines.map(function(m) {
       const sel = consultation.selectedMedicines.some(function(sm) { return sm.id === m.id; });
-      return '<label style="display:flex;align-items:start;padding:12px;cursor:pointer;gap:10px;border-radius:8px;border:2px solid ' + (sel?'#8b5cf6':'#e2e8f0') + ';background:' + (sel?'#ede9fe':'#f8fafc') + ';">' +
-        '<input type="checkbox" class="consult-m-cb" value="' + m.id + '"' + (sel?' checked':'') + ' style="width:18px;height:18px;margin-top:2px;">' +
-        '<div><div style="font-weight:600;color:#5b21b6;">' + m.name + '</div>' +
-        '<div style="font-size:12px;color:#6d28d9;">' + m.dosage + ' | ' + m.frequency + ' | ' + m.duration + '</div></div></label>';
-    }).join('') + '</div></div>' +
-    
-    // ⑦ NOTES
+      return '<option value="' + m.id + '"' + (sel?' selected':'') + '>' + m.name + (m.dosage ? ' — ' + m.dosage : '') + '</option>';
+    }).join('') +
+    '</select></div>' +
     '<div class="card" style="border-top:4px solid #06b6d4;">' +
     '<h3 style="color:#0e7490;margin-bottom:8px;font-size:20px;">⑦ Additional Notes / Advice</h3>' +
     '<textarea id="consult-notes" rows="3" placeholder="Any additional instructions, patient advice, follow-up recommendations..." ' +
@@ -8061,7 +8079,7 @@ function renderDoctorsSection() {
   // Get patients waiting for initial consultation
   const waitingPatients = state.doctorQueue.filter(function(q) {
     return q.status === 'waiting' && 
-           (true || state.currentUser.role === 'admin');
+           (q.doctorId === state.currentUser.id || state.currentUser.role === 'admin');
   });
   
   // Get patients in treatment (paid, chair assigned)
@@ -11200,10 +11218,22 @@ function renderCalendar() {
 
 
 function openRegistrationForDate(dateStr) {
+  // Store selected date
   state.selectedDate = dateStr;
+  
+  // Navigate to walk-in/registration page
   window.location.hash = '#walkin';
-  render();
-  showToast('Date ' + dateStr + ' - Register patient below');
+  
+  // Show notification
+  showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
+  
+  // Pre-fill date in appointment if possible
+  setTimeout(function() {
+    const dateInput = document.getElementById('appointment-date');
+    if (dateInput) {
+      dateInput.value = dateStr;
+    }
+  }, 100);
 }
 
 
