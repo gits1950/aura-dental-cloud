@@ -6718,6 +6718,10 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 // ========== NEW REDESIGNED WORKFLOW MODULES ==========
 // ========== RECEPTION - WALK-IN BOOKING (REDESIGNED) ==========
 function renderWalkInBooking() {
+  console.log('RENDER WALKIN CALLED');
+
+  const isRegisterOPDMode = window.location.hash === '#register-opd';
+
   const todayQueue = state.doctorQueue.filter(q => q.date === new Date().toISOString().split('T')[0]);
   
   const html = '<div class="app-layout">' +
