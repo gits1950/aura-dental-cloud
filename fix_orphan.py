@@ -1,2 +1,13 @@
 lines = open('public/index.html', 'r', encoding='utf-8').readlines()
-result = []\ni = 0\nremoved = 0\nwhile i < len(lines):\n    if i+1 < len(lines) and lines[i].strip() == '}, 100);' and lines[i+1].strip() == '}':\n        removed += 1\n        i += 2\n    else:\n        result.append(lines[i])\n        i += 1\nopen('public/index.html', 'w', encoding='utf-8', newline='').writelines(result)\nprint('Removed', removed, 'orphan blocks')
+result = []
+i = 0
+removed = 0
+while i < len(lines):
+    if i+1 < len(lines) and lines[i].strip() == '}, 100);' and lines[i+1].strip() == '}':
+        removed += 1
+        i += 2
+    else:
+        result.append(lines[i])
+        i += 1
+open('public/index.html', 'w', encoding='utf-8', newline='').writelines(result)
+print('Removed', removed, 'orphan blocks')
