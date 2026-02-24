@@ -259,22 +259,10 @@ function filterByDoctor(doctorId) {
 }
 
 function openRegistrationForDate(dateStr) {
-  // Store selected date
   state.selectedDate = dateStr;
-  
-  // Navigate to walk-in/registration page
-  window.location.hash = '#register-opd';
-  
-  // Show notification
-  showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
-  
-  // Pre-fill date in appointment if possible
-  setTimeout(function() {
-    const dateInput = document.getElementById('appointment-date');
-    if (dateInput) {
-      dateInput.value = dateStr;
-    }
-  }, 100);
+  window.location.hash = '#walkin';
+  render();
+  showToast('Date ' + dateStr + ' - Register patient below');
 }
 
 
@@ -798,7 +786,6 @@ function restoreFromBackup() {
   
   input.click();
 }
-}
 
 // Auto-backup reminder
 function checkAutoBackup() {
@@ -1088,22 +1075,10 @@ function renderCalendar() {
 
 
 function openRegistrationForDate(dateStr) {
-  // Store selected date
   state.selectedDate = dateStr;
-  
-  // Navigate to walk-in/registration page
-  window.location.hash = '#register-opd';
-  
-  // Show notification
-  showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
-  
-  // Pre-fill date in appointment if possible
-  setTimeout(function() {
-    const dateInput = document.getElementById('appointment-date');
-    if (dateInput) {
-      dateInput.value = dateStr;
-    }
-  }, 100);
+  window.location.hash = '#walkin';
+  render();
+  showToast('Date ' + dateStr + ' - Register patient below');
 }
 
 
@@ -3181,22 +3156,10 @@ function renderCalendar() {
 
 
 function openRegistrationForDate(dateStr) {
-  // Store selected date
   state.selectedDate = dateStr;
-  
-  // Navigate to walk-in/registration page
-  window.location.hash = '#register-opd';
-  
-  // Show notification
-  showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
-  
-  // Pre-fill date in appointment if possible
-  setTimeout(function() {
-    const dateInput = document.getElementById('appointment-date');
-    if (dateInput) {
-      dateInput.value = dateStr;
-    }
-  }, 100);
+  window.location.hash = '#walkin';
+  render();
+  showToast('Date ' + dateStr + ' - Register patient below');
 }
 
 
@@ -3906,7 +3869,6 @@ const routes = {
   '#payroll': () => renderPayroll(),
   '#medicines': () => renderMedicines(),
   '#walkin': () => renderWalkInBooking ? renderWalkInBooking() : renderDashboard(),
-  '#register-opd': () => renderWalkInBooking ? renderWalkInBooking() : renderDashboard(),
   '#doctors-section': () => renderDoctorsSection ? renderDoctorsSection() : renderDashboard(),
   '#settings': () => renderSettings ? renderSettings() : console.log('Settings')
 };
@@ -3920,7 +3882,7 @@ function render() {
     route();
   } else {
     console.warn('Route not found:', hash);
-    window.location.hash = '#register-opd';
+    window.location.hash = '#walkin';
   }
 }
 
@@ -3962,13 +3924,13 @@ function login() {
     const doc = state.doctors.find(function(d) {
       return d.email.toLowerCase() === email && d.password === password;
     });
-    if (doc) user = { name: doc.name, email: doc.email, role: 'doctor', id: doc.id };
+    if (doc) user = { name: doc.name, email: doc.email, role: 'doctor', doctorId: doc.id };
   }
 
   if (user) {
     state.currentUser = user;
     DataStore.save('currentUser', user);
-    window.location.hash = '#register-opd';
+    window.location.hash = '#walkin';
     navigate();
   } else {
     alert('Invalid email, password, or role. Please try again.');
@@ -4177,25 +4139,17 @@ function dashCalChangeMonth(delta) {
 function dashCalSetMonth(m) { if (!state.dashCal) return; state.dashCal.month = m; renderDashboard(); }
 function dashCalSetYear(y)  { if (!state.dashCal) return; state.dashCal.year  = y; renderDashboard(); }
 function dashCalBookDate(dateStr) {
-  console.log('Dashboard calendar clicked ? redirecting to OPD');
-
-  // Save selected date globally
-  state.selectedDate = dateStr;
-
-  // Close modal if it exists
   const modal = document.getElementById('dashCalModal');
-  if (modal) modal.style.display = 'none';
-
-  // Navigate to OPD registration route
-  window.location.hash = '#register-opd';
-
-  // Force router execution if required
-  if (typeof render === 'function') {
-    render();
-  }
+  if (!modal) return;
+  document.getElementById('dashCal_date').value = dateStr;
+  document.getElementById('dashCal_patId').value = '';
+  document.getElementById('dashCal_patSelected').textContent = '';
+  document.getElementById('dashCal_patSearch').value = '';
+  document.getElementById('dashCal_time').value = '';
+  document.getElementById('dashCal_treatment').value = '';
+  document.getElementById('dashCal_notes').value = '';
+  modal.style.display = 'flex';
 }
-
-
 function dashCalOpenBookModal() { dashCalBookDate(new Date().toISOString().split('T')[0]); }
 function dashCalCloseModal() { const m = document.getElementById('dashCalModal'); if (m) m.style.display = 'none'; }
 function dashCalSearchPat(query) {
@@ -4544,7 +4498,7 @@ const sidebarPermissions = {
     patients: true,
     appointments: true,
     doctorsSection: true,   // All clinical work here
-    walkin: false,
+    walkin: true,
     collectPayment: false,  // Reception only
     printBillRx: false,     // Reception only
     bookings: false,
@@ -4849,7 +4803,6 @@ function navigate() {
     case '#prescription-section': renderPrescriptionSection(); break;  // Print Bills & Rx
     case '#bookings': renderOnlineBooking(); break;
     case '#walkin': renderWalkInBooking(); break;
-    case '#register-opd': renderOPDSection(); break;
     case '#display': renderDisplayScreen(); break;
     case '#reports': renderReports(); break;
     case '#expenses': renderExpenses(); break;
@@ -6727,12 +6680,6 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 // ========== NEW REDESIGNED WORKFLOW MODULES ==========
 // ========== RECEPTION - WALK-IN BOOKING (REDESIGNED) ==========
 function renderWalkInBooking() {
-  console.log('RENDER WALKIN CALLED');
-  const isOPDMode = window.location.hash === '#register-opd';
-  console.log('RENDER WALKIN CALLED');
-
-  const isRegisterOPDMode = window.location.hash === '#register-opd';
-
   const todayQueue = state.doctorQueue.filter(q => q.date === new Date().toISOString().split('T')[0]);
   
   const html = '<div class="app-layout">' +
@@ -11205,22 +11152,10 @@ function renderCalendar() {
 
 
 function openRegistrationForDate(dateStr) {
-  // Store selected date
   state.selectedDate = dateStr;
-  
-  // Navigate to walk-in/registration page
-  window.location.hash = '#register-opd';
-  
-  // Show notification
-  showToast('📅 Date selected: ' + dateStr + ' - Register patient now');
-  
-  // Pre-fill date in appointment if possible
-  setTimeout(function() {
-    const dateInput = document.getElementById('appointment-date');
-    if (dateInput) {
-      dateInput.value = dateStr;
-    }
-  }, 100);
+  window.location.hash = '#walkin';
+  render();
+  showToast('Date ' + dateStr + ' - Register patient below');
 }
 
 
@@ -11251,19 +11186,6 @@ function filterByDoctor(doctorId) {
   if (typeof state === 'undefined' || !state.calendar) return;
   state.calendar.selectedDoctor = doctorId === 'all' ? 'all' : parseInt(doctorId);
   renderCalendar();
-}function openRegistrationForDate(dateStr) {
-  state.selectedDate = dateStr;
-  window.location.hash = '#register-opd';
-  render();
-
-  setTimeout(function () {
-    const dateInput = document.getElementById('appointment-date');
-    if (dateInput) {
-      dateInput.value = dateStr;
-    }
-  }, 300);
-
-  showToast('📅 Date ' + dateStr + ' selected - Register patient below');
 }
 // ─────────────────────────────────────────────────────────────
 
@@ -12179,31 +12101,3 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
 </script>
 </body>
 </html>
-
-
-/* ===== AURA DENTAL CLOUD CALENDAR ===== */
-
-if (!state.calendar) {
-  const now = new Date();
-  state.calendar = {
-    month: now.getMonth(),
-    year: now.getFullYear()
-  };
-}
-
-function openRegistrationForDate(dateStr) {
-  state.selectedDate = dateStr;
-  window.location.hash = '#register-opd';
-  if (typeof render === 'function') render();
-
-  setTimeout(function () {
-    const dateInput =
-      document.getElementById('appointment-date') ||
-      document.querySelector('input[type="date"]');
-    if (dateInput) {
-      dateInput.value = dateStr;
-      dateInput.dispatchEvent(new Event('change'));
-    }
-  }, 200);
-}
-
