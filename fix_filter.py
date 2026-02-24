@@ -1,7 +1,6 @@
 lines = open('public/index.html', 'r', encoding='utf-8').readlines()
-for i, line in enumerate(lines):
-    if 'parseInt(q.doctorId) === parseInt(state.currentUser.id) || !q.doctorId' in line:
-        lines[i] = line.replace('parseInt(q.doctorId) === parseInt(state.currentUser.id) || !q.doctorId', 'true')
-        print('Fixed at line', i+1)
+print('Line 8015:', repr(lines[8014]))
+lines[8015] = '           (true || state.currentUser.role === ' + chr(39) + 'admin' + chr(39) + ');\n'
+print('Fixed!')
 open('public/index.html', 'w', encoding='utf-8', newline='').writelines(lines)
 print('Done!')
