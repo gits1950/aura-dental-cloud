@@ -4139,17 +4139,17 @@ function dashCalChangeMonth(delta) {
 function dashCalSetMonth(m) { if (!state.dashCal) return; state.dashCal.month = m; renderDashboard(); }
 function dashCalSetYear(y)  { if (!state.dashCal) return; state.dashCal.year  = y; renderDashboard(); }
 function dashCalBookDate(dateStr) {
-  const modal = document.getElementById('dashCalModal');
-  if (!modal) return;
-  document.getElementById('dashCal_date').value = dateStr;
-  document.getElementById('dashCal_patId').value = '';
-  document.getElementById('dashCal_patSelected').textContent = '';
-  document.getElementById('dashCal_patSearch').value = '';
-  document.getElementById('dashCal_time').value = '';
-  document.getElementById('dashCal_treatment').value = '';
-  document.getElementById('dashCal_notes').value = '';
-  modal.style.display = 'flex';
+  state.selectedDate = dateStr;
+  window.location.hash = '#walkin';
+  render();
+  showToast('Date ' + dateStr + ' selected - Register patient below');
 }
+
+
+
+
+
+
 function dashCalOpenBookModal() { dashCalBookDate(new Date().toISOString().split('T')[0]); }
 function dashCalCloseModal() { const m = document.getElementById('dashCalModal'); if (m) m.style.display = 'none'; }
 function dashCalSearchPat(query) {
