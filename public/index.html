@@ -21,7 +21,6 @@
   
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<script>
 // --- STABILIZED CLINICAL LOGIC ---
 const clinicalMappings = {
   complaintToTreatments: {
@@ -51,7 +50,6 @@ function autoSuggestTreatments(complaint) {
   if (!complaint || !clinicalMappings) return;
   const mappings = clinicalMappings.complaintToTreatments[complaint];
   if (!mappings) return;
-  
   mappings.forEach(tid => {
     const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
     if (cb && !cb.checked) {
@@ -70,12 +68,10 @@ function autoSuggestMedicines() {
   if (!clinicalMappings) return;
   const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
   const mIds = new Set();
-  
   tIds.forEach(tid => {
     const meds = clinicalMappings.treatmentToMedicines[tid];
     if (meds) meds.forEach(mid => mIds.add(mid));
   });
-  
   mIds.forEach(mid => {
     const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
     if (cb && !cb.checked) {
