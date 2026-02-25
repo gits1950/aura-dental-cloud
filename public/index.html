@@ -4653,6 +4653,36 @@ function initializeData() {
         "Routine Checkup":               [1, 20]
       },
       treatmentToMedicines: {
+        "1":  [1, 5], "2":  [4], "3":  [1, 2, 4], "4":  [1, 2, 6, 3],
+        "5":  [1, 2, 4], "6":  [1, 7, 4, 3], "7":  [5], "8":  [5],
+        "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
+      }
+    };
+    DataStore.save('treatmentMappings', state.treatmentMappings);
+  } else {
+    state.treatmentMappings = savedMappings;
+  }
+  // Initialize Treatment Mappings
+  const savedMappings = DataStore.load('treatmentMappings', null);
+  if (!savedMappings || Object.keys(savedMappings).length === 0) {
+    state.treatmentMappings = {
+      complaintToTreatments: {
+        "Toothache / Severe Pain":       [1, 5, 7, 20],
+        "Bleeding Gums":                 [1, 2, 23],
+        "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
+        "Missing Tooth":                 [1, 17, 16, 21],
+        "Loose Tooth":                   [1, 23, 3, 20],
+        "Swelling in Gums":              [1, 23, 18],
+        "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
+        "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
+        "Stained/Yellow Teeth":          [1, 2, 12],
+        "Wisdom Tooth Pain":             [1, 24, 4, 20],
+        "Bad Breath (Halitosis)":        [1, 2, 19],
+        "Braces / Orthodontic Query":    [1, 13, 22, 21],
+        "Scaling / Cleaning":            [2, 19],
+        "Routine Checkup":               [1, 20]
+      },
+      treatmentToMedicines: {
         "1":  [1, 5],
         "2":  [4],
         "3":  [1, 2, 4],
