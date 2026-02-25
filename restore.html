@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html>
+<head><title>Aura Dental - Data Restore</title></head>
+<body>
+<h2 style="font-family:Arial;color:#667eea;">Restoring Aura Dental Data...</h2>
+<div id="status" style="font-family:Arial;font-size:16px;"></div>
+<script>
+try {
+  const backup = {
+  "state": {
+    "doctors": [
+      {
+        "id": 1,
+        "name": "Dr. Sahil Chawla",
+        "specialty": "Dental Surgeon",
+        "email": "sahil@auradental.com",
+        "password": "doctor123"
+      },
+      {
+        "id": 2,
+        "name": "Dr. Kiran Kumar",
+        "specialty": "Orthodontist",
+        "email": "kiran@auradental.com",
+        "password": "doctor123"
+      },
+      {
+        "id": 3,
+        "name": "Dr. Priyal Sharma",
+        "specialty": "Endodontist",
+        "email": "priyal@auradental.com",
+        "password": "doctor123"
+      }
+    ],
+    "patients": [
+      {
+        "id": 1,
+        "name": "sc",
+        "age": 46,
+        "gender": "Male",
+        "contact": "9729221010",
+        "email": "",
+        "address": "",
+        "registrationDate": "2026-02-24"
+      }
+    ],
+    "appointments": [],
+    "expenses": [],
+    "staff": [
+      {
+        "id": 1,
+        "name": "Emma Wilson",
+        "role": "Receptionist",
+        "salary": 25000
+      },
+      {
+        "id": 2,
+        "name": "James Brown",
+        "role": "Dental Assistant",
+        "salary": 20000
+      }
+    ],
+    "medicines": [
+      {
+        "id": 1,
+        "name": "IBUPROFEN",
+        "category": "Analgesic",
+        "dosage": "400mg",
+        "frequency": "TDS",
+        "duration": "3 days",
+        "cost": 80
+      },
+      {
+        "id": 2,
+        "name": "AMOXICILLIN",
+        "category": "Antibiotic",
+        "dosage": "500mg",
+        "frequency": "TDS",
+        "duration": "5 days",
+        "cost": 150
+      },
+      {
+        "id": 3,
+        "name": "PANTOPRAZOLE",
+        "category": "Antacid",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "5 days",
+        "cost": 100
+      },
+      {
+        "id": 4,
+        "name": "CHLORHEXIDINE MOUTHWASH",
+        "category": "Antiseptic",
+        "dosage": "10ml",
+        "frequency": "BD",
+        "duration": "7 days",
+        "cost": 120
+      },
+      {
+        "id": 5,
+        "name": "PARACETAMOL",
+        "category": "Analgesic",
+        "dosage": "650mg",
+        "frequency": "TDS",
+        "duration": "3 days",
+        "cost": 50
+      },
+      {
+        "id": 6,
+        "name": "METRONIDAZOLE",
+        "category": "Antibiotic",
+        "dosage": "400mg",
+        "frequency": "TDS",
+        "duration": "5 days",
+        "cost": 90
+      },
+      {
+        "id": 7,
+        "name": "AMOXICILLIN + CLAVULANIC ACID",
+        "category": "Antibiotic",
+        "dosage": "625mg",
+        "frequency": "BD",
+        "duration": "5 days",
+        "cost": 200
+      }
+    ],
+    "chairs": [
+      {
+        "id": 1,
+        "status": "available"
+      },
+      {
+        "id": 2,
+        "status": "available"
+      },
+      {
+        "id": 3,
+        "status": "available"
+      },
+      {
+        "id": 4,
+        "status": "available"
+      },
+      {
+        "id": 5,
+        "status": "available"
+      },
+      {
+        "id": 6,
+        "status": "available"
+      }
+    ],
+    "prescriptions": [],
+    "bookingRequests": [],
+    "bills": [],
+    "config": {
+      "doctorSharePercent": 60,
+      "receptionistCommissionPercent": 2,
+      "revenueShareModel": "equal",
+      "numberOfDoctors": 3,
+      "clinicPhone": "91xxxxxxxxxx",
+      "clinicAddress": "Aura Dental Care, Raipur, Chhattisgarh"
+    }
+  },
+  "timestamp": "2026-02-24T01:32:42.462Z"
+};
+  const data = backup.data || backup;
+  
+  const keys = ['patients','doctors','treatments','medicines','treatmentPlans','doctorQueue','chairs','appointments','bills','treatmentMappings','expenses','staff','config'];
+  
+  let count = 0;
+  keys.forEach(function(key) {
+    if (data[key] !== undefined) {
+      localStorage.setItem('aura_' + key, JSON.stringify(data[key]));
+      count++;
+    }
+  });
+  
+  document.getElementById('status').innerHTML = '<span style="color:green;">✅ Restored ' + count + ' data categories!<br>Redirecting to app in 2 seconds...</span>';
+  
+  setTimeout(function() {
+    window.location.href = 'https://myaura.up.railway.app/#walkin';
+  }, 2000);
+  
+} catch(e) {
+  document.getElementById('status').innerHTML = '<span style="color:red;">❌ Error: ' + e.message + '</span>';
+}
+</script>
+</body>
+</html>

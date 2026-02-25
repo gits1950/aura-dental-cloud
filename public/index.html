@@ -7912,18 +7912,18 @@ function renderDoctorsSection() {
   // Get patients waiting for initial consultation
   const waitingPatients = state.doctorQueue.filter(function(q) {
     return q.status === 'waiting' && 
-           (q.doctorId === state.currentUser.id || state.currentUser.role === 'admin');
+           (q.doctorId === (state.currentUser.doctorId || state.currentUser.id) || state.currentUser.role === 'admin');
   });
   
   // Get patients in treatment (paid, chair assigned)
   const inTreatmentPatients = state.treatmentPlans.filter(function(tp) {
     return tp.status === 'in-treatment' && 
-           (tp.doctorId === state.currentUser.id || state.currentUser.role === 'admin');
+           (tp.doctorId === (state.currentUser.doctorId || state.currentUser.id) || state.currentUser.role === 'admin');
   });
   
   // Get completed treatment plans
   const myTreatmentPlans = state.treatmentPlans.filter(function(tp) {
-    return (tp.doctorId === state.currentUser.id || state.currentUser.role === 'admin') &&
+    return (tp.doctorId === (state.currentUser.doctorId || state.currentUser.id) || state.currentUser.role === 'admin') &&
            tp.status === 'completed';
   });
   
