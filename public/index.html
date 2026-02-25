@@ -7911,8 +7911,7 @@ function renderDoctorsSection() {
   
   // Get patients waiting for initial consultation
   const waitingPatients = state.doctorQueue.filter(function(q) {
-    return q.status === 'waiting' && 
-           (q.doctorId === (state.currentUser.doctorId || state.currentUser.id) || state.currentUser.role === 'admin');
+    return q.status === 'waiting';
   });
   
   // Get patients in treatment (paid, chair assigned)
