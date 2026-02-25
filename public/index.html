@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -51,7 +51,6 @@
 
 <script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
-const clinicalMappings = {
   complaintToTreatments: {
     "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
@@ -75,9 +74,7 @@ const clinicalMappings = {
   }
 };
 
-function initializeClinicalData() {
   const saved = DataStore.load('treatmentMappings', null);
-  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
 }
 
 function autoSuggestTreatments(complaint) {
@@ -1018,7 +1015,6 @@ if (typeof state !== 'undefined' && state.currentUser && state.currentUser.role 
 </script>
 <script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
-const clinicalMappings = {
   complaintToTreatments: {
     "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
@@ -1042,9 +1038,7 @@ const clinicalMappings = {
   }
 };
 
-function initializeClinicalData() {
   const saved = DataStore.load('treatmentMappings', null);
-  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
 }
 
 function autoSuggestTreatments(complaint) {
@@ -4037,7 +4031,6 @@ function lazyLoadImages() {
 
 <script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
-const clinicalMappings = {
   complaintToTreatments: {
     "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
@@ -4061,9 +4054,7 @@ const clinicalMappings = {
   }
 };
 
-function initializeClinicalData() {
   const saved = DataStore.load('treatmentMappings', null);
-  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
 }
 
 function autoSuggestTreatments(complaint) {
@@ -4928,9 +4919,7 @@ function sidebarItem({ allowed, active, hash, icon, label }) {
 
 // ========== INITIALIZE DATA ==========
 function initializeData() {
-  initializeClinicalData();
   // --- Standard Clinical Mappings ---
-  const clinicalMappings = {
     complaintToTreatments: {
       "Toothache / Severe Pain":       [1, 5, 7, 20],
       "Bleeding Gums":                 [1, 2, 23],
@@ -4953,9 +4942,7 @@ function initializeData() {
       "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
     }
   };
-  state.treatmentMappings = DataStore.load('treatmentMappings') || clinicalMappings;
   // --- Standard Clinical Mappings ---
-  const clinicalMappings = {
     complaintToTreatments: {
       "Toothache / Severe Pain":       [1, 5, 7, 20],
       "Bleeding Gums":                 [1, 2, 23],
@@ -4979,9 +4966,7 @@ function initializeData() {
     }
   };
   
-  state.treatmentMappings = DataStore.load('treatmentMappings') || clinicalMappings;
   if (!state.treatmentMappings.complaintToTreatments) {
-      state.treatmentMappings = clinicalMappings;
       DataStore.save('treatmentMappings', state.treatmentMappings);
   }
 
@@ -6605,7 +6590,6 @@ function printPrescriptionFromBill(billId) {
     '<div class="signature"><strong>' + doctor.name + '</strong><br>' + (doctor.specialty || 'Dental Surgeon') + '</div>' +
     '<script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
-const clinicalMappings = {
   complaintToTreatments: {
     "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
@@ -6629,9 +6613,7 @@ const clinicalMappings = {
   }
 };
 
-function initializeClinicalData() {
   const saved = DataStore.load('treatmentMappings', null);
-  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
 }
 
 function autoSuggestTreatments(complaint) {
@@ -7636,7 +7618,6 @@ function generatePrescriptionForPlan(treatmentPlanId) {
     '<div class="signature"><strong>' + doctor.name + '</strong><br>' + (doctor.specialty || 'Dental Surgeon') + '</div>' +
     '<script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
-const clinicalMappings = {
   complaintToTreatments: {
     "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
@@ -7660,9 +7641,7 @@ const clinicalMappings = {
   }
 };
 
-function initializeClinicalData() {
   const saved = DataStore.load('treatmentMappings', null);
-  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
 }
 
 function autoSuggestTreatments(complaint) {
@@ -9176,7 +9155,6 @@ function printFinalPrescription(plan) {
     '</div>' +
     '<script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
-const clinicalMappings = {
   complaintToTreatments: {
     "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
@@ -9200,9 +9178,7 @@ const clinicalMappings = {
   }
 };
 
-function initializeClinicalData() {
   const saved = DataStore.load('treatmentMappings', null);
-  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
 }
 
 function autoSuggestTreatments(complaint) {
@@ -9988,7 +9964,6 @@ function printBillOPD(billId) {
     '</div>' +
     '<script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
-const clinicalMappings = {
   complaintToTreatments: {
     "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
@@ -10012,9 +9987,7 @@ const clinicalMappings = {
   }
 };
 
-function initializeClinicalData() {
   const saved = DataStore.load('treatmentMappings', null);
-  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
 }
 
 function autoSuggestTreatments(complaint) {
@@ -10207,7 +10180,6 @@ function printPrescriptionOPD(prescriptionId) {
     '</div>' +
     '<script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
-const clinicalMappings = {
   complaintToTreatments: {
     "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
@@ -10231,9 +10203,7 @@ const clinicalMappings = {
   }
 };
 
-function initializeClinicalData() {
   const saved = DataStore.load('treatmentMappings', null);
-  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
 }
 
 function autoSuggestTreatments(complaint) {
@@ -12389,7 +12359,6 @@ const DOMCache = {
 <!-- Socket.io Client (only works when running with Node.js server) -->
 <script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
-const clinicalMappings = {
   complaintToTreatments: {
     "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
@@ -12413,9 +12382,7 @@ const clinicalMappings = {
   }
 };
 
-function initializeClinicalData() {
   const saved = DataStore.load('treatmentMappings', null);
-  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
 }
 
 function autoSuggestTreatments(complaint) {
@@ -12496,7 +12463,6 @@ function autoSuggestMedicines() {
 </script>
 <script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
-const clinicalMappings = {
   complaintToTreatments: {
     "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
@@ -12520,9 +12486,7 @@ const clinicalMappings = {
   }
 };
 
-function initializeClinicalData() {
   const saved = DataStore.load('treatmentMappings', null);
-  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
 }
 
 function autoSuggestTreatments(complaint) {
@@ -12600,7 +12564,6 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
 
 <script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
-const clinicalMappings = {
   complaintToTreatments: {
     "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
@@ -12624,9 +12587,7 @@ const clinicalMappings = {
   }
 };
 
-function initializeClinicalData() {
   const saved = DataStore.load('treatmentMappings', null);
-  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
 }
 
 function autoSuggestTreatments(complaint) {
