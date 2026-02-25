@@ -22,9 +22,101 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- External Libraries for Enhanced Features -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const treatment = state.treatments.find(t => t.id === parseInt(tid));
+      if (treatment && !state.currentConsultation.selectedTreatments.some(st => st.id === treatment.id)) {
+        state.currentConsultation.selectedTreatments.push(treatment);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+);
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const med = state.medicines.find(m => m.id === parseInt(mid));
+      if (med && !state.currentConsultation.selectedMedicines.some(sm => sm.id === med.id)) {
+        state.currentConsultation.selectedMedicines.push(med);
+      }
+    }
+  });
+}
+</script>
 
 <script>
+// --- CONSOLIDATED CLINICAL LOGIC ---
+const clinicalMappings = {
+  complaintToTreatments: {
+    "Toothache / Severe Pain":       [1, 5, 7, 20],
+    "Bleeding Gums":                 [1, 2, 23],
+    "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
+    "Missing Tooth":                 [1, 17, 16, 21],
+    "Loose Tooth":                   [1, 23, 3, 20],
+    "Swelling in Gums":              [1, 23, 18],
+    "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
+    "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
+    "Stained/Yellow Teeth":          [1, 2, 12],
+    "Wisdom Tooth Pain":             [1, 24, 4, 20],
+    "Bad Breath (Halitosis)":        [1, 2, 19],
+    "Braces / Orthodontic Query":    [1, 13, 22, 21],
+    "Scaling / Cleaning":            [2, 19],
+    "Routine Checkup":               [1, 20]
+  },
+  treatmentToMedicines: {
+    "1": [1, 5], "2": [4], "3": [1, 2, 4], "4": [1, 2, 6, 3],
+    "5": [1, 2, 4], "6": [1, 7, 4, 3], "7": [5], "8": [5],
+    "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
+  }
+};
+
+function initializeClinicalData() {
+  const saved = DataStore.load('treatmentMappings', null);
+  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
+}
+
+function autoSuggestTreatments(complaint) {
+  if (!complaint || !state.treatmentMappings) return;
+  const mappings = state.treatmentMappings.complaintToTreatments[complaint];
+  if (!mappings) return;
+  mappings.forEach(tid => {
+    const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const t = state.treatments.find(item => item.id === parseInt(tid));
+      if (t && !state.currentConsultation.selectedTreatments.some(st => st.id === t.id)) {
+        state.currentConsultation.selectedTreatments.push(t);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+function autoSuggestMedicines() {
+  if (!state.treatmentMappings) return;
+  const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
+  const mIds = new Set();
+  tIds.forEach(tid => {
+    const meds = state.treatmentMappings.treatmentToMedicines[tid];
+    if (meds) meds.forEach(mid => mIds.add(mid));
+  });
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const m = state.medicines.find(item => item.id === parseInt(mid));
+      if (m && !state.currentConsultation.selectedMedicines.some(sm => sm.id === m.id)) {
+        state.currentConsultation.selectedMedicines.push(m);
+      }
+    }
+  });
+}
 // ═══════════════════════════════════════════════════════════
 // CALENDAR FEATURE - Complete Implementation
 // ═══════════════════════════════════════════════════════════
@@ -872,9 +964,126 @@ if (typeof state !== 'undefined' && state.currentUser && state.currentUser.role 
   setTimeout(cleanupOldData, 5000);
 }
 
+"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const treatment = state.treatments.find(t => t.id === parseInt(tid));
+      if (treatment && !state.currentConsultation.selectedTreatments.some(st => st.id === treatment.id)) {
+        state.currentConsultation.selectedTreatments.push(treatment);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+);
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const med = state.medicines.find(m => m.id === parseInt(mid));
+      if (med && !state.currentConsultation.selectedMedicines.some(sm => sm.id === med.id)) {
+        state.currentConsultation.selectedMedicines.push(med);
+      }
+    }
+  });
+}
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js">"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const treatment = state.treatments.find(t => t.id === parseInt(tid));
+      if (treatment && !state.currentConsultation.selectedTreatments.some(st => st.id === treatment.id)) {
+        state.currentConsultation.selectedTreatments.push(treatment);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+);
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const med = state.medicines.find(m => m.id === parseInt(mid));
+      if (med && !state.currentConsultation.selectedMedicines.some(sm => sm.id === med.id)) {
+        state.currentConsultation.selectedMedicines.push(med);
+      }
+    }
+  });
+}
+</script>
 <script>
+// --- CONSOLIDATED CLINICAL LOGIC ---
+const clinicalMappings = {
+  complaintToTreatments: {
+    "Toothache / Severe Pain":       [1, 5, 7, 20],
+    "Bleeding Gums":                 [1, 2, 23],
+    "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
+    "Missing Tooth":                 [1, 17, 16, 21],
+    "Loose Tooth":                   [1, 23, 3, 20],
+    "Swelling in Gums":              [1, 23, 18],
+    "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
+    "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
+    "Stained/Yellow Teeth":          [1, 2, 12],
+    "Wisdom Tooth Pain":             [1, 24, 4, 20],
+    "Bad Breath (Halitosis)":        [1, 2, 19],
+    "Braces / Orthodontic Query":    [1, 13, 22, 21],
+    "Scaling / Cleaning":            [2, 19],
+    "Routine Checkup":               [1, 20]
+  },
+  treatmentToMedicines: {
+    "1": [1, 5], "2": [4], "3": [1, 2, 4], "4": [1, 2, 6, 3],
+    "5": [1, 2, 4], "6": [1, 7, 4, 3], "7": [5], "8": [5],
+    "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
+  }
+};
+
+function initializeClinicalData() {
+  const saved = DataStore.load('treatmentMappings', null);
+  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
+}
+
+function autoSuggestTreatments(complaint) {
+  if (!complaint || !state.treatmentMappings) return;
+  const mappings = state.treatmentMappings.complaintToTreatments[complaint];
+  if (!mappings) return;
+  mappings.forEach(tid => {
+    const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const t = state.treatments.find(item => item.id === parseInt(tid));
+      if (t && !state.currentConsultation.selectedTreatments.some(st => st.id === t.id)) {
+        state.currentConsultation.selectedTreatments.push(t);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+function autoSuggestMedicines() {
+  if (!state.treatmentMappings) return;
+  const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
+  const mIds = new Set();
+  tIds.forEach(tid => {
+    const meds = state.treatmentMappings.treatmentToMedicines[tid];
+    if (meds) meds.forEach(mid => mIds.add(mid));
+  });
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const m = state.medicines.find(item => item.id === parseInt(mid));
+      if (m && !state.currentConsultation.selectedMedicines.some(sm => sm.id === m.id)) {
+        state.currentConsultation.selectedMedicines.push(m);
+      }
+    }
+  });
+}
 
 function renderCalendar() {
   // Check if state and currentUser exist
@@ -1674,6 +1883,31 @@ function lazyLoadImages() {
   });
 }
 
+"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const treatment = state.treatments.find(t => t.id === parseInt(tid));
+      if (treatment && !state.currentConsultation.selectedTreatments.some(st => st.id === treatment.id)) {
+        state.currentConsultation.selectedTreatments.push(treatment);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+);
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const med = state.medicines.find(m => m.id === parseInt(mid));
+      if (med && !state.currentConsultation.selectedMedicines.some(sm => sm.id === med.id)) {
+        state.currentConsultation.selectedMedicines.push(med);
+      }
+    }
+  });
+}
 </script>
 
 <style>
@@ -3770,6 +4004,31 @@ function lazyLoadImages() {
 // Optimize large list rendering
 
 
+"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const treatment = state.treatments.find(t => t.id === parseInt(tid));
+      if (treatment && !state.currentConsultation.selectedTreatments.some(st => st.id === treatment.id)) {
+        state.currentConsultation.selectedTreatments.push(treatment);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+);
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const med = state.medicines.find(m => m.id === parseInt(mid));
+      if (med && !state.currentConsultation.selectedMedicines.some(sm => sm.id === med.id)) {
+        state.currentConsultation.selectedMedicines.push(med);
+      }
+    }
+  });
+}
 </script>
 </head>
 <body>
@@ -3777,6 +4036,73 @@ function lazyLoadImages() {
 <div id="app"></div>
 
 <script>
+// --- CONSOLIDATED CLINICAL LOGIC ---
+const clinicalMappings = {
+  complaintToTreatments: {
+    "Toothache / Severe Pain":       [1, 5, 7, 20],
+    "Bleeding Gums":                 [1, 2, 23],
+    "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
+    "Missing Tooth":                 [1, 17, 16, 21],
+    "Loose Tooth":                   [1, 23, 3, 20],
+    "Swelling in Gums":              [1, 23, 18],
+    "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
+    "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
+    "Stained/Yellow Teeth":          [1, 2, 12],
+    "Wisdom Tooth Pain":             [1, 24, 4, 20],
+    "Bad Breath (Halitosis)":        [1, 2, 19],
+    "Braces / Orthodontic Query":    [1, 13, 22, 21],
+    "Scaling / Cleaning":            [2, 19],
+    "Routine Checkup":               [1, 20]
+  },
+  treatmentToMedicines: {
+    "1": [1, 5], "2": [4], "3": [1, 2, 4], "4": [1, 2, 6, 3],
+    "5": [1, 2, 4], "6": [1, 7, 4, 3], "7": [5], "8": [5],
+    "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
+  }
+};
+
+function initializeClinicalData() {
+  const saved = DataStore.load('treatmentMappings', null);
+  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
+}
+
+function autoSuggestTreatments(complaint) {
+  if (!complaint || !state.treatmentMappings) return;
+  const mappings = state.treatmentMappings.complaintToTreatments[complaint];
+  if (!mappings) return;
+  mappings.forEach(tid => {
+    const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const t = state.treatments.find(item => item.id === parseInt(tid));
+      if (t && !state.currentConsultation.selectedTreatments.some(st => st.id === t.id)) {
+        state.currentConsultation.selectedTreatments.push(t);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+function autoSuggestMedicines() {
+  if (!state.treatmentMappings) return;
+  const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
+  const mIds = new Set();
+  tIds.forEach(tid => {
+    const meds = state.treatmentMappings.treatmentToMedicines[tid];
+    if (meds) meds.forEach(mid => mIds.add(mid));
+  });
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const m = state.medicines.find(item => item.id === parseInt(mid));
+      if (m && !state.currentConsultation.selectedMedicines.some(sm => sm.id === m.id)) {
+        state.currentConsultation.selectedMedicines.push(m);
+      }
+    }
+  });
+}
 
 // ================================================================
 // 🚀 APP INITIALIZATION - CORE CODE
@@ -4602,105 +4928,63 @@ function sidebarItem({ allowed, active, hash, icon, label }) {
 
 // ========== INITIALIZE DATA ==========
 function initializeData() {
-  // Initialize Treatment Mappings
-  const savedMappings = DataStore.load('treatmentMappings', null);
-  if (!savedMappings || Object.keys(savedMappings).length === 0) {
-    state.treatmentMappings = {
-      complaintToTreatments: {
-        "Toothache / Severe Pain":       [1, 5, 7, 20],
-        "Bleeding Gums":                 [1, 2, 23],
-        "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
-        "Missing Tooth":                 [1, 17, 16, 21],
-        "Loose Tooth":                   [1, 23, 3, 20],
-        "Swelling in Gums":              [1, 23, 18],
-        "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
-        "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
-        "Stained/Yellow Teeth":          [1, 2, 12],
-        "Wisdom Tooth Pain":             [1, 24, 4, 20],
-        "Bad Breath (Halitosis)":        [1, 2, 19],
-        "Braces / Orthodontic Query":    [1, 13, 22, 21],
-        "Scaling / Cleaning":            [2, 19],
-        "Routine Checkup":               [1, 20]
-      },
-      treatmentToMedicines: {
-        "1":  [1, 5], "2":  [4], "3":  [1, 2, 4], "4":  [1, 2, 6, 3],
-        "5":  [1, 2, 4], "6":  [1, 7, 4, 3], "7":  [5], "8":  [5],
-        "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
-      }
-    };
-    DataStore.save('treatmentMappings', state.treatmentMappings);
-  } else {
-    state.treatmentMappings = savedMappings;
+  initializeClinicalData();
+  // --- Standard Clinical Mappings ---
+  const clinicalMappings = {
+    complaintToTreatments: {
+      "Toothache / Severe Pain":       [1, 5, 7, 20],
+      "Bleeding Gums":                 [1, 2, 23],
+      "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
+      "Missing Tooth":                 [1, 17, 16, 21],
+      "Loose Tooth":                   [1, 23, 3, 20],
+      "Swelling in Gums":              [1, 23, 18],
+      "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
+      "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
+      "Stained/Yellow Teeth":          [1, 2, 12],
+      "Wisdom Tooth Pain":             [1, 24, 4, 20],
+      "Bad Breath (Halitosis)":        [1, 2, 19],
+      "Braces / Orthodontic Query":    [1, 13, 22, 21],
+      "Scaling / Cleaning":            [2, 19],
+      "Routine Checkup":               [1, 20]
+    },
+    treatmentToMedicines: {
+      "1": [1, 5], "2": [4], "3": [1, 2, 4], "4": [1, 2, 6, 3],
+      "5": [1, 2, 4], "6": [1, 7, 4, 3], "7": [5], "8": [5],
+      "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
+    }
+  };
+  state.treatmentMappings = DataStore.load('treatmentMappings') || clinicalMappings;
+  // --- Standard Clinical Mappings ---
+  const clinicalMappings = {
+    complaintToTreatments: {
+      "Toothache / Severe Pain":       [1, 5, 7, 20],
+      "Bleeding Gums":                 [1, 2, 23],
+      "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
+      "Missing Tooth":                 [1, 17, 16, 21],
+      "Loose Tooth":                   [1, 23, 3, 20],
+      "Swelling in Gums":              [1, 23, 18],
+      "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
+      "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
+      "Stained/Yellow Teeth":          [1, 2, 12],
+      "Wisdom Tooth Pain":             [1, 24, 4, 20],
+      "Bad Breath (Halitosis)":        [1, 2, 19],
+      "Braces / Orthodontic Query":    [1, 13, 22, 21],
+      "Scaling / Cleaning":            [2, 19],
+      "Routine Checkup":               [1, 20]
+    },
+    treatmentToMedicines: {
+      "1": [1, 5], "2": [4], "3": [1, 2, 4], "4": [1, 2, 6, 3],
+      "5": [1, 2, 4], "6": [1, 7, 4, 3], "7": [5], "8": [5],
+      "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
+    }
+  };
+  
+  state.treatmentMappings = DataStore.load('treatmentMappings') || clinicalMappings;
+  if (!state.treatmentMappings.complaintToTreatments) {
+      state.treatmentMappings = clinicalMappings;
+      DataStore.save('treatmentMappings', state.treatmentMappings);
   }
-  // Initialize Treatment Mappings
-  const savedMappings = DataStore.load('treatmentMappings', null);
-  if (!savedMappings || Object.keys(savedMappings).length === 0) {
-    state.treatmentMappings = {
-      complaintToTreatments: {
-        "Toothache / Severe Pain":       [1, 5, 7, 20],
-        "Bleeding Gums":                 [1, 2, 23],
-        "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
-        "Missing Tooth":                 [1, 17, 16, 21],
-        "Loose Tooth":                   [1, 23, 3, 20],
-        "Swelling in Gums":              [1, 23, 18],
-        "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
-        "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
-        "Stained/Yellow Teeth":          [1, 2, 12],
-        "Wisdom Tooth Pain":             [1, 24, 4, 20],
-        "Bad Breath (Halitosis)":        [1, 2, 19],
-        "Braces / Orthodontic Query":    [1, 13, 22, 21],
-        "Scaling / Cleaning":            [2, 19],
-        "Routine Checkup":               [1, 20]
-      },
-      treatmentToMedicines: {
-        "1":  [1, 5], "2":  [4], "3":  [1, 2, 4], "4":  [1, 2, 6, 3],
-        "5":  [1, 2, 4], "6":  [1, 7, 4, 3], "7":  [5], "8":  [5],
-        "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
-      }
-    };
-    DataStore.save('treatmentMappings', state.treatmentMappings);
-  } else {
-    state.treatmentMappings = savedMappings;
-  }
-  // Initialize Treatment Mappings
-  const savedMappings = DataStore.load('treatmentMappings', null);
-  if (!savedMappings || Object.keys(savedMappings).length === 0) {
-    state.treatmentMappings = {
-      complaintToTreatments: {
-        "Toothache / Severe Pain":       [1, 5, 7, 20],
-        "Bleeding Gums":                 [1, 2, 23],
-        "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
-        "Missing Tooth":                 [1, 17, 16, 21],
-        "Loose Tooth":                   [1, 23, 3, 20],
-        "Swelling in Gums":              [1, 23, 18],
-        "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
-        "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
-        "Stained/Yellow Teeth":          [1, 2, 12],
-        "Wisdom Tooth Pain":             [1, 24, 4, 20],
-        "Bad Breath (Halitosis)":        [1, 2, 19],
-        "Braces / Orthodontic Query":    [1, 13, 22, 21],
-        "Scaling / Cleaning":            [2, 19],
-        "Routine Checkup":               [1, 20]
-      },
-      treatmentToMedicines: {
-        "1":  [1, 5],
-        "2":  [4],
-        "3":  [1, 2, 4],
-        "4":  [1, 2, 6, 3],
-        "5":  [1, 2, 4],
-        "6":  [1, 7, 4, 3],
-        "7":  [5],
-        "8":  [5],
-        "18": [1, 2, 6],
-        "23": [2, 4, 6],
-        "24": [1, 7, 6, 3]
-      }
-    };
-    DataStore.save('treatmentMappings', state.treatmentMappings);
-  } else {
-    state.treatmentMappings = savedMappings;
-  }
-  // Load state from localStorage or use empty defaults
+
   state.prescriptions = DataStore.load('prescriptions', []);
   state.digitalOPDs = DataStore.load('digitalOPDs', []);
   state.opdQueue = DataStore.load('opdQueue', {});
@@ -6319,7 +6603,74 @@ function printPrescriptionFromBill(billId) {
     '<div class="section"><div class="section-title">PRESCRIPTION</div>' + medicinesList + '</div>' +
     (bill.notes ? '<div class="section"><div class="section-title">ADVICE / INSTRUCTIONS</div><div class="advice">' + bill.notes + '</div></div>' : '') +
     '<div class="signature"><strong>' + doctor.name + '</strong><br>' + (doctor.specialty || 'Dental Surgeon') + '</div>' +
-    '<script>window.onload=function(){setTimeout(function(){window.print()},500)}<\/script>' +
+    '<script>
+// --- CONSOLIDATED CLINICAL LOGIC ---
+const clinicalMappings = {
+  complaintToTreatments: {
+    "Toothache / Severe Pain":       [1, 5, 7, 20],
+    "Bleeding Gums":                 [1, 2, 23],
+    "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
+    "Missing Tooth":                 [1, 17, 16, 21],
+    "Loose Tooth":                   [1, 23, 3, 20],
+    "Swelling in Gums":              [1, 23, 18],
+    "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
+    "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
+    "Stained/Yellow Teeth":          [1, 2, 12],
+    "Wisdom Tooth Pain":             [1, 24, 4, 20],
+    "Bad Breath (Halitosis)":        [1, 2, 19],
+    "Braces / Orthodontic Query":    [1, 13, 22, 21],
+    "Scaling / Cleaning":            [2, 19],
+    "Routine Checkup":               [1, 20]
+  },
+  treatmentToMedicines: {
+    "1": [1, 5], "2": [4], "3": [1, 2, 4], "4": [1, 2, 6, 3],
+    "5": [1, 2, 4], "6": [1, 7, 4, 3], "7": [5], "8": [5],
+    "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
+  }
+};
+
+function initializeClinicalData() {
+  const saved = DataStore.load('treatmentMappings', null);
+  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
+}
+
+function autoSuggestTreatments(complaint) {
+  if (!complaint || !state.treatmentMappings) return;
+  const mappings = state.treatmentMappings.complaintToTreatments[complaint];
+  if (!mappings) return;
+  mappings.forEach(tid => {
+    const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const t = state.treatments.find(item => item.id === parseInt(tid));
+      if (t && !state.currentConsultation.selectedTreatments.some(st => st.id === t.id)) {
+        state.currentConsultation.selectedTreatments.push(t);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+function autoSuggestMedicines() {
+  if (!state.treatmentMappings) return;
+  const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
+  const mIds = new Set();
+  tIds.forEach(tid => {
+    const meds = state.treatmentMappings.treatmentToMedicines[tid];
+    if (meds) meds.forEach(mid => mIds.add(mid));
+  });
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const m = state.medicines.find(item => item.id === parseInt(mid));
+      if (m && !state.currentConsultation.selectedMedicines.some(sm => sm.id === m.id)) {
+        state.currentConsultation.selectedMedicines.push(m);
+      }
+    }
+  });
+}window.onload=function(){setTimeout(function(){window.print()},500)}<\/script>' +
     '</body></html>';
   
   const printWindow = window.open('', '_blank', 'width=800,height=900');
@@ -7283,7 +7634,74 @@ function generatePrescriptionForPlan(treatmentPlanId) {
     '<div class="section"><div class="section-title">PRESCRIPTION</div>' + medicinesList + '</div>' +
     (plan.notes ? '<div class="section"><div class="section-title">ADVICE / INSTRUCTIONS</div><div class="advice">' + plan.notes + '</div></div>' : '') +
     '<div class="signature"><strong>' + doctor.name + '</strong><br>' + (doctor.specialty || 'Dental Surgeon') + '</div>' +
-    '<script>window.onload=function(){setTimeout(function(){window.print()},500)}<\/script>' +
+    '<script>
+// --- CONSOLIDATED CLINICAL LOGIC ---
+const clinicalMappings = {
+  complaintToTreatments: {
+    "Toothache / Severe Pain":       [1, 5, 7, 20],
+    "Bleeding Gums":                 [1, 2, 23],
+    "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
+    "Missing Tooth":                 [1, 17, 16, 21],
+    "Loose Tooth":                   [1, 23, 3, 20],
+    "Swelling in Gums":              [1, 23, 18],
+    "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
+    "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
+    "Stained/Yellow Teeth":          [1, 2, 12],
+    "Wisdom Tooth Pain":             [1, 24, 4, 20],
+    "Bad Breath (Halitosis)":        [1, 2, 19],
+    "Braces / Orthodontic Query":    [1, 13, 22, 21],
+    "Scaling / Cleaning":            [2, 19],
+    "Routine Checkup":               [1, 20]
+  },
+  treatmentToMedicines: {
+    "1": [1, 5], "2": [4], "3": [1, 2, 4], "4": [1, 2, 6, 3],
+    "5": [1, 2, 4], "6": [1, 7, 4, 3], "7": [5], "8": [5],
+    "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
+  }
+};
+
+function initializeClinicalData() {
+  const saved = DataStore.load('treatmentMappings', null);
+  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
+}
+
+function autoSuggestTreatments(complaint) {
+  if (!complaint || !state.treatmentMappings) return;
+  const mappings = state.treatmentMappings.complaintToTreatments[complaint];
+  if (!mappings) return;
+  mappings.forEach(tid => {
+    const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const t = state.treatments.find(item => item.id === parseInt(tid));
+      if (t && !state.currentConsultation.selectedTreatments.some(st => st.id === t.id)) {
+        state.currentConsultation.selectedTreatments.push(t);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+function autoSuggestMedicines() {
+  if (!state.treatmentMappings) return;
+  const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
+  const mIds = new Set();
+  tIds.forEach(tid => {
+    const meds = state.treatmentMappings.treatmentToMedicines[tid];
+    if (meds) meds.forEach(mid => mIds.add(mid));
+  });
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const m = state.medicines.find(item => item.id === parseInt(mid));
+      if (m && !state.currentConsultation.selectedMedicines.some(sm => sm.id === m.id)) {
+        state.currentConsultation.selectedMedicines.push(m);
+      }
+    }
+  });
+}window.onload=function(){setTimeout(function(){window.print()},500)}<\/script>' +
     '</body></html>';
   
   const printWindow = window.open('', '_blank', 'width=800,height=900');
@@ -7641,51 +8059,9 @@ function viewTreatmentPlanDetails(planId) {
 // AUTO-MAPPING FUNCTIONS
 // ═══════════════════════════════════════════════════════════
 
-function autoSuggestTreatments(complaint) {
-  if (!complaint || !state.treatmentMappings) return;
-  const mappings = state.treatmentMappings.complaintToTreatments[complaint];
-  if (!mappings) return;
-  
-  mappings.forEach(function(tid) {
-    const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
-    if (cb && !cb.checked) {
-      cb.checked = true;
-      const treatment = state.treatments.find(t => t.id === parseInt(tid));
-      if (treatment && !state.currentConsultation.selectedTreatments.some(st => st.id === treatment.id)) {
-        state.currentConsultation.selectedTreatments.push(treatment);
-      }
-    }
-  });
-  
-  autoSuggestMedicines(); 
-  updateConsultationTotal();
-  showToast('? Suggestions applied for ' + complaint);
-}
 
-function autoSuggestMedicines() {
-  const treatmentIds = Array.from(document.querySelectorAll('.consult-t-cb:checked'))
-    .map(function(cb) { return cb.value; });
-  
-  if (!state.treatmentMappings) return;
-  const medicineIds = new Set();
-  treatmentIds.forEach(function(tid) {
-    const meds = state.treatmentMappings.treatmentToMedicines[tid];
-    if (meds) meds.forEach(function(mid) { medicineIds.add(mid); });
-  });
-  
-  medicineIds.forEach(function(mid) {
-    const cb = document.querySelector('.consult-m-cb[value="' + mid + '"]');
-    if (cb && !cb.checked) {
-      cb.checked = true;
-      const medicine = state.medicines.find(function(m) { return m.id === mid; });
-      if (medicine && !state.currentConsultation.selectedMedicines.some(function(sm) { return sm.id === mid; })) {
-        state.currentConsultation.selectedMedicines.push(medicine);
-      }
-    }
-  });
-  
-  if (medicineIds.size > 0) showToast('✅ Medicines auto-selected');
-}
+
+
 
 function updateConsultationTotal() {
   const selected = Array.from(document.querySelectorAll('.consult-t-cb:checked'));
@@ -8798,7 +9174,74 @@ function printFinalPrescription(plan) {
     '<div style="font-size:12px;color:#64748b;margin-top:3px">' + (doctor.specialty || 'Dental Surgeon') + '</div>' +
     '<div style="font-size:11px;color:#94a3b8;margin-top:5px">Date: ' + formatIndianDate(new Date().toISOString().split('T')[0]) + '</div>' +
     '</div>' +
-    '<script>window.onload=function(){setTimeout(function(){window.print()},500)}<\/script>' +
+    '<script>
+// --- CONSOLIDATED CLINICAL LOGIC ---
+const clinicalMappings = {
+  complaintToTreatments: {
+    "Toothache / Severe Pain":       [1, 5, 7, 20],
+    "Bleeding Gums":                 [1, 2, 23],
+    "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
+    "Missing Tooth":                 [1, 17, 16, 21],
+    "Loose Tooth":                   [1, 23, 3, 20],
+    "Swelling in Gums":              [1, 23, 18],
+    "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
+    "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
+    "Stained/Yellow Teeth":          [1, 2, 12],
+    "Wisdom Tooth Pain":             [1, 24, 4, 20],
+    "Bad Breath (Halitosis)":        [1, 2, 19],
+    "Braces / Orthodontic Query":    [1, 13, 22, 21],
+    "Scaling / Cleaning":            [2, 19],
+    "Routine Checkup":               [1, 20]
+  },
+  treatmentToMedicines: {
+    "1": [1, 5], "2": [4], "3": [1, 2, 4], "4": [1, 2, 6, 3],
+    "5": [1, 2, 4], "6": [1, 7, 4, 3], "7": [5], "8": [5],
+    "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
+  }
+};
+
+function initializeClinicalData() {
+  const saved = DataStore.load('treatmentMappings', null);
+  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
+}
+
+function autoSuggestTreatments(complaint) {
+  if (!complaint || !state.treatmentMappings) return;
+  const mappings = state.treatmentMappings.complaintToTreatments[complaint];
+  if (!mappings) return;
+  mappings.forEach(tid => {
+    const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const t = state.treatments.find(item => item.id === parseInt(tid));
+      if (t && !state.currentConsultation.selectedTreatments.some(st => st.id === t.id)) {
+        state.currentConsultation.selectedTreatments.push(t);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+function autoSuggestMedicines() {
+  if (!state.treatmentMappings) return;
+  const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
+  const mIds = new Set();
+  tIds.forEach(tid => {
+    const meds = state.treatmentMappings.treatmentToMedicines[tid];
+    if (meds) meds.forEach(mid => mIds.add(mid));
+  });
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const m = state.medicines.find(item => item.id === parseInt(mid));
+      if (m && !state.currentConsultation.selectedMedicines.some(sm => sm.id === m.id)) {
+        state.currentConsultation.selectedMedicines.push(m);
+      }
+    }
+  });
+}window.onload=function(){setTimeout(function(){window.print()},500)}<\/script>' +
     '</body></html>';
   
   const printWindow = window.open('', '_blank', 'width=800,height=900');
@@ -9543,7 +9986,74 @@ function printBillOPD(billId) {
     '<p>For queries, contact: ' + (state.config.clinicPhone || '+91-XXXXXXXXXX') + '</p>' +
     '<p style="margin-top:30px">________________<br>Receptionist Signature</p>' +
     '</div>' +
-    '<script>window.onload=function(){setTimeout(function(){window.print()},500)}<\/script>' +
+    '<script>
+// --- CONSOLIDATED CLINICAL LOGIC ---
+const clinicalMappings = {
+  complaintToTreatments: {
+    "Toothache / Severe Pain":       [1, 5, 7, 20],
+    "Bleeding Gums":                 [1, 2, 23],
+    "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
+    "Missing Tooth":                 [1, 17, 16, 21],
+    "Loose Tooth":                   [1, 23, 3, 20],
+    "Swelling in Gums":              [1, 23, 18],
+    "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
+    "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
+    "Stained/Yellow Teeth":          [1, 2, 12],
+    "Wisdom Tooth Pain":             [1, 24, 4, 20],
+    "Bad Breath (Halitosis)":        [1, 2, 19],
+    "Braces / Orthodontic Query":    [1, 13, 22, 21],
+    "Scaling / Cleaning":            [2, 19],
+    "Routine Checkup":               [1, 20]
+  },
+  treatmentToMedicines: {
+    "1": [1, 5], "2": [4], "3": [1, 2, 4], "4": [1, 2, 6, 3],
+    "5": [1, 2, 4], "6": [1, 7, 4, 3], "7": [5], "8": [5],
+    "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
+  }
+};
+
+function initializeClinicalData() {
+  const saved = DataStore.load('treatmentMappings', null);
+  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
+}
+
+function autoSuggestTreatments(complaint) {
+  if (!complaint || !state.treatmentMappings) return;
+  const mappings = state.treatmentMappings.complaintToTreatments[complaint];
+  if (!mappings) return;
+  mappings.forEach(tid => {
+    const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const t = state.treatments.find(item => item.id === parseInt(tid));
+      if (t && !state.currentConsultation.selectedTreatments.some(st => st.id === t.id)) {
+        state.currentConsultation.selectedTreatments.push(t);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+function autoSuggestMedicines() {
+  if (!state.treatmentMappings) return;
+  const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
+  const mIds = new Set();
+  tIds.forEach(tid => {
+    const meds = state.treatmentMappings.treatmentToMedicines[tid];
+    if (meds) meds.forEach(mid => mIds.add(mid));
+  });
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const m = state.medicines.find(item => item.id === parseInt(mid));
+      if (m && !state.currentConsultation.selectedMedicines.some(sm => sm.id === m.id)) {
+        state.currentConsultation.selectedMedicines.push(m);
+      }
+    }
+  });
+}window.onload=function(){setTimeout(function(){window.print()},500)}<\/script>' +
     '</body></html>';
   
   const printWindow = window.open('', '_blank', 'width=800,height=900');
@@ -9695,7 +10205,74 @@ function printPrescriptionOPD(prescriptionId) {
     '<div style="font-size:12px;color:#64748b;margin-top:3px">' + (doctor.specialty || 'Dental Surgeon') + '</div>' +
     '<div style="font-size:11px;color:#94a3b8;margin-top:5px">Date: ' + formatIndianDate(new Date().toISOString().split('T')[0]) + '</div>' +
     '</div>' +
-    '<script>window.onload=function(){setTimeout(function(){window.print()},500)}<\/script>' +
+    '<script>
+// --- CONSOLIDATED CLINICAL LOGIC ---
+const clinicalMappings = {
+  complaintToTreatments: {
+    "Toothache / Severe Pain":       [1, 5, 7, 20],
+    "Bleeding Gums":                 [1, 2, 23],
+    "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
+    "Missing Tooth":                 [1, 17, 16, 21],
+    "Loose Tooth":                   [1, 23, 3, 20],
+    "Swelling in Gums":              [1, 23, 18],
+    "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
+    "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
+    "Stained/Yellow Teeth":          [1, 2, 12],
+    "Wisdom Tooth Pain":             [1, 24, 4, 20],
+    "Bad Breath (Halitosis)":        [1, 2, 19],
+    "Braces / Orthodontic Query":    [1, 13, 22, 21],
+    "Scaling / Cleaning":            [2, 19],
+    "Routine Checkup":               [1, 20]
+  },
+  treatmentToMedicines: {
+    "1": [1, 5], "2": [4], "3": [1, 2, 4], "4": [1, 2, 6, 3],
+    "5": [1, 2, 4], "6": [1, 7, 4, 3], "7": [5], "8": [5],
+    "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
+  }
+};
+
+function initializeClinicalData() {
+  const saved = DataStore.load('treatmentMappings', null);
+  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
+}
+
+function autoSuggestTreatments(complaint) {
+  if (!complaint || !state.treatmentMappings) return;
+  const mappings = state.treatmentMappings.complaintToTreatments[complaint];
+  if (!mappings) return;
+  mappings.forEach(tid => {
+    const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const t = state.treatments.find(item => item.id === parseInt(tid));
+      if (t && !state.currentConsultation.selectedTreatments.some(st => st.id === t.id)) {
+        state.currentConsultation.selectedTreatments.push(t);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+function autoSuggestMedicines() {
+  if (!state.treatmentMappings) return;
+  const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
+  const mIds = new Set();
+  tIds.forEach(tid => {
+    const meds = state.treatmentMappings.treatmentToMedicines[tid];
+    if (meds) meds.forEach(mid => mIds.add(mid));
+  });
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const m = state.medicines.find(item => item.id === parseInt(mid));
+      if (m && !state.currentConsultation.selectedMedicines.some(sm => sm.id === m.id)) {
+        state.currentConsultation.selectedMedicines.push(m);
+      }
+    }
+  });
+}window.onload=function(){setTimeout(function(){window.print()},500)}<\/script>' +
     '</body></html>';
   
   const printWindow = window.open('', '_blank', 'width=800,height=900');
@@ -11782,10 +12359,102 @@ const DOMCache = {
   }
 };
 
+"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const treatment = state.treatments.find(t => t.id === parseInt(tid));
+      if (treatment && !state.currentConsultation.selectedTreatments.some(st => st.id === treatment.id)) {
+        state.currentConsultation.selectedTreatments.push(treatment);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+);
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const med = state.medicines.find(m => m.id === parseInt(mid));
+      if (med && !state.currentConsultation.selectedMedicines.some(sm => sm.id === med.id)) {
+        state.currentConsultation.selectedMedicines.push(med);
+      }
+    }
+  });
+}
 </script>
 
 <!-- Socket.io Client (only works when running with Node.js server) -->
 <script>
+// --- CONSOLIDATED CLINICAL LOGIC ---
+const clinicalMappings = {
+  complaintToTreatments: {
+    "Toothache / Severe Pain":       [1, 5, 7, 20],
+    "Bleeding Gums":                 [1, 2, 23],
+    "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
+    "Missing Tooth":                 [1, 17, 16, 21],
+    "Loose Tooth":                   [1, 23, 3, 20],
+    "Swelling in Gums":              [1, 23, 18],
+    "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
+    "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
+    "Stained/Yellow Teeth":          [1, 2, 12],
+    "Wisdom Tooth Pain":             [1, 24, 4, 20],
+    "Bad Breath (Halitosis)":        [1, 2, 19],
+    "Braces / Orthodontic Query":    [1, 13, 22, 21],
+    "Scaling / Cleaning":            [2, 19],
+    "Routine Checkup":               [1, 20]
+  },
+  treatmentToMedicines: {
+    "1": [1, 5], "2": [4], "3": [1, 2, 4], "4": [1, 2, 6, 3],
+    "5": [1, 2, 4], "6": [1, 7, 4, 3], "7": [5], "8": [5],
+    "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
+  }
+};
+
+function initializeClinicalData() {
+  const saved = DataStore.load('treatmentMappings', null);
+  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
+}
+
+function autoSuggestTreatments(complaint) {
+  if (!complaint || !state.treatmentMappings) return;
+  const mappings = state.treatmentMappings.complaintToTreatments[complaint];
+  if (!mappings) return;
+  mappings.forEach(tid => {
+    const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const t = state.treatments.find(item => item.id === parseInt(tid));
+      if (t && !state.currentConsultation.selectedTreatments.some(st => st.id === t.id)) {
+        state.currentConsultation.selectedTreatments.push(t);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+function autoSuggestMedicines() {
+  if (!state.treatmentMappings) return;
+  const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
+  const mIds = new Set();
+  tIds.forEach(tid => {
+    const meds = state.treatmentMappings.treatmentToMedicines[tid];
+    if (meds) meds.forEach(mid => mIds.add(mid));
+  });
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const m = state.medicines.find(item => item.id === parseInt(mid));
+      if (m && !state.currentConsultation.selectedMedicines.some(sm => sm.id === m.id)) {
+        state.currentConsultation.selectedMedicines.push(m);
+      }
+    }
+  });
+}
 // Gracefully load socket.io - won\'t break if server not running
 (function() {
   const script = document.createElement('script');
@@ -11799,8 +12468,100 @@ const DOMCache = {
   };
   document.head.appendChild(script);
 })();
+"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const treatment = state.treatments.find(t => t.id === parseInt(tid));
+      if (treatment && !state.currentConsultation.selectedTreatments.some(st => st.id === treatment.id)) {
+        state.currentConsultation.selectedTreatments.push(treatment);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+);
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const med = state.medicines.find(m => m.id === parseInt(mid));
+      if (med && !state.currentConsultation.selectedMedicines.some(sm => sm.id === med.id)) {
+        state.currentConsultation.selectedMedicines.push(med);
+      }
+    }
+  });
+}
 </script>
 <script>
+// --- CONSOLIDATED CLINICAL LOGIC ---
+const clinicalMappings = {
+  complaintToTreatments: {
+    "Toothache / Severe Pain":       [1, 5, 7, 20],
+    "Bleeding Gums":                 [1, 2, 23],
+    "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
+    "Missing Tooth":                 [1, 17, 16, 21],
+    "Loose Tooth":                   [1, 23, 3, 20],
+    "Swelling in Gums":              [1, 23, 18],
+    "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
+    "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
+    "Stained/Yellow Teeth":          [1, 2, 12],
+    "Wisdom Tooth Pain":             [1, 24, 4, 20],
+    "Bad Breath (Halitosis)":        [1, 2, 19],
+    "Braces / Orthodontic Query":    [1, 13, 22, 21],
+    "Scaling / Cleaning":            [2, 19],
+    "Routine Checkup":               [1, 20]
+  },
+  treatmentToMedicines: {
+    "1": [1, 5], "2": [4], "3": [1, 2, 4], "4": [1, 2, 6, 3],
+    "5": [1, 2, 4], "6": [1, 7, 4, 3], "7": [5], "8": [5],
+    "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
+  }
+};
+
+function initializeClinicalData() {
+  const saved = DataStore.load('treatmentMappings', null);
+  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
+}
+
+function autoSuggestTreatments(complaint) {
+  if (!complaint || !state.treatmentMappings) return;
+  const mappings = state.treatmentMappings.complaintToTreatments[complaint];
+  if (!mappings) return;
+  mappings.forEach(tid => {
+    const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const t = state.treatments.find(item => item.id === parseInt(tid));
+      if (t && !state.currentConsultation.selectedTreatments.some(st => st.id === t.id)) {
+        state.currentConsultation.selectedTreatments.push(t);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+function autoSuggestMedicines() {
+  if (!state.treatmentMappings) return;
+  const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
+  const mIds = new Set();
+  tIds.forEach(tid => {
+    const meds = state.treatmentMappings.treatmentToMedicines[tid];
+    if (meds) meds.forEach(mid => mIds.add(mid));
+  });
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const m = state.medicines.find(item => item.id === parseInt(mid));
+      if (m && !state.currentConsultation.selectedMedicines.some(sm => sm.id === m.id)) {
+        state.currentConsultation.selectedMedicines.push(m);
+      }
+    }
+  });
+}
 if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.protocol === 'http:')) {
   window.addEventListener('load', function () {
     navigator.serviceWorker.register('/service-worker.js').catch(err => {
@@ -11808,14 +12569,131 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
     });
   });
 }
+"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const treatment = state.treatments.find(t => t.id === parseInt(tid));
+      if (treatment && !state.currentConsultation.selectedTreatments.some(st => st.id === treatment.id)) {
+        state.currentConsultation.selectedTreatments.push(treatment);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+);
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const med = state.medicines.find(m => m.id === parseInt(mid));
+      if (med && !state.currentConsultation.selectedMedicines.some(sm => sm.id === med.id)) {
+        state.currentConsultation.selectedMedicines.push(med);
+      }
+    }
+  });
+}
 </script>
 </body>
 </html>
 
 <script>
+// --- CONSOLIDATED CLINICAL LOGIC ---
+const clinicalMappings = {
+  complaintToTreatments: {
+    "Toothache / Severe Pain":       [1, 5, 7, 20],
+    "Bleeding Gums":                 [1, 2, 23],
+    "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
+    "Missing Tooth":                 [1, 17, 16, 21],
+    "Loose Tooth":                   [1, 23, 3, 20],
+    "Swelling in Gums":              [1, 23, 18],
+    "Sensitivity (Hot/Cold)":        [1, 7, 5, 20],
+    "Broken/Chipped Tooth":          [1, 7, 9, 18, 20],
+    "Stained/Yellow Teeth":          [1, 2, 12],
+    "Wisdom Tooth Pain":             [1, 24, 4, 20],
+    "Bad Breath (Halitosis)":        [1, 2, 19],
+    "Braces / Orthodontic Query":    [1, 13, 22, 21],
+    "Scaling / Cleaning":            [2, 19],
+    "Routine Checkup":               [1, 20]
+  },
+  treatmentToMedicines: {
+    "1": [1, 5], "2": [4], "3": [1, 2, 4], "4": [1, 2, 6, 3],
+    "5": [1, 2, 4], "6": [1, 7, 4, 3], "7": [5], "8": [5],
+    "18": [1, 2, 6], "23": [2, 4, 6], "24": [1, 7, 6, 3]
+  }
+};
+
+function initializeClinicalData() {
+  const saved = DataStore.load('treatmentMappings', null);
+  state.treatmentMappings = (saved && Object.keys(saved).length > 0) ? saved : clinicalMappings;
+}
+
+function autoSuggestTreatments(complaint) {
+  if (!complaint || !state.treatmentMappings) return;
+  const mappings = state.treatmentMappings.complaintToTreatments[complaint];
+  if (!mappings) return;
+  mappings.forEach(tid => {
+    const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const t = state.treatments.find(item => item.id === parseInt(tid));
+      if (t && !state.currentConsultation.selectedTreatments.some(st => st.id === t.id)) {
+        state.currentConsultation.selectedTreatments.push(t);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+function autoSuggestMedicines() {
+  if (!state.treatmentMappings) return;
+  const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
+  const mIds = new Set();
+  tIds.forEach(tid => {
+    const meds = state.treatmentMappings.treatmentToMedicines[tid];
+    if (meds) meds.forEach(mid => mIds.add(mid));
+  });
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const m = state.medicines.find(item => item.id === parseInt(mid));
+      if (m && !state.currentConsultation.selectedMedicines.some(sm => sm.id === m.id)) {
+        state.currentConsultation.selectedMedicines.push(m);
+      }
+    }
+  });
+}
 function handleComplaintClick(complaint) {
   state.currentConsultation.chiefComplaint = complaint;
   autoSuggestTreatments(complaint);
   renderActiveConsultationForm();
+}
+"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const treatment = state.treatments.find(t => t.id === parseInt(tid));
+      if (treatment && !state.currentConsultation.selectedTreatments.some(st => st.id === treatment.id)) {
+        state.currentConsultation.selectedTreatments.push(treatment);
+      }
+    }
+  });
+  autoSuggestMedicines();
+  updateConsultationTotal();
+}
+
+);
+  mIds.forEach(mid => {
+    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
+    if (cb && !cb.checked) {
+      cb.checked = true;
+      const med = state.medicines.find(m => m.id === parseInt(mid));
+      if (med && !state.currentConsultation.selectedMedicines.some(sm => sm.id === med.id)) {
+        state.currentConsultation.selectedMedicines.push(med);
+      }
+    }
+  });
 }
 </script>
