@@ -4174,7 +4174,7 @@ function dashCalChangeMonth(delta) {
 }
 function dashCalSetMonth(m) { if (!state.dashCal) return; state.dashCal.month = m; renderDashboard(); }
 function dashCalSetYear(y)  { if (!state.dashCal) return; state.dashCal.year  = y; renderDashboard(); }
-function dashCalBookDate(dateStr) {
+function dashCalBookDate(dateStr) { openRegistrationForDate(dateStr); return;
   const modal = document.getElementById('dashCalModal');
   if (!modal) return;
   document.getElementById('dashCal_date').value = dateStr;
