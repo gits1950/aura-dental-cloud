@@ -7647,19 +7647,19 @@ function autoSuggestTreatments(complaint) {
   if (!mappings) return;
   
   mappings.forEach(function(tid) {
-    const cb = document.querySelector('.consult-t-cb[value="' + tid + '"]');
+    const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
     if (cb && !cb.checked) {
       cb.checked = true;
-      const treatment = state.treatments.find(function(t) { return t.id === tid; });
-  autoSuggestMedicines();
-      if (treatment && !state.currentConsultation.selectedTreatments.some(function(st) { return st.id === tid; })) {
+      const treatment = state.treatments.find(t => t.id === parseInt(tid));
+      if (treatment && !state.currentConsultation.selectedTreatments.some(st => st.id === treatment.id)) {
         state.currentConsultation.selectedTreatments.push(treatment);
       }
     }
   });
   
+  autoSuggestMedicines(); 
   updateConsultationTotal();
-  showToast('✅ Suggested treatments auto-selected');
+  showToast('? Suggestions applied for ' + complaint);
 }
 
 function autoSuggestMedicines() {
