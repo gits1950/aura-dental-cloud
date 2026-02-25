@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -18,39 +19,15 @@
   <link rel="icon" type="image/svg+xml" sizes="512x512" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='grad2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' fill='url(%23grad2)' rx='50'/%3E%3Cpath d='M256 100 C220 100 190 130 190 190 L190 322 C190 382 220 412 256 412 C292 412 322 382 322 322 L322 190 C322 130 292 100 256 100 Z' fill='white'/%3E%3Ctext x='256' y='460' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-size='42' font-weight='bold'%3EAURA%3C/text%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='192' height='192' fill='url(%23grad1)' rx='20'/%3E%3Cpath d='M96 40 C80 40 68 52 68 68 L68 124 C68 140 80 152 96 152 C112 152 124 140 124 124 L124 68 C124 52 112 40 96 40 Z' fill='white'/%3E%3Ctext x='96' y='175' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-size='16' font-weight='bold'%3EAURA%3C/text%3E%3C/svg%3E">
   
-  
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- External Libraries for Enhanced Features -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">"]`);
-    if (cb && !cb.checked) {
-      cb.checked = true;
-      const treatment = state.treatments.find(t => t.id === parseInt(tid));
-      if (treatment && !state.currentConsultation.selectedTreatments.some(st => st.id === treatment.id)) {
-        state.currentConsultation.selectedTreatments.push(treatment);
-      }
-    }
-  });
-  updateConsultationTotal();
-}
-
-);
-  mIds.forEach(mid => {
-    const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
-    if (cb && !cb.checked) {
-      cb.checked = true;
-      const med = state.medicines.find(m => m.id === parseInt(mid));
-      if (med && !state.currentConsultation.selectedMedicines.some(sm => sm.id === med.id)) {
-        state.currentConsultation.selectedMedicines.push(med);
-      }
-    }
-  });
-}
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
+const clinicalMappings = {
   complaintToTreatments: {
+    "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
     "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
     "Missing Tooth":                 [1, 17, 16, 21],
@@ -72,12 +49,14 @@
   }
 };
 
-  const saved = DataStore.load('treatmentMappings', null);
-}
-
-  if (!complaint || !state.treatmentMappings) return;
-  const mappings = state.treatmentMappings.complaintToTreatments[complaint];
+/**
+ * Automatically checks treatment boxes based on the selected complaint
+ */
+function autoSuggestTreatments(complaint) {
+  if (!complaint || !clinicalMappings) return;
+  const mappings = clinicalMappings.complaintToTreatments[complaint];
   if (!mappings) return;
+  
   mappings.forEach(tid => {
     const cb = document.querySelector(`.consult-t-cb[value="${tid}"]`);
     if (cb && !cb.checked) {
@@ -88,16 +67,23 @@
       }
     }
   });
+  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
-  if (!state.treatmentMappings) return;
+/**
+ * Automatically checks medicine boxes based on selected treatments
+ */
+function autoSuggestMedicines() {
+  if (!clinicalMappings) return;
   const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
   const mIds = new Set();
+  
   tIds.forEach(tid => {
-    const meds = state.treatmentMappings.treatmentToMedicines[tid];
+    const meds = clinicalMappings.treatmentToMedicines[tid];
     if (meds) meds.forEach(mid => mIds.add(mid));
   });
+  
   mIds.forEach(mid => {
     const cb = document.querySelector(`.consult-m-cb[value="${mid}"]`);
     if (cb && !cb.checked) {
@@ -109,7 +95,7 @@
     }
   });
 }
-// ═══════════════════════════════════════════════════════════
+</script>// ═══════════════════════════════════════════════════════════
 // CALENDAR FEATURE - Complete Implementation
 // ═══════════════════════════════════════════════════════════
 
