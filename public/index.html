@@ -31,7 +31,6 @@
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
@@ -52,7 +51,6 @@
 <script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
   complaintToTreatments: {
-    "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
     "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
     "Missing Tooth":                 [1, 17, 16, 21],
@@ -77,7 +75,6 @@
   const saved = DataStore.load('treatmentMappings', null);
 }
 
-function autoSuggestTreatments(complaint) {
   if (!complaint || !state.treatmentMappings) return;
   const mappings = state.treatmentMappings.complaintToTreatments[complaint];
   if (!mappings) return;
@@ -91,11 +88,9 @@ function autoSuggestTreatments(complaint) {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
-function autoSuggestMedicines() {
   if (!state.treatmentMappings) return;
   const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
   const mIds = new Set();
@@ -970,7 +965,6 @@ if (typeof state !== 'undefined' && state.currentUser && state.currentUser.role 
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
@@ -996,7 +990,6 @@ if (typeof state !== 'undefined' && state.currentUser && state.currentUser.role 
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
@@ -1016,7 +1009,6 @@ if (typeof state !== 'undefined' && state.currentUser && state.currentUser.role 
 <script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
   complaintToTreatments: {
-    "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
     "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
     "Missing Tooth":                 [1, 17, 16, 21],
@@ -1041,7 +1033,6 @@ if (typeof state !== 'undefined' && state.currentUser && state.currentUser.role 
   const saved = DataStore.load('treatmentMappings', null);
 }
 
-function autoSuggestTreatments(complaint) {
   if (!complaint || !state.treatmentMappings) return;
   const mappings = state.treatmentMappings.complaintToTreatments[complaint];
   if (!mappings) return;
@@ -1055,11 +1046,9 @@ function autoSuggestTreatments(complaint) {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
-function autoSuggestMedicines() {
   if (!state.treatmentMappings) return;
   const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
   const mIds = new Set();
@@ -1886,7 +1875,6 @@ function lazyLoadImages() {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
@@ -4007,7 +3995,6 @@ function lazyLoadImages() {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
@@ -4032,7 +4019,6 @@ function lazyLoadImages() {
 <script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
   complaintToTreatments: {
-    "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
     "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
     "Missing Tooth":                 [1, 17, 16, 21],
@@ -4057,7 +4043,6 @@ function lazyLoadImages() {
   const saved = DataStore.load('treatmentMappings', null);
 }
 
-function autoSuggestTreatments(complaint) {
   if (!complaint || !state.treatmentMappings) return;
   const mappings = state.treatmentMappings.complaintToTreatments[complaint];
   if (!mappings) return;
@@ -4071,11 +4056,9 @@ function autoSuggestTreatments(complaint) {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
-function autoSuggestMedicines() {
   if (!state.treatmentMappings) return;
   const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
   const mIds = new Set();
@@ -4824,7 +4807,6 @@ if (typeof state !== 'undefined') {
 
 // ========== CHIEF COMPLAINT LIBRARY ==========
 const chiefComplaintLibrary = [
-  "Toothache / Severe Pain",
   "Bleeding Gums",
   "Cavity / Tooth Decay",
   "Missing Tooth",
@@ -4921,7 +4903,6 @@ function sidebarItem({ allowed, active, hash, icon, label }) {
 function initializeData() {
   // --- Standard Clinical Mappings ---
     complaintToTreatments: {
-      "Toothache / Severe Pain":       [1, 5, 7, 20],
       "Bleeding Gums":                 [1, 2, 23],
       "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
       "Missing Tooth":                 [1, 17, 16, 21],
@@ -4944,7 +4925,6 @@ function initializeData() {
   };
   // --- Standard Clinical Mappings ---
     complaintToTreatments: {
-      "Toothache / Severe Pain":       [1, 5, 7, 20],
       "Bleeding Gums":                 [1, 2, 23],
       "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
       "Missing Tooth":                 [1, 17, 16, 21],
@@ -6591,7 +6571,6 @@ function printPrescriptionFromBill(billId) {
     '<script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
   complaintToTreatments: {
-    "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
     "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
     "Missing Tooth":                 [1, 17, 16, 21],
@@ -6616,7 +6595,6 @@ function printPrescriptionFromBill(billId) {
   const saved = DataStore.load('treatmentMappings', null);
 }
 
-function autoSuggestTreatments(complaint) {
   if (!complaint || !state.treatmentMappings) return;
   const mappings = state.treatmentMappings.complaintToTreatments[complaint];
   if (!mappings) return;
@@ -6630,11 +6608,9 @@ function autoSuggestTreatments(complaint) {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
-function autoSuggestMedicines() {
   if (!state.treatmentMappings) return;
   const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
   const mIds = new Set();
@@ -7619,7 +7595,6 @@ function generatePrescriptionForPlan(treatmentPlanId) {
     '<script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
   complaintToTreatments: {
-    "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
     "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
     "Missing Tooth":                 [1, 17, 16, 21],
@@ -7644,7 +7619,6 @@ function generatePrescriptionForPlan(treatmentPlanId) {
   const saved = DataStore.load('treatmentMappings', null);
 }
 
-function autoSuggestTreatments(complaint) {
   if (!complaint || !state.treatmentMappings) return;
   const mappings = state.treatmentMappings.complaintToTreatments[complaint];
   if (!mappings) return;
@@ -7658,11 +7632,9 @@ function autoSuggestTreatments(complaint) {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
-function autoSuggestMedicines() {
   if (!state.treatmentMappings) return;
   const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
   const mIds = new Set();
@@ -8177,7 +8149,6 @@ function renderActiveConsultationForm() {
     '<div class="card" style="border-top:4px solid #7c3aed;">' +
     '<h3 style="color:#7c3aed;margin-bottom:8px;font-size:20px;">① Chief Complaint *</h3>' +
     '<p style="color:#64748b;font-size:13px;margin-bottom:12px;">Select primary reason for visit</p>' +
-    '<select id="consult-chief-complaint" onchange="autoSuggestTreatments(this.value)" style="width:100%;padding:14px;border:2px solid #e2e8f0;border-radius:8px;font-size:15px;background:white;">' +
     '<option value="">-- Select Chief Complaint --</option>' +
     chiefComplaintLibrary.map(function(cc) {
       return '<option value="' + cc + '"' + (consultation.chiefComplaint===cc?' selected':'') + '>' + cc + '</option>';
@@ -8213,7 +8184,6 @@ function renderActiveConsultationForm() {
     state.treatments.map(function(t) {
       const sel = consultation.selectedTreatments.some(function(st) { return st.id === t.id; });
       return '<label style="display:flex;align-items:start;padding:12px;cursor:pointer;gap:10px;border-radius:8px;border:2px solid ' + (sel?'#10b981':'#e2e8f0') + ';background:' + (sel?'#d1fae5':'#f8fafc') + ';">' +
-        '<input type="checkbox" class="consult-t-cb" onchange="autoSuggestMedicines()" value="' + t.id + '"' + (sel?' checked':'') + ' style="width:18px;height:18px;margin-top:2px;">' +
         '<div><div style="font-weight:600;color:#1e293b;">' + t.name + '</div>' +
         '<div style="font-size:13px;color:#10b981;font-weight:700;">₹' + t.cost.toLocaleString('en-IN') + '</div></div></label>';
     }).join('') + '</div></div>' +
@@ -9156,7 +9126,6 @@ function printFinalPrescription(plan) {
     '<script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
   complaintToTreatments: {
-    "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
     "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
     "Missing Tooth":                 [1, 17, 16, 21],
@@ -9181,7 +9150,6 @@ function printFinalPrescription(plan) {
   const saved = DataStore.load('treatmentMappings', null);
 }
 
-function autoSuggestTreatments(complaint) {
   if (!complaint || !state.treatmentMappings) return;
   const mappings = state.treatmentMappings.complaintToTreatments[complaint];
   if (!mappings) return;
@@ -9195,11 +9163,9 @@ function autoSuggestTreatments(complaint) {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
-function autoSuggestMedicines() {
   if (!state.treatmentMappings) return;
   const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
   const mIds = new Set();
@@ -9965,7 +9931,6 @@ function printBillOPD(billId) {
     '<script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
   complaintToTreatments: {
-    "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
     "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
     "Missing Tooth":                 [1, 17, 16, 21],
@@ -9990,7 +9955,6 @@ function printBillOPD(billId) {
   const saved = DataStore.load('treatmentMappings', null);
 }
 
-function autoSuggestTreatments(complaint) {
   if (!complaint || !state.treatmentMappings) return;
   const mappings = state.treatmentMappings.complaintToTreatments[complaint];
   if (!mappings) return;
@@ -10004,11 +9968,9 @@ function autoSuggestTreatments(complaint) {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
-function autoSuggestMedicines() {
   if (!state.treatmentMappings) return;
   const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
   const mIds = new Set();
@@ -10181,7 +10143,6 @@ function printPrescriptionOPD(prescriptionId) {
     '<script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
   complaintToTreatments: {
-    "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
     "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
     "Missing Tooth":                 [1, 17, 16, 21],
@@ -10206,7 +10167,6 @@ function printPrescriptionOPD(prescriptionId) {
   const saved = DataStore.load('treatmentMappings', null);
 }
 
-function autoSuggestTreatments(complaint) {
   if (!complaint || !state.treatmentMappings) return;
   const mappings = state.treatmentMappings.complaintToTreatments[complaint];
   if (!mappings) return;
@@ -10220,11 +10180,9 @@ function autoSuggestTreatments(complaint) {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
-function autoSuggestMedicines() {
   if (!state.treatmentMappings) return;
   const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
   const mIds = new Set();
@@ -12338,7 +12296,6 @@ const DOMCache = {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
@@ -12360,7 +12317,6 @@ const DOMCache = {
 <script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
   complaintToTreatments: {
-    "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
     "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
     "Missing Tooth":                 [1, 17, 16, 21],
@@ -12385,7 +12341,6 @@ const DOMCache = {
   const saved = DataStore.load('treatmentMappings', null);
 }
 
-function autoSuggestTreatments(complaint) {
   if (!complaint || !state.treatmentMappings) return;
   const mappings = state.treatmentMappings.complaintToTreatments[complaint];
   if (!mappings) return;
@@ -12399,11 +12354,9 @@ function autoSuggestTreatments(complaint) {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
-function autoSuggestMedicines() {
   if (!state.treatmentMappings) return;
   const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
   const mIds = new Set();
@@ -12444,7 +12397,6 @@ function autoSuggestMedicines() {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
@@ -12464,7 +12416,6 @@ function autoSuggestMedicines() {
 <script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
   complaintToTreatments: {
-    "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
     "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
     "Missing Tooth":                 [1, 17, 16, 21],
@@ -12489,7 +12440,6 @@ function autoSuggestMedicines() {
   const saved = DataStore.load('treatmentMappings', null);
 }
 
-function autoSuggestTreatments(complaint) {
   if (!complaint || !state.treatmentMappings) return;
   const mappings = state.treatmentMappings.complaintToTreatments[complaint];
   if (!mappings) return;
@@ -12503,11 +12453,9 @@ function autoSuggestTreatments(complaint) {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
-function autoSuggestMedicines() {
   if (!state.treatmentMappings) return;
   const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
   const mIds = new Set();
@@ -12542,7 +12490,6 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
@@ -12565,7 +12512,6 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
 <script>
 // --- CONSOLIDATED CLINICAL LOGIC ---
   complaintToTreatments: {
-    "Toothache / Severe Pain":       [1, 5, 7, 20],
     "Bleeding Gums":                 [1, 2, 23],
     "Cavity / Tooth Decay":          [1, 7, 8, 5, 20],
     "Missing Tooth":                 [1, 17, 16, 21],
@@ -12590,7 +12536,6 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
   const saved = DataStore.load('treatmentMappings', null);
 }
 
-function autoSuggestTreatments(complaint) {
   if (!complaint || !state.treatmentMappings) return;
   const mappings = state.treatmentMappings.complaintToTreatments[complaint];
   if (!mappings) return;
@@ -12604,11 +12549,9 @@ function autoSuggestTreatments(complaint) {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
-function autoSuggestMedicines() {
   if (!state.treatmentMappings) return;
   const tIds = Array.from(document.querySelectorAll('.consult-t-cb:checked')).map(cb => cb.value);
   const mIds = new Set();
@@ -12629,7 +12572,6 @@ function autoSuggestMedicines() {
 }
 function handleComplaintClick(complaint) {
   state.currentConsultation.chiefComplaint = complaint;
-  autoSuggestTreatments(complaint);
   renderActiveConsultationForm();
 }
 "]`);
@@ -12641,7 +12583,6 @@ function handleComplaintClick(complaint) {
       }
     }
   });
-  autoSuggestMedicines();
   updateConsultationTotal();
 }
 
